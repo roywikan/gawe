@@ -1,78 +1,180 @@
-Dari data HTML yang diberikan, berikut adalah beberapa penanda yang bisa dimanfaatkan oleh **DOMParser** untuk memparsing dan mengekstrak informasi dari teks tersebut:
-
-### 1. **Tag dan Atribut Kunci**:
-
-- **`<c-wiz>`**: Tag utama yang membungkus seluruh konten. Penanda seperti `jsrenderer`, `aria-label`, dan `data-title` dapat digunakan untuk mengidentifikasi dan mengekstrak data seperti **judul pekerjaan** dan **informasi terkait**.
-- **`<div>`**: Banyak tag `<div>` yang digunakan untuk berbagai bagian informasi. Atribut seperti `class`, `aria-label`, dan `jscontroller` pada tag `<div>` bisa digunakan untuk menargetkan bagian-bagian spesifik dari konten.
-  - **`aria-label`**: Contoh: `TK Elevator` bisa dijadikan acuan untuk memahami atau mengekstrak nama perusahaan.
-  - **`class`**: Penanda seperti `VTMWGb`, `JmvMcb`, `cS4Vcb` memberikan konteks gaya dan struktur yang dapat digunakan untuk menargetkan elemen tertentu, misalnya pekerjaan yang terdaftar, lokasi, atau bagian lain yang terkait dengan pekerjaan.
-  
-### 2. **Penanda Informasi Pekerjaan**:
-
-- **`<h1>`**: Tag ini berisi **judul pekerjaan**, seperti: 
-  ```html
-  <h1 class="LZAQDf cS4Vcb-pGL6qe-IRrXtf">Strategic Sourcing &amp; Category Manager (Atlanta, GA or Germantown, TN)</h1>
-  ```
-- **`<div class="waQ7qe cS4Vcb-pGL6qe-ysgGef">`**: Tag ini menampilkan **lokasi pekerjaan** dan sumbernya (misalnya "via LinkedIn").
-  ```html
-  <div class="waQ7qe cS4Vcb-pGL6qe-ysgGef">TK Elevator • Atlanta, GA, United States • via LinkedIn</div>
-  ```
-- **`<span class="RcZtZb">`**: Mengandung **status pekerjaan** (misalnya "Full-time").
-  ```html
-  <span class="RcZtZb">Full-time</span>
-  ```
-
-### 3. **Penanda Kualifikasi dan Tanggung Jawab**:
-
-- **`<h3 class="z5xCyb cS4Vcb-pGL6qe-IRrXtf">`**: Menandai bagian dengan judul seperti **"Job highlights"** atau **"Job description"**.
-  ```html
-  <h3 class="z5xCyb cS4Vcb-pGL6qe-IRrXtf">Job highlights</h3>
-  ```
-- **`<h4 class="yVFmQd cS4Vcb-pGL6qe-KUvarc">`**: Digunakan untuk menandai sub-judul dalam kualifikasi atau tanggung jawab, misalnya **"Qualifications"** dan **"Responsibilities"**.
-  ```html
-  <h4 class="yVFmQd cS4Vcb-pGL6qe-KUvarc">Qualifications</h4>
-  ```
-
-- **`<ul class="zqeyHd">` dan `<li class="LevrW">`**: Tag `<ul>` dan `<li>` digunakan untuk mencantumkan **kualifikasi** dan **tanggung jawab**.
-  ```html
-  <ul class="zqeyHd">
-    <li class="LevrW">Bachelor’s degree in Supply Chain, Procurement, Logistics, or Business-related field and 10+ years business related experience</li>
-  </ul>
-  ```
-
-### 4. **Tautan Apply (Link untuk melamar pekerjaan)**:
-- **`<a class="nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe" href="...">`**: Digunakan untuk menargetkan tautan melamar pekerjaan di LinkedIn, dengan atribut **`href`** yang berisi URL aplikasi.
-  ```html
-  <a target="_blank" title="Apply on LinkedIn" class="nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe" href="https://www.linkedin.com/jobs/view/...">
-  ```
-
-### 5. **Penanda Kontak dan Informasi Lainnya**:
-- **`<span class="us2QZb">`**: Berisi teks deskripsi pekerjaan yang lebih rinci, seperti deskripsi perusahaan, informasi terkait pekerjaan, dll.
-  ```html
-  <span class="us2QZb">ndependent after separation from the thyssenkrupp group in August 2020...</span>
-  ```
-- **`<span class="QzugZ cS4Vcb-pGL6qe-k1Ncfe">`**: Digunakan untuk menampilkan deskripsi tambahan atau informasi lain yang mungkin relevan.
-  ```html
-  <span class="QzugZ cS4Vcb-pGL6qe-k1Ncfe">Identified by Google from the original job post</span>
-  ```
-
-### 6. **Tata Letak Lainnya dan Elemen Tidak Terlihat**:
-- **`<img>`**: Elemen gambar yang mungkin berguna untuk mengambil logo atau gambar perusahaan, dengan atribut **`src`** yang berisi URL gambar.
-  ```html
-  <img class="vVYCic" src="https://encrypted-tbn0.gstatic.com/images?...">
-  ```
-
-### 7. **Elemen Tidak Terlihat**:
-- **`<c-data>`**: Elemen seperti ini sering digunakan untuk menyimpan data internal yang tidak ditampilkan di halaman, tetapi dapat diakses oleh JavaScript atau DOMParser untuk mendapatkan informasi tambahan.
-  ```html
-  <c-data id="vfe_uviewer_38" jsdata="iONlyf;_;$163 ZEIdFc;_;$164 k5NH1;_;$161 xQKg9c;_;$162"></c-data>
-  ```
-
-### Penanda yang Bisa Digunakan oleh DOMParser:
-- **Atribut `class`** pada banyak tag HTML yang memberikan informasi struktural dan penataan konten.
-- **Atribut `aria-label`**, **`data-title`**, dan atribut data lainnya yang menyimpan informasi penting, seperti judul pekerjaan, lokasi, perusahaan, dan deskripsi.
-- **Tag `<h1>`, `<h3>`, `<h4>`**, yang memberi struktur untuk bagian penting seperti judul pekerjaan dan subjudul deskripsi pekerjaan.
-- **Tag `<ul>` dan `<li>`**, yang memberikan daftar kualifikasi dan tanggung jawab pekerjaan.
-- **Tag `<a>`**, yang memberi link untuk melamar pekerjaan.
-
-DOMParser dapat digunakan untuk mengakses semua elemen ini dengan mengidentifikasi elemen berdasarkan tag atau atributnya dan mengekstrak data yang relevan.
+<p>Dari data HTML yang diberikan, berikut adalah beberapa penanda yang bisa dimanfaatkan oleh <strong>DOMParser</strong> untuk memparsing dan mengekstrak informasi dari teks tersebut: </p>
+<h3 id="1-tag-dan-atribut-kunci">1. <strong>Tag dan Atribut Kunci</strong>: </h3>
+<ul>
+  <li>
+    <strong>
+      <code>&lt;c-wiz&gt;</code>
+    </strong>: Tag utama yang membungkus seluruh konten. Penanda seperti <code>jsrenderer</code>, <code>aria-label</code>, dan <code>data-title</code> dapat digunakan untuk mengidentifikasi dan mengekstrak data seperti <strong>judul pekerjaan</strong> dan <strong>informasi terkait</strong>.
+  </li>
+  <li>
+    <strong>
+      <code>&lt;div&gt;</code>
+    </strong>: Banyak tag <code>&lt;div&gt;</code> yang digunakan untuk berbagai bagian informasi. Atribut seperti <code>class</code>, <code>aria-label</code>, dan <code>jscontroller</code> pada tag <code>&lt;div&gt;</code> bisa digunakan untuk menargetkan bagian-bagian spesifik dari konten. <ul>
+      <li>
+        <strong>
+          <code>aria-label</code>
+        </strong>: Contoh: <code>TK Elevator</code> bisa dijadikan acuan untuk memahami atau mengekstrak nama perusahaan.
+      </li>
+      <li>
+        <strong>
+          <code>class</code>
+        </strong>: Penanda seperti <code>VTMWGb</code>, <code>JmvMcb</code>, <code>cS4Vcb</code> memberikan konteks gaya dan struktur yang dapat digunakan untuk menargetkan elemen tertentu, misalnya pekerjaan yang terdaftar, lokasi, atau bagian lain yang terkait dengan pekerjaan.
+      </li>
+    </ul>
+  </li>
+</ul>
+<h3 id="2-penanda-informasi-pekerjaan">2. <strong>Penanda Informasi Pekerjaan</strong>: </h3>
+<ul>
+  <li>
+    <strong>
+      <code>&lt;h1&gt;</code>
+    </strong>: Tag ini berisi <strong>judul pekerjaan</strong>, seperti:
+    <pre>
+			<code class="language-html">&lt;h1 class=&quot;LZAQDf cS4Vcb-pGL6qe-IRrXtf&quot;&gt;Strategic Sourcing &amp;amp; Category Manager (Atlanta, GA or Germantown, TN)&lt;/h1&gt;
+</code>
+		</pre>
+  </li>
+  <li>
+    <strong>
+      <code>&lt;div class=&quot;waQ7qe cS4Vcb-pGL6qe-ysgGef&quot;&gt;</code>
+    </strong>: Tag ini menampilkan <strong>lokasi pekerjaan</strong> dan sumbernya (misalnya &quot;via LinkedIn&quot;).
+    <pre>
+			<code class="language-html">&lt;div class=&quot;waQ7qe cS4Vcb-pGL6qe-ysgGef&quot;&gt;TK Elevator • Atlanta, GA, United States • via LinkedIn&lt;/div&gt;
+</code>
+		</pre>
+  </li>
+  <li>
+    <strong>
+      <code>&lt;span class=&quot;RcZtZb&quot;&gt;</code>
+    </strong>: Mengandung <strong>status pekerjaan</strong> (misalnya &quot;Full-time&quot;).
+    <pre>
+			<code class="language-html">&lt;span class=&quot;RcZtZb&quot;&gt;Full-time&lt;/span&gt;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="3-penanda-kualifikasi-dan-tanggung-jawab">3. <strong>Penanda Kualifikasi dan Tanggung Jawab</strong>: </h3>
+<ul>
+  <li>
+    <p>
+      <strong>
+        <code>&lt;h3 class=&quot;z5xCyb cS4Vcb-pGL6qe-IRrXtf&quot;&gt;</code>
+      </strong>: Menandai bagian dengan judul seperti <strong>&quot;Job highlights&quot;</strong> atau <strong>&quot;Job description&quot;</strong>.
+    </p>
+    <pre>
+			<code class="language-html">&lt;h3 class=&quot;z5xCyb cS4Vcb-pGL6qe-IRrXtf&quot;&gt;Job highlights&lt;/h3&gt;
+</code>
+		</pre>
+  </li>
+  <li>
+    <p>
+      <strong>
+        <code>&lt;h4 class=&quot;yVFmQd cS4Vcb-pGL6qe-KUvarc&quot;&gt;</code>
+      </strong>: Digunakan untuk menandai sub-judul dalam kualifikasi atau tanggung jawab, misalnya <strong>&quot;Qualifications&quot;</strong> dan <strong>&quot;Responsibilities&quot;</strong>.
+    </p>
+    <pre>
+			<code class="language-html">&lt;h4 class=&quot;yVFmQd cS4Vcb-pGL6qe-KUvarc&quot;&gt;Qualifications&lt;/h4&gt;
+</code>
+		</pre>
+  </li>
+  <li>
+    <p>
+      <strong>
+        <code>&lt;ul class=&quot;zqeyHd&quot;&gt;</code> dan <code>&lt;li class=&quot;LevrW&quot;&gt;</code>
+      </strong>: Tag <code>&lt;ul&gt;</code> dan <code>&lt;li&gt;</code> digunakan untuk mencantumkan <strong>kualifikasi</strong> dan <strong>tanggung jawab</strong>.
+    </p>
+    <pre>
+			<code class="language-html">&lt;ul class=&quot;zqeyHd&quot;&gt;
+  &lt;li class=&quot;LevrW&quot;&gt;Bachelor’s degree in Supply Chain, Procurement, Logistics, or Business-related field and 10+ years business related experience&lt;/li&gt;
+&lt;/ul&gt;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="4-tautan-apply-link-untuk-melamar-pekerjaan">4. <strong>Tautan Apply (Link untuk melamar pekerjaan)</strong>: </h3>
+<ul>
+  <li>
+    <strong>
+      <code>&lt;a class=&quot;nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe&quot; href=&quot;...&quot;&gt;</code>
+    </strong>: Digunakan untuk menargetkan tautan melamar pekerjaan di LinkedIn, dengan atribut <strong>
+      <code>href</code>
+    </strong> yang berisi URL aplikasi.
+    <pre>
+			<code class="language-html">&lt;a target=&quot;_blank&quot; title=&quot;Apply on LinkedIn&quot; class=&quot;nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe&quot; href=&quot;https://www.linkedin.com/jobs/view/...&quot;&gt;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="5-penanda-kontak-dan-informasi-lainnya">5. <strong>Penanda Kontak dan Informasi Lainnya</strong>: </h3>
+<ul>
+  <li>
+    <strong>
+      <code>&lt;span class=&quot;us2QZb&quot;&gt;</code>
+    </strong>: Berisi teks deskripsi pekerjaan yang lebih rinci, seperti deskripsi perusahaan, informasi terkait pekerjaan, dll.
+    <pre>
+			<code class="language-html">&lt;span class=&quot;us2QZb&quot;&gt;ndependent after separation from the thyssenkrupp group in August 2020...&lt;/span&gt;
+</code>
+		</pre>
+  </li>
+  <li>
+    <strong>
+      <code>&lt;span class=&quot;QzugZ cS4Vcb-pGL6qe-k1Ncfe&quot;&gt;</code>
+    </strong>: Digunakan untuk menampilkan deskripsi tambahan atau informasi lain yang mungkin relevan.
+    <pre>
+			<code class="language-html">&lt;span class=&quot;QzugZ cS4Vcb-pGL6qe-k1Ncfe&quot;&gt;Identified by Google from the original job post&lt;/span&gt;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="6-tata-letak-lainnya-dan-elemen-tidak-terlihat">6. <strong>Tata Letak Lainnya dan Elemen Tidak Terlihat</strong>: </h3>
+<ul>
+  <li>
+    <strong>
+      <code>&lt;img&gt;</code>
+    </strong>: Elemen gambar yang mungkin berguna untuk mengambil logo atau gambar perusahaan, dengan atribut <strong>
+      <code>src</code>
+    </strong> yang berisi URL gambar.
+    <pre>
+			<code class="language-html">&lt;img class=&quot;vVYCic&quot; src=&quot;https://encrypted-tbn0.gstatic.com/images?...&quot;&gt;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="7-elemen-tidak-terlihat">7. <strong>Elemen Tidak Terlihat</strong>: </h3>
+<ul>
+  <li>
+    <strong>
+      <code>&lt;c-data&gt;</code>
+    </strong>: Elemen seperti ini sering digunakan untuk menyimpan data internal yang tidak ditampilkan di halaman, tetapi dapat diakses oleh JavaScript atau DOMParser untuk mendapatkan informasi tambahan.
+    <pre>
+			<code class="language-html">&lt;c-data id=&quot;vfe_uviewer_38&quot; jsdata=&quot;iONlyf;_;$163 ZEIdFc;_;$164 k5NH1;_;$161 xQKg9c;_;$162&quot;&gt;&lt;/c-data&gt;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="penanda-yang-bisa-digunakan-oleh-domparser">Penanda yang Bisa Digunakan oleh DOMParser:</h3>
+<ul>
+  <li>
+    <strong>Atribut <code>class</code>
+    </strong> pada banyak tag HTML yang memberikan informasi struktural dan penataan konten.
+  </li>
+  <li>
+    <strong>Atribut <code>aria-label</code>
+    </strong>, <strong>
+      <code>data-title</code>
+    </strong>, dan atribut data lainnya yang menyimpan informasi penting, seperti judul pekerjaan, lokasi, perusahaan, dan deskripsi.
+  </li>
+  <li>
+    <strong>Tag <code>&lt;h1&gt;</code>, <code>&lt;h3&gt;</code>, <code>&lt;h4&gt;</code>
+    </strong>, yang memberi struktur untuk bagian penting seperti judul pekerjaan dan subjudul deskripsi pekerjaan.
+  </li>
+  <li>
+    <strong>Tag <code>&lt;ul&gt;</code> dan <code>&lt;li&gt;</code>
+    </strong>, yang memberikan daftar kualifikasi dan tanggung jawab pekerjaan.
+  </li>
+  <li>
+    <strong>Tag <code>&lt;a&gt;</code>
+    </strong>, yang memberi link untuk melamar pekerjaan.
+  </li>
+</ul>
+<p>DOMParser dapat digunakan untuk mengakses semua elemen ini dengan mengidentifikasi elemen berdasarkan tag atau atributnya dan mengekstrak data yang relevan.</p>
