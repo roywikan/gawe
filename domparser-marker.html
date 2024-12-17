@@ -1,0 +1,78 @@
+Dari data HTML yang diberikan, berikut adalah beberapa penanda yang bisa dimanfaatkan oleh **DOMParser** untuk memparsing dan mengekstrak informasi dari teks tersebut:
+
+### 1. **Tag dan Atribut Kunci**:
+
+- **`<c-wiz>`**: Tag utama yang membungkus seluruh konten. Penanda seperti `jsrenderer`, `aria-label`, dan `data-title` dapat digunakan untuk mengidentifikasi dan mengekstrak data seperti **judul pekerjaan** dan **informasi terkait**.
+- **`<div>`**: Banyak tag `<div>` yang digunakan untuk berbagai bagian informasi. Atribut seperti `class`, `aria-label`, dan `jscontroller` pada tag `<div>` bisa digunakan untuk menargetkan bagian-bagian spesifik dari konten.
+  - **`aria-label`**: Contoh: `TK Elevator` bisa dijadikan acuan untuk memahami atau mengekstrak nama perusahaan.
+  - **`class`**: Penanda seperti `VTMWGb`, `JmvMcb`, `cS4Vcb` memberikan konteks gaya dan struktur yang dapat digunakan untuk menargetkan elemen tertentu, misalnya pekerjaan yang terdaftar, lokasi, atau bagian lain yang terkait dengan pekerjaan.
+  
+### 2. **Penanda Informasi Pekerjaan**:
+
+- **`<h1>`**: Tag ini berisi **judul pekerjaan**, seperti: 
+  ```html
+  <h1 class="LZAQDf cS4Vcb-pGL6qe-IRrXtf">Strategic Sourcing &amp; Category Manager (Atlanta, GA or Germantown, TN)</h1>
+  ```
+- **`<div class="waQ7qe cS4Vcb-pGL6qe-ysgGef">`**: Tag ini menampilkan **lokasi pekerjaan** dan sumbernya (misalnya "via LinkedIn").
+  ```html
+  <div class="waQ7qe cS4Vcb-pGL6qe-ysgGef">TK Elevator • Atlanta, GA, United States • via LinkedIn</div>
+  ```
+- **`<span class="RcZtZb">`**: Mengandung **status pekerjaan** (misalnya "Full-time").
+  ```html
+  <span class="RcZtZb">Full-time</span>
+  ```
+
+### 3. **Penanda Kualifikasi dan Tanggung Jawab**:
+
+- **`<h3 class="z5xCyb cS4Vcb-pGL6qe-IRrXtf">`**: Menandai bagian dengan judul seperti **"Job highlights"** atau **"Job description"**.
+  ```html
+  <h3 class="z5xCyb cS4Vcb-pGL6qe-IRrXtf">Job highlights</h3>
+  ```
+- **`<h4 class="yVFmQd cS4Vcb-pGL6qe-KUvarc">`**: Digunakan untuk menandai sub-judul dalam kualifikasi atau tanggung jawab, misalnya **"Qualifications"** dan **"Responsibilities"**.
+  ```html
+  <h4 class="yVFmQd cS4Vcb-pGL6qe-KUvarc">Qualifications</h4>
+  ```
+
+- **`<ul class="zqeyHd">` dan `<li class="LevrW">`**: Tag `<ul>` dan `<li>` digunakan untuk mencantumkan **kualifikasi** dan **tanggung jawab**.
+  ```html
+  <ul class="zqeyHd">
+    <li class="LevrW">Bachelor’s degree in Supply Chain, Procurement, Logistics, or Business-related field and 10+ years business related experience</li>
+  </ul>
+  ```
+
+### 4. **Tautan Apply (Link untuk melamar pekerjaan)**:
+- **`<a class="nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe" href="...">`**: Digunakan untuk menargetkan tautan melamar pekerjaan di LinkedIn, dengan atribut **`href`** yang berisi URL aplikasi.
+  ```html
+  <a target="_blank" title="Apply on LinkedIn" class="nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe" href="https://www.linkedin.com/jobs/view/...">
+  ```
+
+### 5. **Penanda Kontak dan Informasi Lainnya**:
+- **`<span class="us2QZb">`**: Berisi teks deskripsi pekerjaan yang lebih rinci, seperti deskripsi perusahaan, informasi terkait pekerjaan, dll.
+  ```html
+  <span class="us2QZb">ndependent after separation from the thyssenkrupp group in August 2020...</span>
+  ```
+- **`<span class="QzugZ cS4Vcb-pGL6qe-k1Ncfe">`**: Digunakan untuk menampilkan deskripsi tambahan atau informasi lain yang mungkin relevan.
+  ```html
+  <span class="QzugZ cS4Vcb-pGL6qe-k1Ncfe">Identified by Google from the original job post</span>
+  ```
+
+### 6. **Tata Letak Lainnya dan Elemen Tidak Terlihat**:
+- **`<img>`**: Elemen gambar yang mungkin berguna untuk mengambil logo atau gambar perusahaan, dengan atribut **`src`** yang berisi URL gambar.
+  ```html
+  <img class="vVYCic" src="https://encrypted-tbn0.gstatic.com/images?...">
+  ```
+
+### 7. **Elemen Tidak Terlihat**:
+- **`<c-data>`**: Elemen seperti ini sering digunakan untuk menyimpan data internal yang tidak ditampilkan di halaman, tetapi dapat diakses oleh JavaScript atau DOMParser untuk mendapatkan informasi tambahan.
+  ```html
+  <c-data id="vfe_uviewer_38" jsdata="iONlyf;_;$163 ZEIdFc;_;$164 k5NH1;_;$161 xQKg9c;_;$162"></c-data>
+  ```
+
+### Penanda yang Bisa Digunakan oleh DOMParser:
+- **Atribut `class`** pada banyak tag HTML yang memberikan informasi struktural dan penataan konten.
+- **Atribut `aria-label`**, **`data-title`**, dan atribut data lainnya yang menyimpan informasi penting, seperti judul pekerjaan, lokasi, perusahaan, dan deskripsi.
+- **Tag `<h1>`, `<h3>`, `<h4>`**, yang memberi struktur untuk bagian penting seperti judul pekerjaan dan subjudul deskripsi pekerjaan.
+- **Tag `<ul>` dan `<li>`**, yang memberikan daftar kualifikasi dan tanggung jawab pekerjaan.
+- **Tag `<a>`**, yang memberi link untuk melamar pekerjaan.
+
+DOMParser dapat digunakan untuk mengakses semua elemen ini dengan mengidentifikasi elemen berdasarkan tag atau atributnya dan mengekstrak data yang relevan.
