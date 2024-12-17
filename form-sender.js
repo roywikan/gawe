@@ -28,40 +28,40 @@ document.getElementById("parseButton").addEventListener("click", function() {
   // Mengambil elemen berdasarkan penanda/marker
 
   // 1. Job Title
-  jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "N/A";
+  jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Title nya?";
 
   // 2. Company Name
-  companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe") ? doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe").textContent.trim() : "N/A";
+  companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe") ? doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe").textContent.trim() : "Company Name nya?";
 
   // 3. Location
-  location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef") ? doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef").textContent.trim() : "N/A";
+  location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef") ? doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef").textContent.trim() : "location nya?";
 
   // 4. Job Type
-  jobType = doc.querySelector(".RcZtZb") ? doc.querySelector(".RcZtZb").textContent.trim() : "N/A";
+  jobType = doc.querySelector(".RcZtZb") ? doc.querySelector(".RcZtZb").textContent.trim() : "Job Type nya?";
 
   // 5. Apply Link(s)
-  applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "N/A";
+  applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
 
   // 6. Job Highlights
-  jobHighlights = doc.querySelector(".z5xCyb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".z5xCyb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "N/A";
+  jobHighlights = doc.querySelector(".z5xCyb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".z5xCyb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Highlights nya?";
 
   // 7. Qualifications
-  qualifications = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "N/A";
+  qualifications = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Qualifications nya?";
 
   // 8. Benefits
-  benefits = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "N/A";
+  benefits = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Benefits nya?";
 
   // 9. Responsibilities
-  responsibilities = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "N/A";
+  responsibilities = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Responsibilities nya?";
 
   // 10. Job Description
-  jobDescription = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : doc.querySelector(".hkXmid") ? doc.querySelector(".hkXmid").textContent.trim() : "N/A";
+  jobDescription = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : doc.querySelector(".hkXmid") ? doc.querySelector(".hkXmid").textContent.trim() : "Job Desc nya?";
 
   // 11. Contact Information
-  contactInfo = doc.querySelector(".us2QZb") ? doc.querySelector(".us2QZb").textContent.trim() : "N/A";
+  contactInfo = doc.querySelector(".us2QZb") ? doc.querySelector(".us2QZb").textContent.trim() : "Contact info nya?";
 
   // 12. Additional Information
-  additionalInfo = doc.querySelector(".QzugZ.cS4Vcb-pGL6qe-k1Ncfe") ? doc.querySelector(".QzugZ.cS4Vcb-pGL6qe-k1Ncfe").textContent.trim() : "N/A";
+  additionalInfo = doc.querySelector(".QzugZ.cS4Vcb-pGL6qe-k1Ncfe") ? doc.querySelector(".QzugZ.cS4Vcb-pGL6qe-k1Ncfe").textContent.trim() : "Additional Info nya";
 
   // Menampilkan hasil parsing di halaman
   document.getElementById("output").innerHTML = `
