@@ -1,0 +1,145 @@
+<p>Untuk menghapus data yang tidak berharga (seperti atribut-atribut yang digunakan untuk interaksi JavaScript atau pelacakan) dalam teks HTML menggunakan <strong>Notepad++</strong> dengan regex, Anda dapat menggunakan beberapa ekspresi regular berikut untuk menargetkan atribut-atribut yang tidak penting dan menghapusnya. </p>
+<p>Berikut adalah beberapa regex yang bisa digunakan di Notepad++ untuk menghapus atribut-atribut yang tidak berharga dalam data HTML Anda:</p>
+<h3 id="1-menghapus-atribut-javascript-seperti-jsname-jsaction">1. <strong>Menghapus atribut JavaScript seperti <code>jsname</code>, <code>jsaction</code>
+  </strong>
+</h3>
+<pre>
+	<code class="language-regex">\s*(jsname|jsaction)\s*=\s*&quot;.*?&quot;
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan atribut <code>jsname</code> dan <code>jsaction</code> beserta nilainya, dan menghapusnya.
+  </li>
+  <li>
+    <strong>Contoh yang dihapus</strong>:
+    <pre>
+			<code class="language-html">jsname=&quot;kG6OVe&quot;
+jsaction=&quot;click:b8Cdsd;&quot;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="2-menghapus-atribut-data-ved-data-hveid-dan-atribut-data--lainnya">2. <strong>Menghapus atribut <code>data-ved</code>, <code>data-hveid</code>, dan atribut <code>data-*</code> lainnya </strong>
+</h3>
+<pre>
+	<code class="language-regex">\s*data-[a-zA-Z0-9_-]+\s*=\s*&quot;.*?&quot;
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan semua atribut yang dimulai dengan <code>data-</code>, termasuk nilai-nilai atributnya, dan menghapusnya.
+  </li>
+  <li>
+    <strong>Contoh yang dihapus</strong>:
+    <pre>
+			<code class="language-html">data-ved=&quot;0CBcQg8UHahcKEwjAyYbAz62KAxUAAAAAHQAAAAAQEA&quot;
+data-hveid=&quot;24&quot;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="3-menghapus-atribut-jsattrs">3. <strong>Menghapus atribut <code>jsattrs</code>
+  </strong>
+</h3>
+<pre>
+	<code class="language-regex">\s*jsattrs\s*=\s*&quot;.*?&quot;
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan atribut <code>jsattrs</code> dan nilai-nilainya, lalu menghapusnya.
+  </li>
+  <li>
+    <strong>Contoh yang dihapus</strong>:
+    <pre>
+			<code class="language-html">jsattrs=&quot;aria-controls: aria_controls_id;&quot;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="4-menghapus-atribut-styledisplay-none">4. <strong>Menghapus atribut <code>style=&quot;display: none;&quot;</code>
+  </strong>
+</h3>
+<pre>
+	<code class="language-regex">\s*style\s*=\s*&quot;display:\s*none;&quot;.*?
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan atribut <code>style=&quot;display: none;&quot;</code> dan menghapusnya.
+  </li>
+  <li>
+    <strong>Contoh yang dihapus</strong>:
+    <pre>
+			<code class="language-html">style=&quot;display: none;&quot;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="5-menghapus-atribut-role-aria--dan-atribut-lain-yang-terkait-dengan-aksesibilitas">5. <strong>Menghapus atribut <code>role</code>, <code>aria-*</code>, dan atribut lain yang terkait dengan aksesibilitas </strong>
+</h3>
+<pre>
+	<code class="language-regex">\s*(role|aria-[a-zA-Z0-9_-]+)\s*=\s*&quot;.*?&quot;
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan atribut <code>role</code> dan atribut <code>aria-*</code> (misalnya <code>aria-controls</code>, <code>aria-hidden</code>, dll.) beserta nilainya, lalu menghapusnya.
+  </li>
+  <li>
+    <strong>Contoh yang dihapus</strong>:
+    <pre>
+			<code class="language-html">role=&quot;button&quot;
+aria-hidden=&quot;true&quot;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="6-menghapus-atribut-tabindex">6. <strong>Menghapus atribut <code>tabindex</code>
+  </strong>
+</h3>
+<pre>
+	<code class="language-regex">\s*tabindex\s*=\s*&quot;.*?&quot;
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan atribut <code>tabindex</code> dan nilainya, lalu menghapusnya.
+  </li>
+  <li>
+    <strong>Contoh yang dihapus</strong>:
+    <pre>
+			<code class="language-html">tabindex=&quot;0&quot;
+</code>
+		</pre>
+  </li>
+</ul>
+<h3 id="cara-menggunakan-regex-di-notepad">Cara Menggunakan Regex di Notepad++:</h3>
+<ol>
+  <li>
+    <strong>Buka Notepad++</strong> dan buka file teks HTML Anda.
+  </li>
+  <li>
+    <strong>Tekan <code>Ctrl + H</code>
+    </strong> untuk membuka dialog <strong>Find and Replace</strong>.
+  </li>
+  <li>Pilih <strong>&quot;Regular expression&quot;</strong> di bagian bawah jendela. </li>
+  <li>Masukkan regex yang sesuai ke dalam kolom <strong>Find what</strong>. </li>
+  <li>Biarkan kolom <strong>Replace with</strong> kosong untuk menghapus teks yang cocok. </li>
+  <li>Klik <strong>Replace All</strong> untuk menghapus semua atribut yang tidak berharga. </li>
+</ol>
+<h3 id="menghapus-tag-null">Menghapus Tag <code>&lt;null&gt;</code>
+</h3>
+<p>Jika Anda ingin menghapus tag <code>&lt;null&gt;</code> yang ada di dalam HTML, gunakan regex berikut: </p>
+<pre>
+	<code class="language-regex">&lt;null[^&gt;]*&gt;.*?&lt;\/null&gt;
+</code>
+</pre>
+<ul>
+  <li>
+    <strong>Penjelasan</strong>: Ekspresi ini akan mencocokkan seluruh tag <code>&lt;null&gt;</code> beserta konten di dalamnya dan menghapusnya.
+  </li>
+</ul>
+<h3 id="ringkasan">Ringkasan:</h3>
+<p>Untuk membersihkan teks HTML dari atribut-atribut yang tidak berharga seperti yang digunakan untuk JavaScript dan pelacakan, Anda dapat menggunakan regex di atas. Ini memungkinkan Anda untuk memodifikasi HTML secara efisien dengan <strong>Notepad++</strong> tanpa harus mengeksekusi JavaScript atau memanipulasi DOM secara dinamis. </p>
