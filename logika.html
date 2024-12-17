@@ -1,0 +1,89 @@
+<p>Script yang ada di GitHub (seperti yang Anda sebutkan sebelumnya) bisa diprogram untuk memproses dan memisahkan bagian-bagian dari data yang Anda berikan, kemudian mengirimkannya ke form di Netlify. Namun, untuk menjawab pertanyaan Anda, mari kita uraikan langkah-langkah umum yang perlu dilakukan untuk mencapainya:</p>
+<h3 id="langkah-langkah-yang-diperlukan">Langkah-langkah yang diperlukan:</h3>
+<ol>
+<li><p><strong>Memproses Data</strong>:
+Script yang Anda gunakan di GitHub perlu mengurai (parse) data yang Anda berikan. Data ini berformat HTML, yang memiliki elemen-elemen seperti <code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>, dan lain-lain. Anda perlu mengekstrak informasi dari elemen-elemen tersebut, seperti nama perusahaan, lokasi pekerjaan, waktu publikasi, dan URL form pelamar.</p>
+</li>
+<li><p><strong>Menulis Script untuk Parsing</strong>:
+Gunakan pustaka JavaScript (misalnya, <code>DOMParser</code> atau pustaka lain yang lebih kuat seperti <code>Cheerio</code> atau <code>jsdom</code>) untuk mengurai HTML dan mendapatkan informasi yang relevan.</p>
+</li>
+<li><p><strong>Menyesuaikan Kolom</strong>:
+Setelah data diekstrak, Anda bisa menyesuaikan kolom data sesuai dengan struktur yang Anda butuhkan. Misalnya, Anda bisa membagi data menjadi kolom seperti &quot;Nama Perusahaan&quot;, &quot;Judul Pekerjaan&quot;, &quot;Lokasi&quot;, &quot;Waktu&quot;, dan &quot;URL Formulir&quot;.</p>
+</li>
+<li><p><strong>Menyiapkan Formulir di Netlify</strong>:
+Anda perlu memastikan bahwa formulir di Netlify memiliki field yang sesuai dengan data yang akan Anda kirimkan. Jika Anda menggunakan formulir Netlify, pastikan Anda menyesuaikan nama-nama field agar sesuai dengan data yang ingin dikirim.</p>
+</li>
+<li><p><strong>Mengirim Data ke Netlify</strong>:
+Setelah Anda menyiapkan dan memisahkan data, Anda bisa mengirimkannya ke formulir Netlify menggunakan request HTTP POST, atau menggunakan pustaka JavaScript seperti <code>fetch()</code> atau <code>axios</code> untuk mengirim data ke URL endpoint Netlify.</p>
+</li>
+</ol>
+<h3 id="contoh-script-untuk-memproses-data-dan-mengirimnya-ke-formulir-netlify">Contoh Script untuk Memproses Data dan Mengirimnya ke Formulir Netlify:</h3>
+<pre><code class="language-javascript">// 1. Mendapatkan data HTML (misalnya, data yang Anda berikan)
+const htmlContent = `...` // Ini adalah HTML yang Anda ingin proses
+
+// 2. Menggunakan DOMParser untuk mengurai HTML
+const parser = new DOMParser();
+const doc = parser.parseFromString(htmlContent, &quot;text/html&quot;);
+
+// 3. Mengambil elemen-elemen yang relevan
+const companyName = doc.querySelector(&quot;.UxTHrf&quot;).textContent.trim(); // Nama Perusahaan
+const jobTitle = doc.querySelector(&quot;.LZAQDf&quot;).textContent.trim(); // Judul Pekerjaan
+const location = doc.querySelector(&quot;.waQ7qe&quot;).textContent.trim(); // Lokasi
+const postedTime = doc.querySelector(&quot;.RcZtZb&quot;).textContent.trim(); // Waktu Posting
+const applyUrl = doc.querySelector(&quot;a&quot;).href.trim(); // URL Formulir Pelamar
+
+// 4. Menyiapkan objek data untuk dikirim ke Netlify
+const formData = {
+  &quot;form-name&quot;: &quot;job-application&quot;, // Nama formulir Netlify
+  &quot;company_name&quot;: companyName,
+  &quot;job_title&quot;: jobTitle,
+  &quot;location&quot;: location,
+  &quot;posted_time&quot;: postedTime,
+  &quot;apply_url&quot;: applyUrl
+};
+
+// 5. Mengirim data ke formulir Netlify
+fetch(&quot;/&quot;, {
+  method: &quot;POST&quot;,
+  headers: {
+    &quot;Content-Type&quot;: &quot;application/x-www-form-urlencoded&quot;,
+  },
+  body: new URLSearchParams(formData).toString()
+})
+  .then(response =&gt; {
+    if (response.ok) {
+      console.log(&quot;Form submitted successfully!&quot;);
+    } else {
+      console.error(&quot;Form submission failed.&quot;);
+    }
+  })
+  .catch(error =&gt; {
+    console.error(&quot;Error:&quot;, error);
+  });
+</code></pre>
+<h3 id="penjelasan-script">Penjelasan Script:</h3>
+<ol>
+<li><p><strong>Parsing Data</strong>: </p>
+<ul>
+<li>Menggunakan <code>DOMParser</code> untuk mengurai HTML dan mengambil informasi dari elemen HTML berdasarkan class atau tag yang relevan.</li>
+<li>Sebagai contoh, Anda mengambil nama perusahaan dengan mencari elemen dengan class <code>.UxTHrf</code>, dan seterusnya.</li>
+</ul>
+</li>
+<li><p><strong>Menyusun Data</strong>: </p>
+<ul>
+<li>Membuat objek <code>formData</code> yang berisi data yang akan dikirim ke Netlify. Anda harus memastikan bahwa nama-nama field (<code>company_name</code>, <code>job_title</code>, <code>location</code>, <code>posted_time</code>, <code>apply_url</code>) sesuai dengan nama field pada formulir Netlify Anda.</li>
+</ul>
+</li>
+<li><p><strong>Mengirim ke Netlify</strong>:</p>
+<ul>
+<li>Menggunakan <code>fetch()</code> untuk mengirim data ke endpoint formulir Netlify. URL endpoint formulir dapat ditemukan di pengaturan formulir di Netlify.</li>
+<li>Data dikirim menggunakan metode HTTP POST, dan menggunakan <code>application/x-www-form-urlencoded</code> untuk mengirimkan data sebagai query string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="catatan">Catatan:</h3>
+<ul>
+<li>Pastikan formulir di Netlify telah dikonfigurasi dengan benar, dengan nama-nama field yang sesuai.</li>
+<li>Anda mungkin perlu menyesuaikan elemen selector di <code>querySelector()</code> dengan struktur HTML yang lebih tepat.</li>
+</ul>
+<p>Dengan demikian, script ini dapat membantu memisahkan data yang Anda berikan, dan mengirimnya ke formulir Netlify yang sudah Anda siapkan. Pastikan Anda menguji script secara menyeluruh dan menyesuaikan selector HTML dengan struktur halaman yang benar.</p>
