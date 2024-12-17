@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Description Parser</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <div class="container">
@@ -38,6 +38,13 @@
     </form>
   </div>
 
-  <script src="script.js"></script>
+  <script src="/form-sender.js"></script>
+  <div>
+
+    <p>Penjelasan Kode: HTML:</p>
+<p>Ditambahkan input tersembunyi untuk setiap elemen yang ingin dikirim ke Netlify. Ada sebuah form yang menggunakan atribut data-netlify=&quot;true&quot; untuk mengirimkan data ke Netlify tanpa backend tambahan. JavaScript:</p>
+<p>Menggunakan DOMParser untuk memproses input HTML yang dimasukkan ke dalam textarea. Mengekstrak elemen-elemen yang relevan berdasarkan marker yang diberikan dalam pertanyaan (seperti .LZAQDf.cS4Vcb-pGL6qe-IRrXtf untuk jobTitle, .BK5CCe.cS4Vcb-pGL6qe-lfQAOe untuk companyName, dll.). Menampilkan hasil parsing dalam div #output untuk pengguna melihat hasilnya. Menyiapkan data untuk dikirimkan ke Netlify dengan mengisi input tersembunyi. Netlify Form Setup:</p>
+<p>Formulir dikirimkan ke Netlify secara otomatis setelah data diisi atau Anda bisa menambahkan tombol kirim manual. Dengan skrip ini, saat pengguna memasukkan HTML yang relevan dalam textarea dan menekan tombol &quot;Parse Job Description&quot;, data akan diurai dan dikirimkan ke formulir Netlify.</p>
+  </div>
 </body>
 </html>
