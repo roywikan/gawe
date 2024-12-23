@@ -22,8 +22,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   let benefits = "";
   let responsibilities = "";
   let jobDescription = "";
-  let contactInfo = "";
-  let additionalInfo = "";
+  let equalOpportunityStatement = "";
 
   // Mengambil elemen berdasarkan penanda/marker
 
@@ -39,7 +38,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   // 4. Job Type
   jobType = doc.querySelector(".RcZtZb") ? doc.querySelector(".RcZtZb").textContent.trim() : "Job Type nya?";
 
-  // 5. Apply Link(s)
+  // 5. Apply Link
   applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
 
   // 6. Job Highlights
@@ -49,19 +48,16 @@ document.getElementById("parseButton").addEventListener("click", function() {
   qualifications = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Qualifications nya?";
 
   // 8. Benefits
-  benefits = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Benefits nya?";
+  benefits = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[1].textContent.trim() : "Benefits nya?";
 
   // 9. Responsibilities
-  responsibilities = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Responsibilities nya?";
+  responsibilities = doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[2] ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[2].textContent.trim() : "Responsibilities nya?";
 
   // 10. Job Description
-  jobDescription = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : doc.querySelector(".hkXmid") ? doc.querySelector(".hkXmid").textContent.trim() : "Job Desc nya?";
+  jobDescription = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Description nya?";
 
-  // 11. Contact Information
-  contactInfo = doc.querySelector(".us2QZb") ? doc.querySelector(".us2QZb").textContent.trim() : "Contact info nya?";
-
-  // 12. Additional Information
-  additionalInfo = doc.querySelector(".QzugZ.cS4Vcb-pGL6qe-k1Ncfe") ? doc.querySelector(".QzugZ.cS4Vcb-pGL6qe-k1Ncfe").textContent.trim() : "Additional Info nya";
+  // 11. Equal Opportunity Statement
+  equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
 
   // Menampilkan hasil parsing di halaman
   document.getElementById("output").innerHTML = `
@@ -76,8 +72,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>Benefits:</strong> ${benefits}</p>
     <p><strong>Responsibilities:</strong> ${responsibilities}</p>
     <p><strong>Job Description:</strong> ${jobDescription}</p>
-    <p><strong>Contact Information:</strong> ${contactInfo}</p>
-    <p><strong>Additional Information:</strong> ${additionalInfo}</p>
+    <p><strong>Equal Opportunity Statement:</strong> ${equalOpportunityStatement}</p>
   `;
 
   // Menyiapkan data untuk dikirim ke formulir Netlify
@@ -91,8 +86,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("benefits").value = benefits;
   document.getElementById("responsibilities").value = responsibilities;
   document.getElementById("jobDescription").value = jobDescription;
-  document.getElementById("contactInfo").value = contactInfo;
-  document.getElementById("additionalInfo").value = additionalInfo;
+  document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
   // Mengirim data ke Netlify (bisa menggunakan otomatis atau manual)
   // document.getElementById("netlifyForm").submit(); // Otomatis kirim form (Opsional)
