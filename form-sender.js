@@ -42,7 +42,13 @@ document.getElementById("parseButton").addEventListener("click", function() {
   applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
 
   // 6. Job Highlights
-  jobHighlights = doc.querySelector(".z5xCyb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".z5xCyb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Highlights nya?";
+  let jobHighlightsHeader = doc.querySelector("h3.z5xCyb.cS4Vcb-pGL6qe-IRrXtf");
+  if (jobHighlightsHeader) {
+    let jobHighlightsSpan = jobHighlightsHeader.nextElementSibling;
+    if (jobHighlightsSpan && jobHighlightsSpan.classList.contains("QzugZ")) {
+      jobHighlights = jobHighlightsSpan.textContent.trim();
+    }
+  }
 
   // 7. Qualifications
   qualifications = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Qualifications nya?";
