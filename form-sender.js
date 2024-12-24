@@ -93,6 +93,26 @@ document.getElementById("output").innerHTML = `
     <p><strong>Equal Opportunity Statement:</strong> ${equalOpportunityStatement}</p>
   `;
 
+
+   // Add parsed results to a textarea for easy copying
+  const parsedResults = `
+    Job Title: ${jobTitle}
+    Company Name: ${companyName}
+    Location: ${location}
+    Job Type: ${jobType}
+    Apply Link: ${applyLink}
+    Job Highlights: ${jobHighlights}
+    Qualifications: ${qualifications}
+    Benefits: ${benefits}
+    Responsibilities: ${responsibilities}
+    Job Description: ${jobDescription}
+    Equal Opportunity Statement: ${equalOpportunityStatement}
+  `;
+
+  document.getElementById("parsedResultsTextarea").value = parsedResults.trim();
+
+
+  
   // Preparing data to send to Netlify form
   document.getElementById("jobTitle").value = jobTitle;
   document.getElementById("companyName").value = companyName;
@@ -122,3 +142,6 @@ document.getElementById("output").innerHTML = `
     console.error(error);
   });
 });
+
+// HTML part to add a new textarea
+// <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly></textarea>
