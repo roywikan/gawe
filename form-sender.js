@@ -49,11 +49,14 @@ document.getElementById("parseButton").addEventListener("click", function() {
       if (sibling.classList.contains("QzugZ")) {
         jobHighlights += sibling.textContent.trim() + "\n";
       } else if (sibling.classList.contains("yVFmQd") && sibling.textContent.includes("Qualifications")) {
-        qualifications = sibling.nextElementSibling ? sibling.nextElementSibling.textContent.trim() : "";
+        let qualElements = sibling.nextElementSibling ? sibling.nextElementSibling.querySelectorAll("li") : [];
+        qualifications = Array.prototype.map.call(qualElements, li => li.textContent.trim()).join("<br>");
       } else if (sibling.classList.contains("yVFmQd") && sibling.textContent.includes("Responsibilities")) {
-        responsibilities = sibling.nextElementSibling ? sibling.nextElementSibling.textContent.trim() : "";
+        let respElements = sibling.nextElementSibling ? sibling.nextElementSibling.querySelectorAll("li") : [];
+        responsibilities = Array.prototype.map.call(respElements, li => li.textContent.trim()).join("<br>");
       } else if (sibling.classList.contains("yVFmQd") && sibling.textContent.includes("Benefits")) {
-        benefits = sibling.nextElementSibling ? sibling.nextElementSibling.textContent.trim() : "";
+        let benElements = sibling.nextElementSibling ? sibling.nextElementSibling.querySelectorAll("li") : [];
+        benefits = Array.prototype.map.call(benElements, li => li.textContent.trim()).join("<br>");
       }
       sibling = sibling.nextElementSibling;
     }
