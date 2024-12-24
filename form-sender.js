@@ -68,11 +68,11 @@ document.getElementById("parseButton").addEventListener("click", function() {
       if (sibling.tagName === "BR") {
         descriptionContent.push("<br>");
       } else {
-        descriptionContent.push(sibling.textContent.trim());
+        descriptionContent.push(sibling.innerHTML.trim());
       }
       sibling = sibling.nextElementSibling;
     }
-    jobDescription = descriptionContent.join("\n");
+    jobDescription = descriptionContent.join("");
   }
 
   // 11. Equal Opportunity Statement
