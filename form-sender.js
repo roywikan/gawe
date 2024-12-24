@@ -1,4 +1,5 @@
 //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
+
 // script.js
 document.getElementById("parseButton").addEventListener("click", function() {
   const inputText = document.getElementById("jobTextInput").value.trim();
@@ -130,7 +131,7 @@ equalOpportunityStatement: ${equalOpportunityStatement}
   fetch('https://api.github.com/repos/roywikan/gawe/contents/content.yaml', {
     method: 'PUT',
     headers: {
-      'Authorization': 'token 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',
+      'Authorization': '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',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
