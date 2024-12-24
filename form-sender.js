@@ -41,26 +41,23 @@ document.getElementById("parseButton").addEventListener("click", function() {
   // 5. Apply Link
   applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
 
-  // 6. Job Highlights
+  // 6. Job Highlights, Qualifications, Responsibilities, and Benefits
   let jobHighlightsHeader = doc.querySelector("h3.z5xCyb.cS4Vcb-pGL6qe-IRrXtf");
   if (jobHighlightsHeader) {
-    let jobHighlightsContent = [];
     let sibling = jobHighlightsHeader.nextElementSibling;
     while (sibling && sibling.tagName !== "H3") {
-      jobHighlightsContent.push(sibling.textContent.trim());
+      if (sibling.classList.contains("QzugZ")) {
+        jobHighlights += sibling.textContent.trim() + "\n";
+      } else if (sibling.classList.contains("yVFmQd") && sibling.textContent.includes("Qualifications")) {
+        qualifications = sibling.nextElementSibling ? sibling.nextElementSibling.textContent.trim() : "";
+      } else if (sibling.classList.contains("yVFmQd") && sibling.textContent.includes("Responsibilities")) {
+        responsibilities = sibling.nextElementSibling ? sibling.nextElementSibling.textContent.trim() : "";
+      } else if (sibling.classList.contains("yVFmQd") && sibling.textContent.includes("Benefits")) {
+        benefits = sibling.nextElementSibling ? sibling.nextElementSibling.textContent.trim() : "";
+      }
       sibling = sibling.nextElementSibling;
     }
-    jobHighlights = jobHighlightsContent.join("\n");
   }
-
-  // 7. Qualifications
-  qualifications = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Qualifications nya?";
-
-  // 8. Benefits
-  benefits = doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[1] ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[1].textContent.trim() : "Benefits nya?";
-
-  // 9. Responsibilities
-  responsibilities = doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[2] ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[2].textContent.trim() : "Responsibilities nya?";
 
   // 10. Job Description
   jobDescription = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Description nya?";
