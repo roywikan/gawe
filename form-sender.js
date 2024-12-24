@@ -110,7 +110,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("jobDescription").value = jobDescription;
   document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
-  // Mengirim data ke database content.yaml
+  // Convert data to YAML
   const yamlContent = `
 jobTitle: ${jobTitle}
 companyName: ${companyName}
@@ -125,7 +125,7 @@ jobDescription: ${jobDescription}
 equalOpportunityStatement: ${equalOpportunityStatement}
   `;
 
-  // Menggunakan GitHub API untuk membuat atau memperbarui content.yaml
+  // Send data to GitHub API to create or update content.yaml
   fetch('https://api.github.com/repos/roywikan/gawe/contents/content.yaml', {
     method: 'PUT',
     headers: {
