@@ -15,6 +15,9 @@ document.getElementById("parseButton").addEventListener("click", function() {
   let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || "location nya?";
   let jobType = doc.querySelector(".RcZtZb")?.textContent.trim() || "Job Type nya?";
   let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || "Apply Link nya?";
+  let salary = doc.querySelector(".RcZtZb")?.textContent.trim() || "Salary tidak ada?";
+  let timeworking = doc.querySelector(".RcZtZb")?.textContent.trim() || "Timeworking tidak ada?";
+ 
   let jobHighlights = "", qualifications = "", benefits = "", responsibilities = "", jobDescription = "", equalOpportunityStatement = "";
 
 
@@ -36,6 +39,12 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
   // 5. Apply Link
   applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
+
+  // 5a. Salary
+  salary = doc.querySelector(".nYym1e .RcZtZb") ? doc.querySelector(".nYym1e .RcZtZb").textContent.trim() : "Salary tidak ada?";
+
+  // 5b. Timeworking
+  timeworking = doc.querySelector(".nYym1e .RcZtZb") ? doc.querySelector(".nYym1e .RcZtZb").textContent.trim() : "Timeworking tidak ada?";
 
   // 6. Job Highlights, Qualifications, Responsibilities, and Benefits
   let jobHighlightsHeader = doc.querySelector("h3.z5xCyb.cS4Vcb-pGL6qe-IRrXtf");
@@ -85,6 +94,8 @@ document.getElementById("output").innerHTML = `
     <p><strong>Location:</strong> ${location}</p>
     <p><strong>Job Type:</strong> ${jobType}</p>
     <p><strong>Apply Link:</strong> <a href="${applyLink}" target="_blank">${applyLink}</a></p>
+    <p><strong>Salary:</strong> ${salary}</p>
+    <p><strong>Timeworking:</strong> ${timeworking}</p>
     <p><strong>Job Highlights:</strong> ${jobHighlights}</p>
     <p><strong>Qualifications:</strong> ${qualifications}</p>
     <p><strong>Benefits:</strong> ${benefits}</p>
@@ -101,6 +112,8 @@ document.getElementById("output").innerHTML = `
     Location: ${location}
     Job Type: ${jobType}
     Apply Link: ${applyLink}
+    Salary: ${salary}
+    Timeworking: ${timeworking}
     Job Highlights: ${jobHighlights}
     Qualifications: ${qualifications}
     Benefits: ${benefits}
@@ -119,6 +132,11 @@ document.getElementById("output").innerHTML = `
   document.getElementById("location").value = location;
   document.getElementById("jobType").value = jobType;
   document.getElementById("applyLink").value = applyLink;
+
+    document.getElementById("salary").value = salary;
+  document.getElementById("timeworking").value = timeworking;
+
+  
   document.getElementById("jobHighlights").value = jobHighlights;
   document.getElementById("qualifications").value = qualifications;
   document.getElementById("benefits").value = benefits;
