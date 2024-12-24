@@ -7,22 +7,18 @@ document.getElementById("parseButton").addEventListener("click", function() {
     return;
   }
 
-  // Menggunakan DOMParser untuk mengurai input HTML
   const parser = new DOMParser();
   const doc = parser.parseFromString(inputText, "text/html");
 
-  // Data yang akan diekstrak dari HTML
-  let jobTitle = "";
-  let companyName = "";
-  let location = "";
-  let jobType = "";
-  let applyLink = "";
-  let jobHighlights = "";
-  let qualifications = "";
-  let benefits = "";
-  let responsibilities = "";
-  let jobDescription = "";
-  let equalOpportunityStatement = "";
+  let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || "Job Title nya?";
+  let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || "Company Name nya?";
+  let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || "location nya?";
+  let jobType = doc.querySelector(".RcZtZb")?.textContent.trim() || "Job Type nya?";
+  let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || "Apply Link nya?";
+  let jobHighlights = "", qualifications = "", benefits = "", responsibilities = "", jobDescription = "", equalOpportunityStatement = "";
+
+
+
 
   // Mengambil elemen berdasarkan penanda/marker
 
@@ -82,7 +78,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
 
   // Menampilkan hasil parsing di halaman
-  document.getElementById("output").innerHTML = `
+document.getElementById("output").innerHTML = `
     <h3>Parsed Job Details</h3>
     <p><strong>Job Title:</strong> ${jobTitle}</p>
     <p><strong>Company Name:</strong> ${companyName}</p>
@@ -97,7 +93,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>Equal Opportunity Statement:</strong> ${equalOpportunityStatement}</p>
   `;
 
-  // Menyiapkan data untuk dikirim ke formulir Netlify
+  // Preparing data to send to Netlify form
   document.getElementById("jobTitle").value = jobTitle;
   document.getElementById("companyName").value = companyName;
   document.getElementById("location").value = location;
@@ -110,52 +106,19 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("jobDescription").value = jobDescription;
   document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
-  // Mengirim data ke Netlify (bisa menggunakan otomatis atau manual)
-  // document.getElementById("netlifyForm").submit(); // Otomatis kirim form (Opsional)
-});
-
-exports.handler = async function(event, context) {
-  const { jobTitle, companyName, location, jobType, applyLink, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement } = JSON.parse(event.body);
-
-  const yamlContent = `
-jobTitle: ${jobTitle}
-companyName: ${companyName}
-location: ${location}
-jobType: ${jobType}
-applyLink: ${applyLink}
-jobHighlights: ${jobHighlights.replace(/\n/g, '<br>')}
-qualifications: ${qualifications}
-benefits: ${benefits}
-responsibilities: ${responsibilities}
-jobDescription: ${jobDescription}
-equalOpportunityStatement: ${equalOpportunityStatement}
-  `;
-
-  const response = await fetch('https://api.github.com/repos/roywikan/gawe/contents/content.yaml', {
-    method: 'PUT',
-    headers: {
-      'Authorization': `token ${process.env.GITHUB_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
+  // Send data to Netlify function
+  fetch('/.netlify/functions/saveToGitHub', {
+    method: 'POST',
     body: JSON.stringify({
-      message: 'Add content.yaml with form data',
-      content: Buffer.from(yamlContent).toString('base64'),
-      branch: 'main'
+      jobTitle, companyName, location, jobType, applyLink, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement
     })
+  })
+  .then(response => response.json())
+  .then(data => {
+    alert(data.message);
+  })
+  .catch(error => {
+    alert('Error: ' + error.message);
+    console.error(error);
   });
-
-  const data = await response.json();
-
-  if (response.ok) {
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Data has been saved to content.yaml' })
-    };
-  } else {
-    console.error(data);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Failed to save data to content.yaml' })
-    };
-  }
-};
+});
