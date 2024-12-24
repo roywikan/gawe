@@ -39,7 +39,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   jobType = doc.querySelector(".RcZtZb") ? doc.querySelector(".RcZtZb").textContent.trim() : "Job Type nya?";
 
   // 5. Apply Link
-  applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
+  applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.split('?')[0].trim() : "Apply Link nya?";
 
   // 6. Job Highlights, Qualifications, Responsibilities, and Benefits
   let jobHighlightsHeader = doc.querySelector("h3.z5xCyb.cS4Vcb-pGL6qe-IRrXtf");
@@ -110,6 +110,22 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("jobDescription").value = jobDescription;
   document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
-  // Mengirim data ke Netlify (bisa menggunakan otomatis atau manual)
-  // document.getElementById("netlifyForm").submit(); // Otomatis kirim form (Opsional)
+  // Mengirim data ke database content.yaml
+  const yamlContent = `
+jobTitle: ${jobTitle}
+companyName: ${companyName}
+location: ${location}
+jobType: ${jobType}
+applyLink: ${applyLink}
+jobHighlights: ${jobHighlights.replace(/\n/g, '<br>')}
+qualifications: ${qualifications}
+benefits: ${benefits}
+responsibilities: ${responsibilities}
+jobDescription: ${jobDescription}
+equalOpportunityStatement: ${equalOpportunityStatement}
+  `;
+  const fs = require('fs');
+  fs.writeFileSync('content.yaml', yamlContent, 'utf8');
+
+  alert('Data has been saved to content.yaml');
 });
