@@ -44,17 +44,20 @@ document.getElementById("parseButton").addEventListener("click", function() {
   // 6. Job Highlights
   let jobHighlightsHeader = doc.querySelector("h3.z5xCyb.cS4Vcb-pGL6qe-IRrXtf");
   if (jobHighlightsHeader) {
-    let jobHighlightsSpan = jobHighlightsHeader.nextElementSibling;
-    if (jobHighlightsSpan && jobHighlightsSpan.classList.contains("QzugZ")) {
-      jobHighlights = jobHighlightsSpan.textContent.trim();
+    let jobHighlightsContent = [];
+    let sibling = jobHighlightsHeader.nextElementSibling;
+    while (sibling && sibling.tagName !== "H3") {
+      jobHighlightsContent.push(sibling.textContent.trim());
+      sibling = sibling.nextElementSibling;
     }
+    jobHighlights = jobHighlightsContent.join("\n");
   }
 
   // 7. Qualifications
   qualifications = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc").textContent.trim() : "Qualifications nya?";
 
   // 8. Benefits
-  benefits = doc.querySelector(".yVFmQd.cS4Vcb-pGL6qe-KUvarc") ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[1].textContent.trim() : "Benefits nya?";
+  benefits = doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[1] ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[1].textContent.trim() : "Benefits nya?";
 
   // 9. Responsibilities
   responsibilities = doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[2] ? doc.querySelectorAll(".yVFmQd.cS4Vcb-pGL6qe-KUvarc")[2].textContent.trim() : "Responsibilities nya?";
