@@ -1,3 +1,4 @@
+//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
 // script.js
 document.getElementById("parseButton").addEventListener("click", function() {
   const inputText = document.getElementById("jobTextInput").value.trim();
@@ -129,12 +130,12 @@ equalOpportunityStatement: ${equalOpportunityStatement}
   fetch('https://api.github.com/repos/roywikan/gawe/contents/content.yaml', {
     method: 'PUT',
     headers: {
-      'Authorization': 'token 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',
+      'Authorization': 'token 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',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       message: 'Add content.yaml with form data',
-      content: btoa(yamlContent),
+      content: btoa(unescape(encodeURIComponent(yamlContent))),
       branch: 'main'
     })
   })
