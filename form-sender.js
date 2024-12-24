@@ -124,8 +124,31 @@ responsibilities: ${responsibilities}
 jobDescription: ${jobDescription}
 equalOpportunityStatement: ${equalOpportunityStatement}
   `;
-  const fs = require('fs');
-  fs.writeFileSync('content.yaml', yamlContent, 'utf8');
 
-  alert('Data has been saved to content.yaml');
+  // Menggunakan GitHub API untuk membuat atau memperbarui content.yaml
+  fetch('https://api.github.com/repos/roywikan/gawe/contents/content.yaml', {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'token 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',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      message: 'Add content.yaml with form data',
+      content: btoa(yamlContent),
+      branch: 'main'
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.content && data.content.sha) {
+      alert('Data has been saved to content.yaml');
+    } else {
+      alert('Failed to save data to content.yaml');
+      console.error(data);
+    }
+  })
+  .catch(error => {
+    alert('Error: ' + error.message);
+    console.error(error);
+  });
 });
