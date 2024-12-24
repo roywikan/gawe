@@ -65,7 +65,11 @@ document.getElementById("parseButton").addEventListener("click", function() {
     let descriptionContent = [];
     let sibling = jobDescriptionHeader.nextElementSibling;
     while (sibling && sibling.tagName !== "H3") {
-      descriptionContent.push(sibling.textContent.trim());
+      if (sibling.tagName === "BR") {
+        descriptionContent.push("<br>");
+      } else {
+        descriptionContent.push(sibling.textContent.trim());
+      }
       sibling = sibling.nextElementSibling;
     }
     jobDescription = descriptionContent.join("\n");
