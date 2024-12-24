@@ -60,7 +60,16 @@ document.getElementById("parseButton").addEventListener("click", function() {
   }
 
   // 10. Job Description
-  jobDescription = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Description nya?";
+  let jobDescriptionHeader = doc.querySelector("h3.FkMLeb.cS4Vcb-pGL6qe-IRrXtf");
+  if (jobDescriptionHeader) {
+    let descriptionContent = [];
+    let sibling = jobDescriptionHeader.nextElementSibling;
+    while (sibling && sibling.tagName !== "H3") {
+      descriptionContent.push(sibling.textContent.trim());
+      sibling = sibling.nextElementSibling;
+    }
+    jobDescription = descriptionContent.join("\n");
+  }
 
   // 11. Equal Opportunity Statement
   equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
