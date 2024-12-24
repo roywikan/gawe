@@ -13,11 +13,17 @@ document.getElementById("parseButton").addEventListener("click", function() {
   let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || "Job Title nya?";
   let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || "Company Name nya?";
   let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || "location nya?";
-  let jobType = doc.querySelector(".RcZtZb")?.textContent.trim() || "Job Type nya?";
+  //let jobType = doc.querySelector(".RcZtZb")?.textContent.trim() || "Job Type nya?";
+  //let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || "Apply Link nya?";
+  //let salary = doc.querySelector(".RcZtZb")?.textContent.trim() || "Salary tidak ada?";
+  //let timeworking = doc.querySelector(".RcZtZb")?.textContent.trim() || "Timeworking tidak ada?";
+
+  let jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || "Job Type nya?";
   let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || "Apply Link nya?";
-  let salary = doc.querySelector(".RcZtZb")?.textContent.trim() || "Salary tidak ada?";
-  let timeworking = doc.querySelector(".RcZtZb")?.textContent.trim() || "Timeworking tidak ada?";
- 
+  let salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || "Salary tidak ada?";
+  let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || "Timeworking tidak ada?";
+
+  
   let jobHighlights = "", qualifications = "", benefits = "", responsibilities = "", jobDescription = "", equalOpportunityStatement = "";
 
 
@@ -35,16 +41,16 @@ document.getElementById("parseButton").addEventListener("click", function() {
   location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef") ? doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef").textContent.trim() : "location nya?";
 
   // 4. Job Type
-  jobType = doc.querySelector(".RcZtZb") ? doc.querySelector(".RcZtZb").textContent.trim() : "Job Type nya?";
+  jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(3) .RcZtZb").textContent.trim() : "Job Type nya?";
 
   // 5. Apply Link
   applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
 
-  // 5a. Salary
-  salary = doc.querySelector(".nYym1e .RcZtZb") ? doc.querySelector(".nYym1e .RcZtZb").textContent.trim() : "Salary tidak ada?";
+  // 6. Salary
+  salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(2) .RcZtZb").textContent.trim() : "Salary tidak ada?";
 
-  // 5b. Timeworking
-  timeworking = doc.querySelector(".nYym1e .RcZtZb") ? doc.querySelector(".nYym1e .RcZtZb").textContent.trim() : "Timeworking tidak ada?";
+  // 7. Timeworking
+  timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(1) .RcZtZb").textContent.trim() : "Timeworking tidak ada?";
 
   // 6. Job Highlights, Qualifications, Responsibilities, and Benefits
   let jobHighlightsHeader = doc.querySelector("h3.z5xCyb.cS4Vcb-pGL6qe-IRrXtf");
@@ -147,8 +153,8 @@ document.getElementById("output").innerHTML = `
   // Send data to Netlify function
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
-    body: JSON.stringify({
-      jobTitle, companyName, location, jobType, applyLink, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement
+      body: JSON.stringify({
+      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement
     })
   })
   .then(response => response.json())
