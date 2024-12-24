@@ -99,58 +99,34 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>Equal Opportunity Statement:</strong> ${equalOpportunityStatement}</p>
   `;
 
-  // Menyiapkan data untuk dikirim ke formulir Netlify
-  document.getElementById("jobTitle").value = jobTitle;
-  document.getElementById("companyName").value = companyName;
-  document.getElementById("location").value = location;
-  document.getElementById("jobType").value = jobType;
-  document.getElementById("applyLink").value = applyLink;
-  document.getElementById("jobHighlights").value = jobHighlights;
-  document.getElementById("qualifications").value = qualifications;
-  document.getElementById("benefits").value = benefits;
-  document.getElementById("responsibilities").value = responsibilities;
-  document.getElementById("jobDescription").value = jobDescription;
-  document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
+  const formData = {
+    jobTitle,
+    companyName,
+    location,
+    jobType,
+    applyLink,
+    jobHighlights,
+    qualifications,
+    benefits,
+    responsibilities,
+    jobDescription,
+    equalOpportunityStatement
+  };
 
-  // Convert data to YAML
-  const yamlContent = `
-jobTitle: ${jobTitle}
-companyName: ${companyName}
-location: ${location}
-jobType: ${jobType}
-applyLink: ${applyLink}
-jobHighlights: ${jobHighlights.replace(/\n/g, '<br>')}
-qualifications: ${qualifications}
-benefits: ${benefits}
-responsibilities: ${responsibilities}
-jobDescription: ${jobDescription}
-equalOpportunityStatement: ${equalOpportunityStatement}
-  `;
-
-  // Send data to GitHub API to create or update content.yaml
-  fetch('https://api.github.com/repos/roywikan/gawe/contents/content.yaml', {
-    method: 'PUT',
-    headers: {
-      'Authorization': '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',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      message: 'Add content.yaml with form data',
-      content: btoa(unescape(encodeURIComponent(yamlContent))),
-      branch: 'main'
-    })
+  fetch('/.netlify/functions/saveToGitHub', {
+    method: 'POST',
+    body: JSON.stringify(formData)
   })
   .then(response => response.json())
   .then(data => {
-    if (data.content && data.content.sha) {
-      alert('Data has been saved to content.yaml');
-    } else {
-      alert('Failed to save data to content.yaml');
-      console.error(data);
-    }
+    alert(data.message);
   })
   .catch(error => {
     alert('Error: ' + error.message);
     console.error(error);
   });
+
+
+
+  
 });
