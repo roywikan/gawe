@@ -47,8 +47,21 @@ document.getElementById("parseButton").addEventListener("click", function() {
   applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
 
   // 6. Salary
-  salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(2) .RcZtZb").textContent.trim() : "Salary tidak ada?";
+  salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(2) .RcZtZb").textContent.trim() : false;
 
+
+  if (!salary) {
+    const benefitsList = doc.querySelectorAll(".yVFmQd + ul.zqeyHd > li.LevrW");
+    benefitsList.forEach((item) => {
+      let text = item.textContent.trim();
+      if (/[\$€£¥₩₹]|Rp|USD|SGD/i.test(text)) {
+        salary = text;
+      }
+    });
+  }
+  salary = salary || "Salary tidak ada?";
+
+  
   // 7. Timeworking
   timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(1) .RcZtZb").textContent.trim() : "Timeworking tidak ada?";
 
