@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-
 exports.handler = async function(event, context) {
   const { jobTitle, companyName, location, jobType, applyLink, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement } = JSON.parse(event.body);
 
