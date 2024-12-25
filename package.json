@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "sql.js": "^1.6.1"  // Ensure to include sql.js here
   }
 }
