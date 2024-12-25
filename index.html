@@ -13,7 +13,7 @@
     <label for="languageSelect">Select Language:</label>
     <select id="languageSelect">
       <option value="id">Indonesia</option>
-      <option value="en">English</option>
+      <option value="en" selected>English</option>
       <option value="es">Spanish</option>
       <option value="de">German</option>
       <option value="ms">Malay</option>
@@ -31,20 +31,33 @@
 
     <!-- Netlify Form to submit parsed data -->
     <form name="jobForm" method="POST" data-netlify="true" id="netlifyForm">
-      <input type="hidden" name="form-name" value="jobForm">
-      <input type="hidden" name="jobTitle" id="jobTitle">
-      <input type="hidden" name="companyName" id="companyName">
-      <input type="hidden" name="location" id="location">
-      <input type="hidden" name="jobType" id="jobType">
-      <input type="hidden" name="applyLink" id="applyLink">
-      <input type="hidden" name="jobHighlights" id="jobHighlights">
-      <input type="hidden" name="qualifications" id="qualifications">
-      <input type="hidden" name="benefits" id="benefits">
-      <input type="hidden" name="responsibilities" id="responsibilities">
-      <input type="hidden" name="jobDescription" id="jobDescription">
-      <input type="hidden" name="contactInfo" id="contactInfo">
-      <input type="hidden" name="additionalInfo" id="additionalInfo">
-      <button type="submit">Submit to Netlify</button>
+  <input type="hidden" name="form-name" value="jobForm">
+      
+  <input type="hidden" name="jobTitle" id="jobTitle">
+  <input type="hidden" name="companyName" id="companyName">
+  <input type="hidden" name="location" id="location">
+  <input type="hidden" name="jobType" id="jobType">
+  <input type="hidden" name="applyLink" id="applyLink">
+  <input type="hidden" name="jobHighlights" id="jobHighlights">
+  <input type="hidden" name="qualifications" id="qualifications">
+  <input type="hidden" name="benefits" id="benefits">
+  <input type="hidden" name="responsibilities" id="responsibilities">
+  <input type="hidden" name="jobDescription" id="jobDescription">
+
+  <input type="hidden" name="snippet" id="snippet">
+
+  <!-- Additional fields that are in the JavaScript code but missing from the HTML -->
+  <input type="hidden" name="currency" id="currency"> <!-- Added currency -->
+  <input type="hidden" name="salary" id="salary"> <!-- Added salary -->
+  <input type="hidden" name="timeworking" id="timeworking"> <!-- Added timeworking -->
+  <input type="hidden" name="education" id="education"> <!-- Added education -->
+  
+  <input type="hidden" name="googleMapsIframe" id="googleMapsIframe"> <!-- Added googleMapsIframe -->
+  <input type="hidden" name="jsonLDScript" id="jsonLDScript"> <!-- Added jsonLDScript -->
+
+
+      
+      <button type="submit">Submit to Netlify Form</button>
     </form>
     <br><br>
 
@@ -54,33 +67,37 @@
       </textarea>
     </div>
     
-      <div style="text-align: left;">
+  <div style="text-align: left;">
+  <p><strong>Penjelasan Kode:</strong></p>
 
-        <p>Penjelasan Kode: HTML:</p>
-        <p>Body HTML yang dibutuhkan , awalannya ditandai dengan <br>
+  <p><strong>HTML:</strong></p>
+  <p>Body HTML yang dibutuhkan diawali dengan tag berikut:</p>
   <pre>
     &lt;c-wiz jsrenderer="kpn7Sd"&gt;
   </pre>
   <pre>
     &lt;c-wiz jsrenderer="EU1dwe"&gt;
-  </pre><br>
-          Ditambahkan input tersembunyi untuk setiap elemen yang ingin dikirim ke Netlify. <br>
-          Ada sebuah form yang menggunakan atribut data-netlify=&quot;true&quot; <br>untuk mengirimkan data ke Netlify tanpa backend tambahan. JavaScript:</p>
-        <p>Menggunakan DOMParser untuk memproses input HTML yang dimasukkan ke dalam textarea. <br>
-          Mengekstrak elemen-elemen yang relevan berdasarkan marker yang diberikan dalam pertanyaan v
-          (seperti .LZAQDf.cS4Vcb-pGL6qe-IRrXtf untuk jobTitle, .BK5CCe.cS4Vcb-pGL6qe-lfQAOe untuk companyName, dll.). <br>
-          Menampilkan hasil parsing dalam div #output untuk pengguna melihat hasilnya. <br>
-          Menyiapkan data untuk dikirimkan ke Netlify dengan mengisi input tersembunyi. Netlify Form Setup:</p><br>
-        <p>Formulir dikirimkan ke Netlify secara otomatis setelah data diisi atau Anda bisa menambahkan tombol kirim manual. <br>
-          Dengan skrip ini, saat pengguna memasukkan HTML yang relevan dalam textarea dan <br>
-          menekan tombol &quot;Parse Job Description&quot;, <br>
-          data akan diurai dan dikirimkan ke formulir Netlify.<br>
-          membutuhkan GITHUB_TOKEN diletakkan di Netlify environment variabel<br>
+  </pre>
+  <p>Selanjutnya, ditambahkan input tersembunyi untuk setiap elemen yang ingin dikirim ke Netlify.</p>
+  <p>Ada sebuah formulir yang menggunakan atribut <code>data-netlify="true"</code> untuk mengirimkan data ke Netlify tanpa memerlukan backend tambahan.</p>
 
-        
-        
-        </p>
-      </div>
+  <p><strong>JavaScript:</strong></p>
+  <p>Script ini menggunakan <code>DOMParser</code> untuk memproses input HTML yang dimasukkan dalam textarea.</p>
+  <p>Elemen-elemen yang relevan diekstrak berdasarkan marker yang diberikan, seperti:</p>
+  <ul>
+    <li><code>.LZAQDf.cS4Vcb-pGL6qe-IRrXtf</code> untuk <strong>jobTitle</strong></li>
+    <li><code>.BK5CCe.cS4Vcb-pGL6qe-lfQAOe</code> untuk <strong>companyName</strong></li>
+    <li>dan seterusnya...</li>
+  </ul>
+  <p>Hasil parsing akan ditampilkan dalam elemen <code>&lt;div id="output"&gt;</code> agar pengguna dapat melihat hasilnya.</p>
+  <p>Data kemudian disiapkan untuk dikirimkan ke Netlify dengan mengisi input tersembunyi di formulir.</p>
+
+  <p><strong>Netlify Form Setup:</strong></p>
+  <p>Formulir dikirimkan ke Netlify secara otomatis setelah data diisi. Anda juga dapat menambahkan tombol kirim manual jika diperlukan.</p>
+  <p>Dengan skrip ini, saat pengguna memasukkan HTML yang relevan dalam textarea dan menekan tombol "Parse Job Description", data akan diurai dan dikirimkan ke formulir Netlify.</p>
+  <p>Perlu diingat bahwa <code>GITHUB_TOKEN</code> harus diletakkan di variabel lingkungan Netlify agar proses ini berjalan lancar.</p>
+</div>
+
 
 
     
