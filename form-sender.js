@@ -120,17 +120,6 @@ document.getElementById("parseButton").addEventListener("click", function() {
   let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
   let education = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || ``;
 
-  if (jobType === "No Degree Mentioned") {
-    education = jobType;
-    jobType = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
-  }
-
-  // Correcting the values for salary and timeworking
-  if (salary === "Full-time") {
-    salary = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
-    timeworking = "Full-time";
-  }
-
 
   
 
@@ -215,7 +204,19 @@ document.getElementById("parseButton").addEventListener("click", function() {
   }
 
 
-    // concept proposal: 
+  if (jobType === "No Degree Mentioned") {
+    education = jobType;
+    jobType = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
+  }
+
+  // Correcting the values for salary and timeworking
+  if (salary === "Full-time") {
+    salary = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
+    timeworking = "Full-time";
+  }
+
+
+
   if (!jobType && timeworking) {
     jobType = timeworking;
   }
