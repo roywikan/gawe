@@ -111,8 +111,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   };
 
   const label = labels[selectedLanguage] || labels.en;
-  
-  let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || ``;
+    let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || ``;
   let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || ``;
   let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || ``;
   let jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || ``;
@@ -123,6 +122,13 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
   if (jobType === "No Degree Mentioned") {
     education = jobType;
+    jobType = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
+  }
+
+  // Correcting the values for salary and timeworking
+  if (salary === "Full-time") {
+    salary = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
+    timeworking = "Full-time";
   }
 
 
