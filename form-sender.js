@@ -133,10 +133,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
 
   
-  // concept proposal: 
-  //if (jobType && timeworking) {
-    //jobType = timeworking;
-  //}
+
   let jobHighlights = "", qualifications = "", benefits = "", responsibilities = "", jobDescription = "", equalOpportunityStatement = "";
 
 
@@ -217,14 +214,20 @@ document.getElementById("parseButton").addEventListener("click", function() {
     jobDescription = descriptionContent.join("");
   }
 
+
+    // concept proposal: 
+  if (jobType && timeworking) {
+    jobType = timeworking;
+  }
+  
   // 11. Equal Opportunity Statement
   equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
 
   // Menampilkan hasil parsing di halaman
   // Display parsed job details
 
-  document.getElementById("output").innerHTML = `
-    <h3>Parsed Job Details</h3>
+  const htmlResults = `
+    <h3>${jobTitle}</h3>
     <p><strong>${label.jobTitle}:</strong> ${jobTitle}</p>
     <p><strong>${label.companyName}:</strong> ${companyName}</p>
     <p><strong>${label.location}:</strong> ${location}</p>
@@ -240,24 +243,28 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>${label.jobDescription}:</strong> ${jobDescription}</p>
     <p><strong>${label.equalOpportunityStatement}:</strong> ${equalOpportunityStatement}</p>
   `;
+  
+  document.getElementById("output").innerHTML = htmlResults ;
 
   // Add parsed results to a textarea for easy copying
-  const parsedResults = `
-    ${label.jobTitle}: ${jobTitle}
-    ${label.companyName}: ${companyName}
-    ${label.location}: ${location}
-    ${label.jobType}: ${jobType}
-    ${label.applyLink}: ${applyLink}
-    ${label.salary}: ${salary}
-    ${label.timeworking}: ${timeworking}
-    ${label.education}: ${education}
-    ${label.jobHighlights}: ${jobHighlights}
-    ${label.qualifications}: ${qualifications}
-    ${label.benefits}: ${benefits}
-    ${label.responsibilities}: ${responsibilities}
-    ${label.jobDescription}: ${jobDescription}
-    ${label.equalOpportunityStatement}: ${equalOpportunityStatement}
-  `;
+  //const parsedResults = `
+    //${label.jobTitle}: ${jobTitle}
+    //${label.companyName}: ${companyName}
+    //${label.location}: ${location}
+    //${label.jobType}: ${jobType}
+    //${label.applyLink}: ${applyLink}
+    //${label.salary}: ${salary}
+    //${label.timeworking}: ${timeworking}
+    //${label.education}: ${education}
+    //${label.jobHighlights}: ${jobHighlights}
+    //${label.qualifications}: ${qualifications}
+    //${label.benefits}: ${benefits}
+    //${label.responsibilities}: ${responsibilities}
+    //${label.jobDescription}: ${jobDescription}
+    //${label.equalOpportunityStatement}: ${equalOpportunityStatement}
+  //`;
+
+  const parsedResults = htmlResults ;
 
   document.getElementById("parsedResultsTextarea").value = parsedResults.trim();
 
