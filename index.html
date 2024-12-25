@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Job Description Parser</title>
+  <title>Job Parser</title>
   <link rel="stylesheet" href="/index.css">
 </head>
 <body>
   <div class="container">
-    <h1>Job Description Parser</h1>
+    <h1>Job Parser</h1>
     <!-- Dropdown menu for language selection -->
     <label for="languageSelect">Select Language:</label>
     <select id="languageSelect">
@@ -47,10 +47,10 @@
   <input type="hidden" name="snippet" id="snippet">
 
   <!-- Additional fields that are in the JavaScript code but missing from the HTML -->
-  <input type="hidden" name="currency" id="currency"> <!-- Added currency -->
-  <input type="hidden" name="salary" id="salary"> <!-- Added salary -->
-  <input type="hidden" name="timeworking" id="timeworking"> <!-- Added timeworking -->
-  <input type="hidden" name="education" id="education"> <!-- Added education -->
+  <input type="hidden" name="currency" id="currency">
+  <input type="hidden" name="salary" id="salary">
+  <input type="hidden" name="timeworking" id="timeworking">
+  <input type="hidden" name="education" id="education">
   
   <input type="hidden" name="googleMapsIframe" id="googleMapsIframe"> <!-- Added googleMapsIframe -->
   <input type="hidden" name="jsonLDScript" id="jsonLDScript"> <!-- Added jsonLDScript -->
@@ -61,7 +61,7 @@
     </form>
     <br><br>
 
-    // HTML part to add a new textarea
+    <b>HTML part to add a new textarea</b>
     <div>
       <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly>  
       </textarea>
@@ -79,7 +79,8 @@
     &lt;c-wiz jsrenderer="EU1dwe"&gt;
   </pre>
   <p>Selanjutnya, ditambahkan input tersembunyi untuk setiap elemen yang ingin dikirim ke Netlify.</p>
-  <p>Ada sebuah formulir yang menggunakan atribut <code>data-netlify="true"</code> untuk mengirimkan data ke Netlify tanpa memerlukan backend tambahan.</p>
+  <p>Ada sebuah formulir yang menggunakan atribut <code>data-netlify="true"</code> <br>
+    untuk mengirimkan data ke Netlify tanpa memerlukan backend tambahan.</p>
 
   <p><strong>JavaScript:</strong></p>
   <p>Script ini menggunakan <code>DOMParser</code> untuk memproses input HTML yang dimasukkan dalam textarea.</p>
@@ -89,7 +90,8 @@
     <li><code>.BK5CCe.cS4Vcb-pGL6qe-lfQAOe</code> untuk <strong>companyName</strong></li>
     <li>dan seterusnya...</li>
   </ul>
-  <p>Hasil parsing akan ditampilkan dalam elemen <code>&lt;div id="output"&gt;</code> agar pengguna dapat melihat hasilnya.</p>
+  <p>Inspect, Select selector, Edit HTML, select all , copy!<br>
+    Hasil parsing akan ditampilkan dalam elemen <code>&lt;div id="output"&gt;</code> agar pengguna dapat melihat hasilnya.</p>
   <p>Data kemudian disiapkan untuk dikirimkan ke Netlify dengan mengisi input tersembunyi di formulir.</p>
 
   <p><strong>Netlify Form Setup:</strong></p>
