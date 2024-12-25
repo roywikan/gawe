@@ -42,7 +42,66 @@ document.getElementById("parseButton").addEventListener("click", function() {
       jobDescription: "Deskripsi Pekerjaan",
       equalOpportunityStatement: "Pernyataan Peluang Setara"
     },
-    // Add other languages here...
+    es: {
+      jobTitle: "Título del Trabajo",
+      companyName: "Nombre de la Empresa",
+      location: "Ubicación",
+      jobType: "Tipo de Trabajo",
+      applyLink: "Enlace de Solicitud",
+      salary: "Salario",
+      timeworking: "Horario de Trabajo",
+      jobHighlights: "Aspectos Destacados del Trabajo",
+      qualifications: "Calificaciones",
+      benefits: "Beneficios",
+      responsibilities: "Responsabilidades",
+      jobDescription: "Descripción del Trabajo",
+      equalOpportunityStatement: "Declaración de Igualdad de Oportunidades"
+    },
+    de: {
+      jobTitle: "Berufsbezeichnung",
+      companyName: "Firmenname",
+      location: "Standort",
+      jobType: "Art der Beschäftigung",
+      applyLink: "Bewerbungslink",
+      salary: "Gehalt",
+      timeworking: "Arbeitszeit",
+      jobHighlights: "Job-Highlights",
+      qualifications: "Qualifikationen",
+      benefits: "Leistungen",
+      responsibilities: "Verantwortlichkeiten",
+      jobDescription: "Stellenbeschreibung",
+      equalOpportunityStatement: "Gleichstellungserklärung"
+    },
+    ms: {
+      jobTitle: "Tajuk Pekerjaan",
+      companyName: "Nama Syarikat",
+      location: "Lokasi",
+      jobType: "Jenis Pekerjaan",
+      applyLink: "Pautan Permohonan",
+      salary: "Gaji",
+      timeworking: "Waktu Bekerja",
+      jobHighlights: "Sorotan Pekerjaan",
+      qualifications: "Kelayakan",
+      benefits: "Manfaat",
+      responsibilities: "Tanggungjawab",
+      jobDescription: "Deskripsi Pekerjaan",
+      equalOpportunityStatement: "Pernyataan Kesetaraan Peluang"
+    },
+    fil: {
+      jobTitle: "Pamagat ng Trabaho",
+      companyName: "Pangalan ng Kumpanya",
+      location: "Lokasyon",
+      jobType: "Uri ng Trabaho",
+      applyLink: "Link ng Aplikasyon",
+      salary: "Suweldo",
+      timeworking: "Oras ng Pagtatrabaho",
+      jobHighlights: "Mga Highlight ng Trabaho",
+      qualifications: "Mga Kwalipikasyon",
+      benefits: "Mga Benepisyo",
+      responsibilities: "Mga Responsibilidad",
+      jobDescription: "Paglalarawan ng Trabaho",
+      equalOpportunityStatement: "Pahayag ng Pantay na Pagkakataon"
+    }
   };
 
   const label = labels[selectedLanguage] || labels.en;
@@ -54,7 +113,11 @@ document.getElementById("parseButton").addEventListener("click", function() {
   let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || `${label.applyLink} nya?`;
   let salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || `${label.salary} tidak ada?`;
   let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || `${label.timeworking} tidak ada?`;
-
+  
+  // concept proposal: 
+  //if (jobType && timeworking) {
+    //jobType = timeworking;
+  //}
   let jobHighlights = "", qualifications = "", benefits = "", responsibilities = "", jobDescription = "", equalOpportunityStatement = "";
 
 
