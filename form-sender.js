@@ -305,6 +305,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>${label.location}:</strong> ${location}</p>
     <p><strong>${label.jobType}:</strong> ${jobType}</p>
     <p><strong>${label.applyLink}:</strong> <a href="${applyLink}" target="_blank">Apply for ${jobTitle} at ${companyName}</a></p>
+       <p><strong>${currency}:</strong> ${currency}</p>
     <p><strong>${label.salary}:</strong> ${salary}</p>
     <p><strong>${label.timeworking}:</strong> ${timeworking}</p>
     <p><strong>${label.education}:</strong> ${education}</p>
@@ -335,6 +336,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("location").value = location;
   document.getElementById("jobType").value = jobType;
   document.getElementById("applyLink").value = applyLink;
+    document.getElementById("currency").value = currency;
   document.getElementById("salary").value = salary;
   document.getElementById("timeworking").value = timeworking;
   document.getElementById("education").value = education;
@@ -352,7 +354,7 @@ document.getElementById("jsonLDScript").value = jsonLDScript;
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
     body: JSON.stringify({
-      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet, googleMapsIframe, jsonLDScript
+      jobTitle, companyName, location, jobType, applyLink, currency, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet, googleMapsIframe, jsonLDScript
       
     })
   })
