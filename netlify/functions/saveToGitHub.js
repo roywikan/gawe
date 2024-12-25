@@ -13,7 +13,7 @@ exports.handler = async function(event, context) {
     }
 
     // Define the API endpoint and headers
-    const apiUrl = 'https://nlocdwihnz.sqlite.cloud:8860';
+    const apiUrl = 'https://nlocdwihnz.sqlite.cloud:8860?apikey=${process.env.SQLITECLOUD_TOKEN}';
     const headers = {
       'Authorization': `Bearer ${process.env.SQLITECLOUD_TOKEN}`,
       'Content-Type': 'application/json'
