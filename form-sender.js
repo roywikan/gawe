@@ -52,14 +52,17 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
   if (!salary) {
     const benefitsList = doc.querySelectorAll(".yVFmQd + ul.zqeyHd > li.LevrW");
+    let salaryLines = [];
     benefitsList.forEach((item) => {
       let text = item.textContent.trim();
       if (/[\$€£¥₩₹]|Rp|USD|SGD/i.test(text)) {
-        salary = text;
+        salaryLines.push(text);
       }
     });
+    salary = salaryLines.join(", ");
   }
   salary = salary || "Salary tidak ada?";
+
 
   
   // 7. Timeworking
