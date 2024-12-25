@@ -11,7 +11,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   const parser = new DOMParser();
   const doc = parser.parseFromString(inputText, "text/html");
 
-  const labels = {
+   const labels = {
     en: {
       jobTitle: "Job Title",
       companyName: "Company Name",
@@ -25,7 +25,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
       benefits: "Benefits",
       responsibilities: "Responsibilities",
       jobDescription: "Job Description",
-      equalOpportunityStatement: "Equal Opportunity Statement"
+      equalOpportunityStatement: "Equal Opportunity Statement",
+      education: "Education"
     },
     id: {
       jobTitle: "Judul Pekerjaan",
@@ -40,7 +41,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
       benefits: "Manfaat",
       responsibilities: "Tanggung Jawab",
       jobDescription: "Deskripsi Pekerjaan",
-      equalOpportunityStatement: "Pernyataan Peluang Setara"
+      equalOpportunityStatement: "Pernyataan Peluang Setara",
+      education: "Pendidikan"
     },
     es: {
       jobTitle: "Título del Trabajo",
@@ -55,7 +57,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
       benefits: "Beneficios",
       responsibilities: "Responsabilidades",
       jobDescription: "Descripción del Trabajo",
-      equalOpportunityStatement: "Declaración de Igualdad de Oportunidades"
+      equalOpportunityStatement: "Declaración de Igualdad de Oportunidades",
+      education: "Educación"
     },
     de: {
       jobTitle: "Berufsbezeichnung",
@@ -70,7 +73,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
       benefits: "Leistungen",
       responsibilities: "Verantwortlichkeiten",
       jobDescription: "Stellenbeschreibung",
-      equalOpportunityStatement: "Gleichstellungserklärung"
+      equalOpportunityStatement: "Gleichstellungserklärung",
+      education: "Bildung"
     },
     ms: {
       jobTitle: "Tajuk Pekerjaan",
@@ -85,7 +89,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
       benefits: "Manfaat",
       responsibilities: "Tanggungjawab",
       jobDescription: "Deskripsi Pekerjaan",
-      equalOpportunityStatement: "Pernyataan Kesetaraan Peluang"
+      equalOpportunityStatement: "Pernyataan Kesetaraan Peluang",
+      education: "Pendidikan"
     },
     fil: {
       jobTitle: "Pamagat ng Trabaho",
@@ -100,19 +105,27 @@ document.getElementById("parseButton").addEventListener("click", function() {
       benefits: "Mga Benepisyo",
       responsibilities: "Mga Responsibilidad",
       jobDescription: "Paglalarawan ng Trabaho",
-      equalOpportunityStatement: "Pahayag ng Pantay na Pagkakataon"
+      equalOpportunityStatement: "Pahayag ng Pantay na Pagkakataon",
+      education: "Edukasyon"
     }
   };
 
   const label = labels[selectedLanguage] || labels.en;
+  
+  let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || ``;
+  let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || ``;
+  let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || ``;
+  let jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || ``;
+  let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || ``;
+  let salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
+  let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
+  let education = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || ``;
 
-  let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || `${label.jobTitle} nya?`;
-  let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || `${label.companyName} nya?`;
-  let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || `${label.location} nya?`;
-  let jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || `${label.jobType} nya?`;
-  let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || `${label.applyLink} nya?`;
-  let salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || `${label.salary} tidak ada?`;
-  let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || `${label.timeworking} tidak ada?`;
+  if (jobType === "No Degree Mentioned") {
+    education = jobType;
+  }
+
+
   
   // concept proposal: 
   //if (jobType && timeworking) {
@@ -125,19 +138,19 @@ document.getElementById("parseButton").addEventListener("click", function() {
   // Mengambil elemen berdasarkan penanda/marker
 
   // 1. Job Title
-  jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "Job Title nya?";
+  jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf").textContent.trim() : "";
 
   // 2. Company Name
-  companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe") ? doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe").textContent.trim() : "Company Name nya?";
+  companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe") ? doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe").textContent.trim() : "";
 
   // 3. Location
-  location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef") ? doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef").textContent.trim() : "location nya?";
+  location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef") ? doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef").textContent.trim() : "";
 
   // 4. Job Type
-  jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(3) .RcZtZb").textContent.trim() : "Job Type nya?";
+  jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(3) .RcZtZb").textContent.trim() : "";
 
   // 5. Apply Link
-  applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "Apply Link nya?";
+  applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe") ? doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe").href.trim() : "";
 
   // 6. Salary
   salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(2) .RcZtZb").textContent.trim() : false;
@@ -203,6 +216,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
   // Menampilkan hasil parsing di halaman
   // Display parsed job details
+
   document.getElementById("output").innerHTML = `
     <h3>Parsed Job Details</h3>
     <p><strong>${label.jobTitle}:</strong> ${jobTitle}</p>
@@ -212,6 +226,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>${label.applyLink}:</strong> <a href="${applyLink}" target="_blank">${applyLink}</a></p>
     <p><strong>${label.salary}:</strong> ${salary}</p>
     <p><strong>${label.timeworking}:</strong> ${timeworking}</p>
+    <p><strong>${label.education}:</strong> ${education}</p>
     <p><strong>${label.jobHighlights}:</strong> ${jobHighlights}</p>
     <p><strong>${label.qualifications}:</strong> ${qualifications}</p>
     <p><strong>${label.benefits}:</strong> ${benefits}</p>
@@ -229,6 +244,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     ${label.applyLink}: ${applyLink}
     ${label.salary}: ${salary}
     ${label.timeworking}: ${timeworking}
+    ${label.education}: ${education}
     ${label.jobHighlights}: ${jobHighlights}
     ${label.qualifications}: ${qualifications}
     ${label.benefits}: ${benefits}
@@ -247,6 +263,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("applyLink").value = applyLink;
   document.getElementById("salary").value = salary;
   document.getElementById("timeworking").value = timeworking;
+  document.getElementById("education").value = education;
   document.getElementById("jobHighlights").value = jobHighlights;
   document.getElementById("qualifications").value = qualifications;
   document.getElementById("benefits").value = benefits;
@@ -255,11 +272,10 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
   // Send data to Netlify function
-  // Send data to Netlify function
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
-      body: JSON.stringify({
-      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement
+    body: JSON.stringify({
+      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement
     })
   })
   .then(response => response.json())
@@ -270,15 +286,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     alert('Error: ' + error.message);
     console.error(error);
   });
-
-
-
-  
 });
-
-
-
-
 
 // HTML part to add a new textarea
 // <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly></textarea>
