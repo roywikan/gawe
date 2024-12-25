@@ -310,8 +310,10 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>${label.benefits}:</strong> ${benefits}</p>
     <p><strong>${label.responsibilities}:</strong> ${responsibilities}</p>
     <p><strong>${label.jobDescription}:</strong> ${jobDescription}</p>
-    ${jsonLDScript}
-    ${googleMapsIframe}
+    <p><strong>Location Map:</strong> ${googleMapsIframe}</p>
+    <p>${jsonLDScript}</p>
+   
+   
 
   `;
   
