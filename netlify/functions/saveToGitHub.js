@@ -71,3 +71,24 @@ exports.handler = async function(event, context) {
     body: JSON.stringify({ message: 'Data has been saved to SQLiteCloud' })
   };
 };
+
+/*
+Untuk mendapatkan API Key dari SQLiteCloud yang akan digunakan untuk autentikasi API dan mengatur environment variable `SQLITECLOUD_TOKEN`, ikuti langkah-langkah berikut:
+
+1. **Login ke SQLiteCloud:**
+   - Buka [SQLiteCloud](https://dashboard.sqlitecloud.io/) dan login dengan akun Anda.
+
+2. **Akses Proyek:**
+   - Pilih proyek yang sesuai (misalnya proyek `cdvcdzinhz`).
+
+3. **Generate API Key:**
+   - Navigasi ke bagian "API Keys" atau "Settings" di dashboard SQLiteCloud.
+   - Klik "Generate New API Key" dan ikuti instruksi untuk membuat API Key baru.
+   - Salin API Key yang dihasilkan.
+
+4. **Set Environment Variable:**
+   - Buka pengaturan environment variables di platform hosting (misalnya Netlify).
+   - Tambahkan environment variable baru dengan nama `SQLITECLOUD_TOKEN` dan nilai API Key yang telah Anda salin.
+
+Dengan mengikuti langkah-langkah di atas, Anda akan mendapatkan API Key dari SQLiteCloud dan mengaturnya sebagai environment variable untuk digunakan dalam kode Anda.
+*/
