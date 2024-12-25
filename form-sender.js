@@ -220,6 +220,74 @@ document.getElementById("parseButton").addEventListener("click", function() {
   if (!jobType && timeworking) {
     jobType = timeworking;
   }
+
+    // Remove query strings from apply link
+  const url = new URL(applyLink);
+  applyLink = url.origin + url.pathname;
+
+
+    // Detect currency from salary data
+  let currency = "";
+  if (salary) {
+    if (salary.includes('Rp')) {
+      currency = 'IDR';
+    } else if (salary.includes('$')) {
+      currency = 'USD';
+    } else if (salary.includes('€')) {
+      currency = 'EUR';
+    } else if (salary.includes('£')) {
+      currency = 'GBP';
+    } else {
+      currency = "IDR";  // default currency if not detected
+    }
+  }
+
+  
+
+  // Create JSON-LD script for job posting
+  const jobPostingJSONLD = {
+    "@context": "http://schema.org",
+    "@type": "JobPosting",
+    "title": jobTitle,
+    "description": jobDescription,
+    "identifier": {
+      "@type": "PropertyValue",
+      "name": companyName
+    },
+    "datePosted": new Date().toISOString(),
+    "employmentType": jobType,
+    "hiringOrganization": {
+      "@type": "Organization",
+      "name": companyName,
+      "sameAs": applyLink
+    },
+    "jobLocation": {
+      "@type": "Place",
+      "address": location
+    },
+    "workHours": timeworking
+  };
+
+  if (salary) {
+    jobPostingJSONLD.baseSalary = {
+      "@type": "MonetaryAmount",
+      "currency": currency,
+      "value": {
+        "@type": "QuantitativeValue",
+        "value": salary
+      }
+    };
+  }
+
+  const jsonLDScript = `<script type="application/ld+json">${JSON.stringify(jobPostingJSONLD)}</script>`;
+
+
+  // Create Google Maps iframe based on location
+  let googleMapsIframe = "";
+  if (location) {
+    const mapsQuery = encodeURIComponent(location);
+    googleMapsIframe = `<div class="mapouter"><div class="gmap_canvas"><iframe loading="lazy" id="gmap_canvas" title="${location}" src="https://maps.google.com/maps?q=${mapsQuery}&amp;t=&amp;z=18&amp;ie=UTF8&amp;iwloc=&amp;output=embed" width="100%" height="240px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="width: 100%;"></iframe></div></div>`;
+  }
   
   // 11. Equal Opportunity Statement
   equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
@@ -242,6 +310,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>${label.benefits}:</strong> ${benefits}</p>
     <p><strong>${label.responsibilities}:</strong> ${responsibilities}</p>
     <p><strong>${label.jobDescription}:</strong> ${jobDescription}</p>
+    ${jsonLDScript}
+    ${googleMapsIframe}
 
   `;
   
