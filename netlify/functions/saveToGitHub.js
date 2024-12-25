@@ -1,7 +1,25 @@
 import fetch from "bun-fetch";
+import crypto from "crypto";
+
+async function verifySignature(req) {
+  const payload = await req.json();
+  const signature = crypto
+    .createHmac('sha256', process.env.WEBHOOK_SECRET)
+    .update(JSON.stringify(payload))
+    .digest('hex');
+  return signature === req.headers['x-sqlitecloud-signature'];
+}
 
 export async function handler(request) {
   try {
+    const isVerified = await verifySignature(request);
+    if (!isVerified) {
+      return {
+        data: { message: 'Invalid signature' },
+        statusCode: 403
+      };
+    }
+
     const {
       jobTitle, slug, companyName, location, jobType, applyLink, currency, salary, timeworking, education,
       jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet,
