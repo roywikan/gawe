@@ -51,7 +51,7 @@ exports.handler = async function(event, context) {
       jobTitle, slug, companyName, location, jobType, applyLink, currency, salary, timeworking, education,
       jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet,
       googleMapsIframe, jsonLDScript
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
   `;
   
   const values = [
