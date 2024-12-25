@@ -1,25 +1,23 @@
-const fetch = require("node-fetch");
+import fetch from "bun-fetch";
 
-exports.handler = async function(event, context) {
+export async function handler(request) {
   try {
     const {
       jobTitle, slug, companyName, location, jobType, applyLink, currency, salary, timeworking, education,
       jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet,
       googleMapsIframe, jsonLDScript
-    } = JSON.parse(event.body);
+    } = request.data;
 
     if (!process.env.SQLITECLOUD_TOKEN) {
       throw new Error('SQLITECLOUD_TOKEN is not defined');
     }
 
-    // Define the API endpoint and headers
-    const apiUrl = 'https://nlocdwihnz.sqlite.cloud:8860?apikey=${process.env.SQLITECLOUD_TOKEN}';
+    const apiUrl = `https://nlocdwihnz.sqlite.cloud:8860?apikey=${process.env.SQLITECLOUD_TOKEN}`;
     const headers = {
       'Authorization': `Bearer ${process.env.SQLITECLOUD_TOKEN}`,
       'Content-Type': 'application/json'
     };
 
-    // Create table if it doesn't exist
     const createTableQuery = `
       CREATE TABLE IF NOT EXISTS job_data (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -55,7 +53,6 @@ exports.handler = async function(event, context) {
       throw new Error('Failed to create table');
     }
 
-    // Insert data into table
     const insertDataQuery = `
       INSERT INTO job_data (
         jobTitle, slug, companyName, location, jobType, applyLink, currency, salary, timeworking, education,
@@ -82,14 +79,12 @@ exports.handler = async function(event, context) {
     }
 
     return {
-      statusCode: 200,
-      body: JSON.stringify({ message: 'Data has been saved to SQLiteCloud' })
+      data: { message: 'Data has been saved to SQLiteCloud' }
     };
   } catch (error) {
     console.error('Error:', error.message);
     return {
-      statusCode: 500,
-      body: JSON.stringify({ message: 'Failed to save data' })
+      data: { message: 'Failed to save data' }
     };
   }
-};
+}
