@@ -216,7 +216,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
 
     // concept proposal: 
-  if (jobType && timeworking) {
+  if (!jobType && timeworking) {
     jobType = timeworking;
   }
   
@@ -241,34 +241,17 @@ document.getElementById("parseButton").addEventListener("click", function() {
     <p><strong>${label.benefits}:</strong> ${benefits}</p>
     <p><strong>${label.responsibilities}:</strong> ${responsibilities}</p>
     <p><strong>${label.jobDescription}:</strong> ${jobDescription}</p>
-    <p><strong>${label.equalOpportunityStatement}:</strong> ${equalOpportunityStatement}</p>
+
   `;
   
   document.getElementById("output").innerHTML = htmlResults ;
 
-  // Add parsed results to a textarea for easy copying
-  //const parsedResults = `
-    //${label.jobTitle}: ${jobTitle}
-    //${label.companyName}: ${companyName}
-    //${label.location}: ${location}
-    //${label.jobType}: ${jobType}
-    //${label.applyLink}: ${applyLink}
-    //${label.salary}: ${salary}
-    //${label.timeworking}: ${timeworking}
-    //${label.education}: ${education}
-    //${label.jobHighlights}: ${jobHighlights}
-    //${label.qualifications}: ${qualifications}
-    //${label.benefits}: ${benefits}
-    //${label.responsibilities}: ${responsibilities}
-    //${label.jobDescription}: ${jobDescription}
-    //${label.equalOpportunityStatement}: ${equalOpportunityStatement}
-  //`;
-
+  // Add parsed results to a textarea for easy editing and copying
   const parsedResults = htmlResults ;
 
   document.getElementById("parsedResultsTextarea").value = parsedResults.trim();
 
-  // Preparing data to send to Netlify form
+  // Preparing data to send to Netlify form, I WISHED I CAN EDIT THEM BEFORE SUBMITTING TO NETLIFY FORMS
   document.getElementById("jobTitle").value = jobTitle;
   document.getElementById("companyName").value = companyName;
   document.getElementById("location").value = location;
@@ -282,13 +265,13 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("benefits").value = benefits;
   document.getElementById("responsibilities").value = responsibilities;
   document.getElementById("jobDescription").value = jobDescription;
-  document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
+  //document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
   // Send data to Netlify function
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
     body: JSON.stringify({
-      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, equalOpportunityStatement
+      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription
     })
   })
   .then(response => response.json())
