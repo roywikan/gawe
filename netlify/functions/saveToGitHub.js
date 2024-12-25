@@ -7,6 +7,10 @@ exports.handler = async function(event, context) {
     googleMapsIframe, jsonLDScript
   } = JSON.parse(event.body);
 
+      if (!process.env.SQLITECLOUD_TOKEN) {
+      throw new Error('SQLITECLOUD_TOKEN is not defined');
+    }
+
   // Define the API endpoint and headers
   const apiUrl = 'https://api.sqlitecloud.io/v1/projects/cdvcdzinhz/databases/gaweDB.sqlite';
   const headers = {
@@ -38,12 +42,21 @@ exports.handler = async function(event, context) {
       jsonLDScript TEXT
     );
   `;
+
+
+      const createTableResponse = await fetch(apiUrl, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ query: createTableQuery })
+    });
+
+    if (!createTableResponse.ok) {
+      console.error('Failed to create table:', await createTableResponse.text());
+      throw new Error('Failed to create table');
+    }
+
   
-  await fetch(apiUrl, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({ query: createTableQuery })
-  });
+
 
   // Insert data into table
   const insertDataQuery = `
@@ -60,16 +73,29 @@ exports.handler = async function(event, context) {
     googleMapsIframe, jsonLDScript
   ];
 
-  await fetch(apiUrl, {
-    method: 'POST',
-    headers: headers,
-    body: JSON.stringify({ query: insertDataQuery, values: values })
-  });
+    const insertDataResponse = await fetch(apiUrl, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify({ query: insertDataQuery, values: values })
+    });
+
+    if (!insertDataResponse.ok) {
+      console.error('Failed to insert data:', await insertDataResponse.text());
+      throw new Error('Failed to insert data');
+    }
+
 
   return {
     statusCode: 200,
     body: JSON.stringify({ message: 'Data has been saved to SQLiteCloud' })
   };
+ } catch (error) {
+    console.error('Error:', error.message);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Failed to save data' })
+    };
+  }
 };
 
 /*
