@@ -1,7 +1,8 @@
 // script.js
 document.getElementById("parseButton").addEventListener("click", function() {
   const inputText = document.getElementById("jobTextInput").value.trim();
-  
+  const selectedLanguage = document.getElementById("languageSelect").value;
+
   if (inputText === "") {
     alert("Please enter the job description!");
     return;
@@ -10,22 +11,51 @@ document.getElementById("parseButton").addEventListener("click", function() {
   const parser = new DOMParser();
   const doc = parser.parseFromString(inputText, "text/html");
 
-  let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || "Job Title nya?";
-  let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || "Company Name nya?";
-  let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || "location nya?";
-  //let jobType = doc.querySelector(".RcZtZb")?.textContent.trim() || "Job Type nya?";
-  //let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || "Apply Link nya?";
-  //let salary = doc.querySelector(".RcZtZb")?.textContent.trim() || "Salary tidak ada?";
-  //let timeworking = doc.querySelector(".RcZtZb")?.textContent.trim() || "Timeworking tidak ada?";
+  const labels = {
+    en: {
+      jobTitle: "Job Title",
+      companyName: "Company Name",
+      location: "Location",
+      jobType: "Job Type",
+      applyLink: "Apply Link",
+      salary: "Salary",
+      timeworking: "Timeworking",
+      jobHighlights: "Job Highlights",
+      qualifications: "Qualifications",
+      benefits: "Benefits",
+      responsibilities: "Responsibilities",
+      jobDescription: "Job Description",
+      equalOpportunityStatement: "Equal Opportunity Statement"
+    },
+    id: {
+      jobTitle: "Judul Pekerjaan",
+      companyName: "Nama Perusahaan",
+      location: "Lokasi",
+      jobType: "Jenis Pekerjaan",
+      applyLink: "Tautan Melamar",
+      salary: "Gaji",
+      timeworking: "Jam Kerja",
+      jobHighlights: "Sorotan Pekerjaan",
+      qualifications: "Kualifikasi",
+      benefits: "Manfaat",
+      responsibilities: "Tanggung Jawab",
+      jobDescription: "Deskripsi Pekerjaan",
+      equalOpportunityStatement: "Pernyataan Peluang Setara"
+    },
+    // Add other languages here...
+  };
 
-  let jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || "Job Type nya?";
-  let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || "Apply Link nya?";
-  let salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || "Salary tidak ada?";
-  let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || "Timeworking tidak ada?";
+  const label = labels[selectedLanguage] || labels.en;
 
-  
+  let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || `${label.jobTitle} nya?`;
+  let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || `${label.companyName} nya?`;
+  let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || `${label.location} nya?`;
+  let jobType = doc.querySelector(".nYym1e:nth-child(3) .RcZtZb")?.textContent.trim() || `${label.jobType} nya?`;
+  let applyLink = doc.querySelector("a.nNzjpf-cS4Vcb-PvZLI-Ueh9jd-LgbsSe-Jyewjb-tlSJBe")?.href.trim() || `${label.applyLink} nya?`;
+  let salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || `${label.salary} tidak ada?`;
+  let timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || `${label.timeworking} tidak ada?`;
+
   let jobHighlights = "", qualifications = "", benefits = "", responsibilities = "", jobDescription = "", equalOpportunityStatement = "";
-
 
 
 
@@ -109,56 +139,51 @@ document.getElementById("parseButton").addEventListener("click", function() {
   equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
 
   // Menampilkan hasil parsing di halaman
-document.getElementById("output").innerHTML = `
+  // Display parsed job details
+  document.getElementById("output").innerHTML = `
     <h3>Parsed Job Details</h3>
-    <p><strong>Job Title:</strong> ${jobTitle}</p>
-    <p><strong>Company Name:</strong> ${companyName}</p>
-    <p><strong>Location:</strong> ${location}</p>
-    <p><strong>Job Type:</strong> ${jobType}</p>
-    <p><strong>Apply Link:</strong> <a href="${applyLink}" target="_blank">${applyLink}</a></p>
-    <p><strong>Salary:</strong> ${salary}</p>
-    <p><strong>Timeworking:</strong> ${timeworking}</p>
-    <p><strong>Job Highlights:</strong> ${jobHighlights}</p>
-    <p><strong>Qualifications:</strong> ${qualifications}</p>
-    <p><strong>Benefits:</strong> ${benefits}</p>
-    <p><strong>Responsibilities:</strong> ${responsibilities}</p>
-    <p><strong>Job Description:</strong> ${jobDescription}</p>
-    <p><strong>Equal Opportunity Statement:</strong> ${equalOpportunityStatement}</p>
+    <p><strong>${label.jobTitle}:</strong> ${jobTitle}</p>
+    <p><strong>${label.companyName}:</strong> ${companyName}</p>
+    <p><strong>${label.location}:</strong> ${location}</p>
+    <p><strong>${label.jobType}:</strong> ${jobType}</p>
+    <p><strong>${label.applyLink}:</strong> <a href="${applyLink}" target="_blank">${applyLink}</a></p>
+    <p><strong>${label.salary}:</strong> ${salary}</p>
+    <p><strong>${label.timeworking}:</strong> ${timeworking}</p>
+    <p><strong>${label.jobHighlights}:</strong> ${jobHighlights}</p>
+    <p><strong>${label.qualifications}:</strong> ${qualifications}</p>
+    <p><strong>${label.benefits}:</strong> ${benefits}</p>
+    <p><strong>${label.responsibilities}:</strong> ${responsibilities}</p>
+    <p><strong>${label.jobDescription}:</strong> ${jobDescription}</p>
+    <p><strong>${label.equalOpportunityStatement}:</strong> ${equalOpportunityStatement}</p>
   `;
 
-
-   // Add parsed results to a textarea for easy copying
+  // Add parsed results to a textarea for easy copying
   const parsedResults = `
-    Job Title: ${jobTitle}
-    Company Name: ${companyName}
-    Location: ${location}
-    Job Type: ${jobType}
-    Apply Link: ${applyLink}
-    Salary: ${salary}
-    Timeworking: ${timeworking}
-    Job Highlights: ${jobHighlights}
-    Qualifications: ${qualifications}
-    Benefits: ${benefits}
-    Responsibilities: ${responsibilities}
-    Job Description: ${jobDescription}
-    Equal Opportunity Statement: ${equalOpportunityStatement}
+    ${label.jobTitle}: ${jobTitle}
+    ${label.companyName}: ${companyName}
+    ${label.location}: ${location}
+    ${label.jobType}: ${jobType}
+    ${label.applyLink}: ${applyLink}
+    ${label.salary}: ${salary}
+    ${label.timeworking}: ${timeworking}
+    ${label.jobHighlights}: ${jobHighlights}
+    ${label.qualifications}: ${qualifications}
+    ${label.benefits}: ${benefits}
+    ${label.responsibilities}: ${responsibilities}
+    ${label.jobDescription}: ${jobDescription}
+    ${label.equalOpportunityStatement}: ${equalOpportunityStatement}
   `;
 
   document.getElementById("parsedResultsTextarea").value = parsedResults.trim();
 
-
-  
   // Preparing data to send to Netlify form
   document.getElementById("jobTitle").value = jobTitle;
   document.getElementById("companyName").value = companyName;
   document.getElementById("location").value = location;
   document.getElementById("jobType").value = jobType;
   document.getElementById("applyLink").value = applyLink;
-
-    document.getElementById("salary").value = salary;
+  document.getElementById("salary").value = salary;
   document.getElementById("timeworking").value = timeworking;
-
-  
   document.getElementById("jobHighlights").value = jobHighlights;
   document.getElementById("qualifications").value = qualifications;
   document.getElementById("benefits").value = benefits;
@@ -166,6 +191,7 @@ document.getElementById("output").innerHTML = `
   document.getElementById("jobDescription").value = jobDescription;
   document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
 
+  // Send data to Netlify function
   // Send data to Netlify function
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
@@ -181,7 +207,15 @@ document.getElementById("output").innerHTML = `
     alert('Error: ' + error.message);
     console.error(error);
   });
+
+
+
+  
 });
+
+
+
+
 
 // HTML part to add a new textarea
 // <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly></textarea>
