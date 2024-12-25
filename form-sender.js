@@ -291,30 +291,35 @@ document.getElementById("parseButton").addEventListener("click", function() {
   
   // 11. Equal Opportunity Statement
   equalOpportunityStatement = doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf") ? doc.querySelector(".FkMLeb.cS4Vcb-pGL6qe-IRrXtf").nextElementSibling.textContent.trim() : "Equal Opportunity Statement nya?";
+  const snippet = equalOpportunityStatement ;
 
+  
   // Menampilkan hasil parsing di halaman
   // Display parsed job details
 
+  // Display parsed job details
   const htmlResults = `
     <h3>${jobTitle}</h3>
     <p><strong>${label.jobTitle}:</strong> ${jobTitle}</p>
     <p><strong>${label.companyName}:</strong> ${companyName}</p>
     <p><strong>${label.location}:</strong> ${location}</p>
     <p><strong>${label.jobType}:</strong> ${jobType}</p>
-    <p><strong>${label.applyLink}:</strong> <a href="${applyLink}" target="_blank">${applyLink}</a></p>
+    <p><strong>${label.applyLink}:</strong> <a href="${applyLink}" target="_blank">Apply for ${jobTitle} at ${companyName}</a></p>
     <p><strong>${label.salary}:</strong> ${salary}</p>
     <p><strong>${label.timeworking}:</strong> ${timeworking}</p>
     <p><strong>${label.education}:</strong> ${education}</p>
     <p><strong>${label.jobHighlights}:</strong> ${jobHighlights}</p>
-    <p><strong>${label.qualifications}:</strong> ${qualifications}</p>
-    <p><strong>${label.benefits}:</strong> ${benefits}</p>
-    <p><strong>${label.responsibilities}:</strong> ${responsibilities}</p>
-    <p><strong>${label.jobDescription}:</strong> ${jobDescription}</p>
+    <p><strong>${label.qualifications}:</strong></p>
+    <ul>${qualifications.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
+    <p><strong>${label.benefits}:</strong></p>
+    <ul>${benefits.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
+    <p><strong>${label.responsibilities}:</strong></p>
+    <ul>${responsibilities.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
+    <p><strong>${label.jobDescription}:</strong></p>
+    <ul>${jobDescription.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
     <p><strong>Location Map:</strong> ${googleMapsIframe}</p>
+    <p><blockquote>${snippet}</blockquote>
     <p>${jsonLDScript}</p>
-   
-   
-
   `;
   
   document.getElementById("output").innerHTML = htmlResults ;
@@ -338,13 +343,17 @@ document.getElementById("parseButton").addEventListener("click", function() {
   document.getElementById("benefits").value = benefits;
   document.getElementById("responsibilities").value = responsibilities;
   document.getElementById("jobDescription").value = jobDescription;
-  //document.getElementById("equalOpportunityStatement").value = equalOpportunityStatement;
+  document.getElementById("snippet").value = snippet;
+
+document.getElementById("googleMapsIframe").value = googleMapsIframe;
+document.getElementById("jsonLDScript").value = jsonLDScript;
 
   // Send data to Netlify function
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
     body: JSON.stringify({
-      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription
+      jobTitle, companyName, location, jobType, applyLink, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet, googleMapsIframe, jsonLDScript
+      
     })
   })
   .then(response => response.json())
