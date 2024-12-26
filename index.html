@@ -114,45 +114,52 @@
 
 
   <script>
-import { createClient } from '@supabase/supabase-js';
+
 
 // Supabase configuration
 const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co';
-const supabaseKey = process.env.SUPABASE_KEY
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Handle form submission
 document.getElementById('parseButton').addEventListener('click', async () => {
-    const jobData = {
-        jobTitle: document.getElementById('jobTitle').value,
-        slug: document.getElementById('slug').value,
-        companyName: document.getElementById('companyName').value,
-        location: document.getElementById('location').value,
-        jobType: document.getElementById('jobType').value,
-        applyLink: document.getElementById('applyLink').value,
-        jobHighlights: document.getElementById('jobHighlights').value,
-        qualifications: document.getElementById('qualifications').value,
-        benefits: document.getElementById('benefits').value,
-        responsibilities: document.getElementById('responsibilities').value,
-        jobDescription: document.getElementById('jobDescription').value,
-        snippet: document.getElementById('snippet').value,
-        currency: document.getElementById('currency').value,
-        salary: document.getElementById('salary').value,
-        timeworking: document.getElementById('timeworking').value,
-        education: document.getElementById('education').value,
-        googleMapsIframe: document.getElementById('googleMapsIframe').value,
-        jsonLDScript: document.getElementById('jsonLDScript').value,
-    };
+const jobData = {
+    jobTitle: document.getElementById('jobTitle').value || null,
+    slug: document.getElementById('slug').value || null,
+    companyName: document.getElementById('companyName').value || null,
+    location: document.getElementById('location').value || null,
+    jobType: document.getElementById('jobType').value || null,
+    applyLink: document.getElementById('applyLink').value || null,
+    jobHighlights: document.getElementById('jobHighlights').value || null,
+    qualifications: document.getElementById('qualifications').value || null,
+    benefits: document.getElementById('benefits').value || null,
+    responsibilities: document.getElementById('responsibilities').value || null,
+    jobDescription: document.getElementById('jobDescription').value || null,
+    snippet: document.getElementById('snippet').value || null,
+    currency: document.getElementById('currency').value || null,
+    salary: document.getElementById('salary').value || null,
+    timeworking: document.getElementById('timeworking').value || null,
+    education: document.getElementById('education').value || null,
+    googleMapsIframe: document.getElementById('googleMapsIframe').value || null,
+    jsonLDScript: document.getElementById('jsonLDScript').value || null,
+};
 
-    // Insert into Supabase
-    const { data, error } = await supabase.from('jobPost').insert([jobData]);
 
-    if (error) {
-        console.error('Error inserting data:', error);
+try {
+    const response = await supabase.from('jobPost').insert([jobData]);
+
+    if (response.error) {
+        console.error('Supabase Error:', response.error);
+        alert('Failed to submit job description: ' + response.error.message);
     } else {
-        console.log('Data inserted successfully:', data);
+        console.log('Data inserted successfully:', response.data);
         alert('Job description submitted successfully!');
     }
+} catch (error) {
+    console.error('Unexpected error:', error);
+    alert('An unexpected error occurred. Please try again.');
+}
+
 });
 
 
