@@ -26,7 +26,9 @@
     <textarea id="jobTextInput" placeholder="Paste job description here..." rows="10"></textarea>
 
     <!-- Button to trigger the parsing -->
-    <button id="parseButton">Parse Job Description</button>
+    <button id="parseButton">Parse Job Description and SEND to SUPABASE.com</button>
+    <br>
+    <span>https://supabase.com/dashboard/project/kbuiddaciduxktywsuna/editor/29245?schema=public</span>
 
     <!-- Output for parsed job details -->
     <div  style="text-align: left;" id="output"></div>
@@ -69,46 +71,7 @@
       <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly>  
       </textarea>
     </div>
-    
-  <div style="text-align: left;">
-  <p><strong>Penjelasan Kode:</strong></p>
-
-  <p><strong>HTML:</strong></p>
-  <p>Body HTML yang dibutuhkan diawali dengan tag berikut:</p>
-  <pre>
-    &lt;c-wiz jsrenderer="kpn7Sd"&gt;
-  </pre>
-  <pre>
-    &lt;c-wiz jsrenderer="EU1dwe"&gt;
-  </pre>
-  <p>Selanjutnya, ditambahkan input tersembunyi untuk setiap elemen yang ingin dikirim ke Netlify.</p>
-  <p>Ada sebuah formulir yang menggunakan atribut <code>data-netlify="true"</code> <br>
-    untuk mengirimkan data ke Netlify tanpa memerlukan backend tambahan.</p>
-
-  <p><strong>JavaScript:</strong></p>
-  <p>Script ini menggunakan <code>DOMParser</code> untuk memproses input HTML yang dimasukkan dalam textarea.</p>
-  <p>Elemen-elemen yang relevan diekstrak berdasarkan marker yang diberikan, seperti:</p>
-  <ul>
-    <li><code>.LZAQDf.cS4Vcb-pGL6qe-IRrXtf</code> untuk <strong>jobTitle</strong></li>
-    <li><code>.BK5CCe.cS4Vcb-pGL6qe-lfQAOe</code> untuk <strong>companyName</strong></li>
-    <li>dan seterusnya...</li>
-  </ul>
-  <p>Inspect, Select selector, Edit HTML, select all , copy!<br>
-    Hasil parsing akan ditampilkan dalam elemen <code>&lt;div id="output"&gt;</code> agar pengguna dapat melihat hasilnya.</p>
-  <p>Data kemudian disiapkan untuk dikirimkan ke Netlify dengan mengisi input tersembunyi di formulir.</p>
-
-  <p><strong>Netlify Form Setup:</strong></p>
-  <p>Formulir dikirimkan ke Netlify secara otomatis setelah data diisi. Anda juga dapat menambahkan tombol kirim manual jika diperlukan.</p>
-  <p>Dengan skrip ini, saat pengguna memasukkan HTML yang relevan dalam textarea dan menekan tombol "Parse Job Description", data akan diurai dan dikirimkan ke formulir Netlify.</p>
-  <p>Perlu diingat bahwa <code>GITHUB_TOKEN</code> harus diletakkan di variabel lingkungan Netlify agar proses ini berjalan lancar.</p>
-
-    supabase butuh service role secret dari https://supabase.com/dashboard/project/kbuiddaciduxktywsuna/settings/api
-</div>
-
-
-
-    
-  </div>
+  
 
 
 
@@ -128,7 +91,7 @@
       //ANON PUBLIC KEY:
       const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU'; 
       
-      //INI TIDAK AMAN TAPI BERHASIL const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTE3MzcxNCwiZXhwIjoyMDUwNzQ5NzE0fQ.fRrqI0rqLWIkeq3NphNWmbPPaXC04av08fHeXmJUdFQ';
+      //INI TIDAK AMAN TAPI BERHASIL const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkqLWIkeq3NphNWmbPPaXC04av08fHeXmJUdFQ';
       //INI BARIS YANG GAGAL : const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_SECRET; // Replace with your actual service role key
     
       
@@ -138,7 +101,7 @@
       
 // Handle form submission
 document.getElementById('parseButton').addEventListener('click', async () => {
-const jobDataORI = {
+const jobData = {
     jobTitle: document.getElementById('jobTitle').value || null,
     slug: document.getElementById('slug').value || null,
     companyName: document.getElementById('companyName').value || null,
@@ -159,7 +122,7 @@ const jobDataORI = {
     jsonLDScript: document.getElementById('jsonLDScript').value || null,
 };
 
-const jobData = {
+const jobDataSAMPLE = {
     jobtitle: 'Sample Job', // Pastikan nama kolom sesuai (gunakan huruf kecil semua)
     slug: 'sample-job-slug',
     companyname: 'Sample Company',
@@ -208,6 +171,65 @@ const jobData = {
     
   </script>
   <br>
+<div style="text-align: left; font-family: Arial, sans-serif; line-height: 1.6;">
+  <h2>Penjelasan Kode</h2>
 
+  <h3>HTML:</h3>
+  <p>Body HTML yang dibutuhkan diawali dengan tag berikut:</p>
+  <pre>&lt;c-wiz jsrenderer="kpn7Sd"&gt;</pre>
+  <pre>&lt;c-wiz jsrenderer="EU1dwe"&gt;</pre>
+  <p>Tambahkan input tersembunyi untuk setiap elemen yang ingin dikirim ke Netlify.</p>
+  <p>Formulir menggunakan atribut <code>data-netlify="true"</code> untuk mengirim data tanpa memerlukan backend tambahan.</p>
+
+  <h3>JavaScript:</h3>
+  <p>Skrip ini memanfaatkan <code>DOMParser</code> untuk memproses input HTML dari textarea. Elemen-elemen relevan diekstrak menggunakan selector seperti:</p>
+  <ul>
+    <li><code>.LZAQDf.cS4Vcb-pGL6qe-IRrXtf</code> untuk <strong>jobTitle</strong></li>
+    <li><code>.BK5CCe.cS4Vcb-pGL6qe-lfQAOe</code> untuk <strong>companyName</strong></li>
+    <li>Dan lainnya...</li>
+  </ul>
+  <p>Hasil parsing akan ditampilkan di elemen <code>&lt;div id="output"&gt;</code>.</p>
+  <p>Data ini kemudian diisi ke input tersembunyi di formulir sebelum dikirim ke Netlify.</p>
+
+  <h3>Netlify Form Setup:</h3>
+  <p>Formulir dikirim secara otomatis setelah data diisi. Tambahkan tombol kirim manual jika diperlukan.</p>
+  <p>Pastikan variabel lingkungan <code>GITHUB_TOKEN</code> disiapkan di dashboard Netlify.</p>
+
+  <h3>Supabase Setup:</h3>
+  <p>Untuk menggunakan public anon key, aktifkan Row Level Security (RLS) dan konfigurasi policies di tabel Supabase Anda.</p>
+  <h4>Langkah-langkah:</h4>
+  <ol>
+    <li>Masuk ke Supabase dashboard.</li>
+    <li>Pilih proyek Anda.</li>
+    <li>Buka tab <strong>Table Editor</strong>, pilih tabel, dan aktifkan <strong>Row Level Security (RLS)</strong> pada tab Security.</li>
+  </ol>
+
+  <h4>Konfigurasi Policies:</h4>
+  <p>Buat kebijakan untuk membaca dan menulis data, contohnya:</p>
+  <h5>Insert Data:</h5>
+  <pre>
+alter policy "Allow anonymous inserts"
+on "public"."jobpost"
+to anon
+with check (
+  (jobtitle IS NOT NULL)
+);
+  </pre>
+  <h5>Select Data:</h5>
+  <pre>
+alter policy "Allow public SELECT as anon"
+on "public"."jobpost"
+to anon
+using (
+  (auth.role() = 'anon'::text)
+);
+  </pre>
+  <p>Tambahkan kebijakan lain (Update, Delete) sesuai kebutuhan aplikasi Anda.</p>
+</div>
+
+
+
+
+  </div>
 </body>
 </html>
