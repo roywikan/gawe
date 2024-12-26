@@ -151,14 +151,19 @@ try {
     if (response.error) {
         console.error('Supabase Error:', response.error);
         alert('Failed to submit job description: ' + response.error.message);
-    } else {
+    } else if (response.data) {
         console.log('Data inserted successfully:', response.data);
         alert('Job description submitted successfully!');
+    } else {
+        console.warn('Unexpected response:', response);
+        alert('Unexpected response format.');
     }
 } catch (error) {
     console.error('Unexpected error:', error);
     alert('An unexpected error occurred. Please try again.');
 }
+
+
 
 });
 
