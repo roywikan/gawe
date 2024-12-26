@@ -102,7 +102,7 @@
       
 // Handle form submission
 document.getElementById('parseButton').addEventListener('click', async () => {
-const jobDataORI = {
+const jobData = {
     jobTitle: document.getElementById('jobTitle').value || null,
     slug: document.getElementById('slug').value || null,
     companyName: document.getElementById('companyName').value || null,
@@ -124,7 +124,7 @@ const jobDataORI = {
     //jsonLDScript: document.getElementById('jsonLDScript').value || null,
 };
 
-const jobData = {
+const jobDataSample = {
     jobtitle: 'Sample Job', // Pastikan nama kolom sesuai (gunakan huruf kecil semua)
     slug: 'sample-job-slug',
     companyname: 'Sample Company',
