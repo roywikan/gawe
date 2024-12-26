@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Job Parser</title>
   <link rel="stylesheet" href="/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
 </head>
 <body>
   <div class="container">
@@ -106,7 +108,56 @@
     
   </div>
 
+
+
   <script src="/form-sender.js?ref=123"></script>
+
+
+  <script>
+import { createClient } from '@supabase/supabase-js';
+
+// Supabase configuration
+const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co';
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Handle form submission
+document.getElementById('parseButton').addEventListener('click', async () => {
+    const jobData = {
+        jobTitle: document.getElementById('jobTitle').value,
+        slug: document.getElementById('slug').value,
+        companyName: document.getElementById('companyName').value,
+        location: document.getElementById('location').value,
+        jobType: document.getElementById('jobType').value,
+        applyLink: document.getElementById('applyLink').value,
+        jobHighlights: document.getElementById('jobHighlights').value,
+        qualifications: document.getElementById('qualifications').value,
+        benefits: document.getElementById('benefits').value,
+        responsibilities: document.getElementById('responsibilities').value,
+        jobDescription: document.getElementById('jobDescription').value,
+        snippet: document.getElementById('snippet').value,
+        currency: document.getElementById('currency').value,
+        salary: document.getElementById('salary').value,
+        timeworking: document.getElementById('timeworking').value,
+        education: document.getElementById('education').value,
+        googleMapsIframe: document.getElementById('googleMapsIframe').value,
+        jsonLDScript: document.getElementById('jsonLDScript').value,
+    };
+
+    // Insert into Supabase
+    const { data, error } = await supabase.from('jobPost').insert([jobData]);
+
+    if (error) {
+        console.error('Error inserting data:', error);
+    } else {
+        console.log('Data inserted successfully:', data);
+        alert('Job description submitted successfully!');
+    }
+});
+
+
+    
+  </script>
   <br>
 
 </body>
