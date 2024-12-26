@@ -144,6 +144,15 @@ const jobData = {
     jsonLDScript: document.getElementById('jsonLDScript').value || null,
 };
 
+const jobData = {
+    jobTitle: 'Sample Job',
+    companyName: 'Sample Company',
+    location: 'Sample Location',
+    jobType: 'Full-time',
+    applyLink: 'https://example.com/apply',
+    jobDescription: 'This is a sample job description for testing purposes.',
+};
+
 
 try {
     const response = await supabase.from('jobPost').insert([jobData]);
