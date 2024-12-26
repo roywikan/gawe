@@ -18,55 +18,58 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
   <script>
-    // Supabase configuration
-    const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co'; // Ganti dengan URL Supabase Anda
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU'; // Ganti dengan Supabase key Anda
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey); // Inisialisasi supabase setelah mendeklarasikan URL dan key
+    // Ensure this runs after the supabase-js library has been loaded
+    window.onload = function () {
+      // Supabase configuration
+      const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co'; // Ganti dengan URL Supabase Anda
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU'; // Ganti dengan Supabase key Anda
+      const supabase = supabase.createClient(supabaseUrl, supabaseKey); // Inisialisasi supabase setelah library dimuat
 
-    // Function to insert test data into Supabase
-    document.getElementById('insertDataButton').addEventListener('click', async () => {
-      const jobData = {
-        jobtitle: 'Test Job',
-        slug: 'test-job-slug',
-        companyname: 'Test Company',
-        location: 'Test Location',
-        jobtype: 'Full-time',
-        applylink: 'https://test.com/apply',
-        jobhighlights: 'Job description highlight',
-        qualifications: 'Test qualifications',
-        benefits: 'Test benefits',
-        responsibilities: 'Test responsibilities',
-        jobdescription: 'This is a test job description.',
-        currency: 'USD',
-        salary: '50000',
-        timeworking: '9 AM - 5 PM',
-        education: 'Bachelor\'s Degree',
-        snippet: 'Join our team!',
-        googlemapsiframe: '<iframe></iframe>', // Contoh iframe kosong
-        jsonldscript: '{"@context": "https://schema.org", "@type": "JobPosting"}', // Contoh JSON-LD
-      };
+      // Function to insert test data into Supabase
+      document.getElementById('insertDataButton').addEventListener('click', async () => {
+        const jobData = {
+          jobtitle: 'Test Job',
+          slug: 'test-job-slug',
+          companyname: 'Test Company',
+          location: 'Test Location',
+          jobtype: 'Full-time',
+          applylink: 'https://test.com/apply',
+          jobhighlights: 'Job description highlight',
+          qualifications: 'Test qualifications',
+          benefits: 'Test benefits',
+          responsibilities: 'Test responsibilities',
+          jobdescription: 'This is a test job description.',
+          currency: 'USD',
+          salary: '50000',
+          timeworking: '9 AM - 5 PM',
+          education: 'Bachelor\'s Degree',
+          snippet: 'Join our team!',
+          googlemapsiframe: '<iframe></iframe>', // Contoh iframe kosong
+          jsonldscript: '{"@context": "https://schema.org", "@type": "JobPosting"}', // Contoh JSON-LD
+        };
 
-      try {
-        // Log sebelum request
-        console.log('Attempting to insert data:', jobData);
+        try {
+          // Log sebelum request
+          console.log('Attempting to insert data:', jobData);
 
-        const response = await supabase.from('jobpost').insert([jobData]);
+          const response = await supabase.from('jobpost').insert([jobData]);
 
-        // Log response dari Supabase
-        console.log('Supabase response:', response);
+          // Log response dari Supabase
+          console.log('Supabase response:', response);
 
-        if (response.error) {
-          console.error('Supabase Error:', response.error);
-          document.getElementById('status').innerText = 'Failed to insert data: ' + response.error.message;
-        } else {
-          console.log('Data inserted successfully:', response.data);
-          document.getElementById('status').innerText = 'Data inserted successfully!';
+          if (response.error) {
+            console.error('Supabase Error:', response.error);
+            document.getElementById('status').innerText = 'Failed to insert data: ' + response.error.message;
+          } else {
+            console.log('Data inserted successfully:', response.data);
+            document.getElementById('status').innerText = 'Data inserted successfully!';
+          }
+        } catch (error) {
+          console.error('Unexpected error:', error);
+          document.getElementById('status').innerText = 'An unexpected error occurred. Please try again.';
         }
-      } catch (error) {
-        console.error('Unexpected error:', error);
-        document.getElementById('status').innerText = 'An unexpected error occurred. Please try again.';
-      }
-    });
+      });
+    };
   </script>
 
 </body>
