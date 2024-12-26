@@ -123,6 +123,23 @@ const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+
+    // Ensure this runs after the supabase-js library has been loaded
+    window.onload = function () {
+      // Supabase configuration
+      const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co'; // Ganti dengan URL Supabase Anda
+
+      //ANON PUBLIC KEY:
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU'; 
+      
+      //INI TIDAK AMAN TAPI BERHASIL const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTE3MzcxNCwiZXhwIjoyMDUwNzQ5NzE0fQ.fRrqI0rqLWIkeq3NphNWmbPPaXC04av08fHeXmJUdFQ';
+      //INI BARIS YANG GAGAL : const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_SECRET; // Replace with your actual service role key
+    
+      
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey); // Use window.supabase to ensure correct scope
+
+
+      
 // Handle form submission
 document.getElementById('parseButton').addEventListener('click', async () => {
 const jobDataORI = {
@@ -170,22 +187,27 @@ const jobData = {
    alert('Job Data: ' + JSON.stringify(jobData)); // Alert job data for debugging
 
     try {
-        const response = await supabase.from('jobPost').insert([jobData]);
+          // Log sebelum request
+          console.log('Attempting to insert data:', jobData);
 
-        if (response.error) {
-            alert('Supabase Error: ' + response.error.message);
-        } else if (response.data) {
-            alert('Job description submitted successfully! Data: ' + JSON.stringify(response.data));
-        } else {
-            alert('Unexpected response format.');
+          const response = await supabase.from('jobpost').insert([jobData]);
+
+          // Log response dari Supabase
+          console.log('Supabase response:', response);
+
+          if (response.error) {
+            console.error('Supabase Error:', response.error);
+            document.getElementById('status').innerText = 'Failed to insert data: ' + response.error.message;
+          } else {
+            console.log('Data inserted successfully:', response.data);
+            document.getElementById('status').innerText = 'Data inserted successfully!';
+          }
+        } catch (error) {
+          console.error('Unexpected error:', error);
+          document.getElementById('status').innerText = 'An unexpected error occurred. Please try again.';
         }
-    } catch (error) {
-        alert('Unexpected error: ' + error.message);
-    }
-
-
-});
-
+      });
+    };
 
     
   </script>
