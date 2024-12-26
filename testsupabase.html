@@ -14,12 +14,14 @@
 
   <div id="status"></div>
 
+  <!-- Load Supabase JS library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
   <script>
     // Supabase configuration
     const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co'; // Ganti dengan URL Supabase Anda
     const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU'; // Ganti dengan Supabase key Anda
-    const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+    const supabase = supabase.createClient(supabaseUrl, supabaseKey); // Inisialisasi supabase setelah mendeklarasikan URL dan key
 
     // Function to insert test data into Supabase
     document.getElementById('insertDataButton').addEventListener('click', async () => {
