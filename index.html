@@ -30,7 +30,41 @@
     <button id="parseButton">Parse Job Description and SEND to SUPABASE.com</button>
     <br>
     <span>https://supabase.com/dashboard/project/kbuiddaciduxktywsuna/editor/29245?schema=public</span>
+    <br>
 
+
+
+
+  <!-- Form input elements for each variable -->
+  <form id="parsedForm">
+    <input type="text" id="jobTitle" name="jobTitle" placeholder="Job Title">
+    <input type="text" id="slug" name="slug" placeholder="Slug">
+    <input type="text" id="companyName" name="companyName" placeholder="Company Name">
+    <input type="text" id="location" name="location" placeholder="Location">
+    <input type="text" id="jobType" name="jobType" placeholder="Job Type">
+    <input type="url" id="applyLink" name="applyLink" placeholder="Apply Link">
+    <input type="text" id="currency" name="currency" placeholder="Currency">
+    <input type="text" id="salary" name="salary" placeholder="Salary">
+    <input type="text" id="timeworking" name="timeworking" placeholder="Timeworking">
+    <input type="text" id="education" name="education" placeholder="Education">
+    <textarea id="jobHighlights" name="jobHighlights" placeholder="Job Highlights"></textarea>
+    <textarea id="qualifications" name="qualifications" placeholder="Qualifications"></textarea>
+    <textarea id="benefits" name="benefits" placeholder="Benefits"></textarea>
+    <textarea id="responsibilities" name="responsibilities" placeholder="Responsibilities"></textarea>
+    <textarea id="jobDescription" name="jobDescription" placeholder="Job Description"></textarea>
+    <textarea id="snippet" name="snippet" placeholder="Equal Opportunity Statement"></textarea>
+    <textarea id="googleMapsIframe" name="googleMapsIframe" placeholder="Google Maps Iframe"></textarea>
+    <textarea id="jsonLDScript" name="jsonLDScript" placeholder="JSON-LD Script"></textarea>
+    <button type="button" id="submitButton">Submit to Supabase</button>
+  </form>
+  
+ <br><br><br>
+
+    
+
+
+
+    
     <!-- Output for parsed job details -->
     <div  style="text-align: left;" id="output"></div>
 
