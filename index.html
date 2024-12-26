@@ -123,7 +123,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Handle form submission
 document.getElementById('parseButton').addEventListener('click', async () => {
-const jobData = {
+const jobDataORI = {
     jobTitle: document.getElementById('jobTitle').value || null,
     slug: document.getElementById('slug').value || null,
     companyName: document.getElementById('companyName').value || null,
