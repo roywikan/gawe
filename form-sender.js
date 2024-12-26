@@ -478,28 +478,53 @@ if (salary) {
   // Preparing data to send to Netlify form, I WISHED I CAN EDIT THEM BEFORE SUBMITTING TO NETLIFY FORMS
   document.getElementById("jobTitle").value = jobTitle;
   document.getElementById("slug").value = slug;
-  
   document.getElementById("companyName").value = companyName;
   document.getElementById("location").value = location;
   document.getElementById("jobType").value = jobType;
+  
   document.getElementById("applyLink").value = applyLink;
-    document.getElementById("currency").value = currency;
+  document.getElementById("currency").value = currency;
   document.getElementById("salary").value = salary;
   document.getElementById("timeworking").value = timeworking;
   document.getElementById("education").value = education;
+  
   document.getElementById("jobHighlights").value = jobHighlights;
   document.getElementById("qualifications").value = qualifications;
   document.getElementById("benefits").value = benefits;
   document.getElementById("responsibilities").value = responsibilities;
   document.getElementById("jobDescription").value = jobDescription;
+  
   document.getElementById("snippet").value = snippet;
-
 document.getElementById("googleMapsIframe").value = googleMapsIframe;
 document.getElementById("jsonLDScript").value = jsonLDScript;
+
+   document.getElementById("output").innerHTML = htmlResults;
+  document.getElementById("parsedResultsTextarea").value = htmlResults.trim();
 
 
 
 
 });
 
-
+// Menambahkan event listener untuk tombol submit
+document.getElementById("submitButton").addEventListener("click", function() {
+  const formData = new FormData(document.getElementById("parsedForm"));
+  
+  // Kirim data ke Supabase Postgres
+  fetch('URL_SUPABASE_FUNCTION', {
+    method: 'POST',
+    body: JSON.stringify(Object.fromEntries(formData)),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+    alert('Data successfully submitted to Supabase!');
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('An error occurred while submitting data to Supabase.');
+  });
+});
