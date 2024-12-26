@@ -1,3 +1,92 @@
+//const flatted = require("flatted"); // Uncomment if using circular reference handling
+// Menggunakan Flatted dari CDN :
+const { stringify, parse } = Flatted;
+
+
+
+
+
+/**
+ * Sanitizes and safely stringifies an object to JSON.
+ * @param {any} data - The object or value to stringify.
+ * @returns {string|null} - The JSON string or null if an error occurs.
+ */
+function sanitizeAndStringify(data) {
+  try {
+    // Step 1: Handle undefined and BigInt
+    const preprocessData = (obj) => {
+      if (typeof obj === "bigint") {
+        return obj.toString(); // Convert BigInt to string
+      } else if (typeof obj === "undefined") {
+        return null; // Replace undefined with null
+      } else if (Array.isArray(obj)) {
+        return obj.map(preprocessData); // Recursively process arrays
+      } else if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+          Object.entries(obj).map(([key, value]) => [key, preprocessData(value)])
+        );
+      }
+      return obj; // Return other types unchanged
+    };
+
+    const sanitizedData = preprocessData(data);
+
+    // Step 2: Sanitize strings
+    const sanitizeString = (str) => {
+      if (typeof str === "string") {
+        return str
+          .replace(/[\u0000-\u001F]/g, "") // Remove control characters
+          .replace(/\\/g, "\\\\") // Escape backslash
+          .replace(/"/g, '\\"'); // Escape double quotes
+      }
+      return str; // Return non-strings unchanged
+    };
+
+    const recursivelySanitizeStrings = (obj) => {
+      if (typeof obj === "string") {
+        return sanitizeString(obj);
+      } else if (Array.isArray(obj)) {
+        return obj.map(recursivelySanitizeStrings);
+      } else if (obj && typeof obj === "object") {
+        return Object.fromEntries(
+          Object.entries(obj).map(([key, value]) => [
+            key,
+            recursivelySanitizeStrings(value),
+          ])
+        );
+      }
+      return obj;
+    };
+
+    const fullySanitizedData = recursivelySanitizeStrings(sanitizedData);
+
+    // Step 3: Handle circular references (optional)
+    // Uncomment the line below to handle circular references
+    // return flatted.stringify(fullySanitizedData);
+
+    // Step 4: Stringify with JSON.stringify
+    return JSON.stringify(fullySanitizedData);
+  } catch (err) {
+    console.error("Error while sanitizing and stringifying JSON:", err.message);
+    return null; // Return null in case of error
+  }
+}
+
+// Example Usage:
+const obj = {
+  key1: "Normal string",
+  key2: "String with \u0000 control characters",
+  key3: undefined,
+  key4: BigInt(123456789012345678901234567890),
+  key5: { nested: "String with \"double quotes\"" },
+  key6: ["Array with", "special \\ characters"],
+  key7: {},
+};
+obj.circular = obj; // Circular reference for testing
+
+//console.log(sanitizeAndStringify(obj));
+
+
 // script.js
 document.getElementById("parseButton").addEventListener("click", function() {
   const inputText = document.getElementById("jobTextInput").value.trim();
@@ -179,8 +268,10 @@ function createSlug(jobTitle) {
     .toLowerCase() // Ubah ke huruf kecil
     .replace(/[^a-z0-9\s-]/g, "") // Hapus simbol, non-ASCII, dan non-alfanumerik
     .trim() // Hapus spasi di awal dan akhir
-    .replace(/\s+/g, "-"); // Ganti spasi dengan "-"
+    .replace(/\s+/g, "-") // Ganti spasi dengan "-"
+    .replace(/-+/g, "-"); // Ganti "-" berurutan menjadi satu "-"
 }
+
 
 // Contoh penggunaan
 
@@ -332,7 +423,7 @@ if (salary) {
     };
   }
 
-  const jsonLDScript = `<script type="application/ld+json">${JSON.stringify(jobPostingJSONLD)}</script>`;
+  const jsonLDScript = `<script type="application/ld+json">${sanitizeAndStringify(jobPostingJSONLD)}</script>`;
 
 
   // Create Google Maps iframe based on location
