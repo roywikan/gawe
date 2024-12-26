@@ -22,14 +22,17 @@
     window.onload = function () {
       // Supabase configuration
       const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co'; // Ganti dengan URL Supabase Anda
-      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTE3MzcxNCwiZXhwIjoyMDUwNzQ5NzE0fQ.fRrqI0rqLWIkeq3NphNWmbPPaXC04av08fHeXmJUdFQ';
+      //const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczNTE3MzcxNCwiZXhwIjoyMDUwNzQ5NzE0fQ.fRrqI0rqLWIkeq3NphNWmbPPaXC04av08fHeXmJUdFQ';
+        const supabaseKey = 'SUPABASE_SERVICE_ROLE_SECRET'; // Replace with your actual service role key
+    
+      
       const supabase = window.supabase.createClient(supabaseUrl, supabaseKey); // Use window.supabase to ensure correct scope
 
       // Function to insert test data into Supabase
       document.getElementById('insertDataButton').addEventListener('click', async () => {
         const jobData = {
           jobtitle: 'Test Job',
-          slug: 'test-job-slug',
+          slug: 'test-job-slug-1',
           companyname: 'Test Company',
           location: 'Test Location',
           jobtype: 'Full-time',
