@@ -77,7 +77,7 @@
 </form>
     <script>
 
-      document.getElementById('mergeCopyButton').addEventListener('click', () => {
+document.getElementById('mergeCopyButton').addEventListener('click', () => {
   const textareas = document.querySelectorAll('textarea');
   let mergedContent = '';
 
@@ -92,9 +92,12 @@
     }
   });
 
-  // Display the merged content or do something with it
-  // For example, you can assign it to a hidden input or show it in a div
-  console.log('Merged Content:', mergedContent);
+  // Copy merged content to clipboard
+  navigator.clipboard.writeText(mergedContent).then(() => {
+    alert('Merged content copied to clipboard!');
+  }).catch(err => {
+    console.error('Could not copy text: ', err);
+  });
 });
 
     </script>     
