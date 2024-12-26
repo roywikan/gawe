@@ -507,7 +507,7 @@ document.getElementById("jsonLDScript").value = jsonLDScript;
 });
 
 // Menambahkan event listener untuk tombol submit
-document.getElementById("submitButton").addEventListener("click", function() {
+document.getElementById("mergeCopyButton").addEventListener("click", function() {
   const formData = new FormData(document.getElementById("parsedForm"));
   
   // Kirim data ke Supabase Postgres
