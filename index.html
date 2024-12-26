@@ -77,28 +77,35 @@
 </form>
     <script>
 
-document.getElementById('mergeCopyButton').addEventListener('click', () => {
-  const textareas = document.querySelectorAll('textarea');
-  let mergedContent = '';
+    document.getElementById('mergeCopyButton').addEventListener('click', () => {
+        const textareas = document.querySelectorAll('#parsedForm textarea');
+        let mergedContent = '';
 
-  textareas.forEach((textarea, index) => {
-    const value = textarea.value.trim();
-    if (value) {
-      if (index === 0) {
-        mergedContent += `<h3>${value}</h3>`;
-      } else {
-        mergedContent += `<p>${value}</p>`;
-      }
-    }
-  });
+        textareas.forEach((textarea, index) => {
+          const value = textarea.value.trim();
+          if (value) {
+            if (index === 0) {
+              mergedContent += `<h3>${value}</h3>`;
+            } else {
+              mergedContent += `<p>${value}</p>`;
+            }
+          }
+        });
 
-  // Copy merged content to clipboard
-  navigator.clipboard.writeText(mergedContent).then(() => {
-    alert('Merged content copied to clipboard!');
-  }).catch(err => {
-    console.error('Could not copy text: ', err);
-  });
-});
+        // Clear clipboard before copying
+        navigator.clipboard.writeText('').then(() => {
+          // Copy merged content to clipboard
+          navigator.clipboard.writeText(mergedContent).then(() => {
+            alert('Merged content copied to clipboard!');
+          }).catch(err => {
+            console.error('Could not copy text: ', err);
+          });
+        }).catch(err => {
+          console.error('Could not clear clipboard: ', err);
+        });
+      });
+    };
+
 
     </script>     
  <br><br><br>
