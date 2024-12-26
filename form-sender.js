@@ -11,104 +11,116 @@ document.getElementById("parseButton").addEventListener("click", function() {
   const parser = new DOMParser();
   const doc = parser.parseFromString(inputText, "text/html");
 
-   const labels = {
-    en: {
-      jobTitle: "Job Title",
-      companyName: "Company Name",
-      location: "Location",
-      jobType: "Job Type",
-      applyLink: "Apply Link",
-      salary: "Salary",
-      timeworking: "Timeworking",
-      jobHighlights: "Job Highlights",
-      qualifications: "Qualifications",
-      benefits: "Benefits",
-      responsibilities: "Responsibilities",
-      jobDescription: "Job Description",
-      equalOpportunityStatement: "Equal Opportunity Statement",
-      education: "Education"
-    },
-    id: {
-      jobTitle: "Judul Pekerjaan",
-      companyName: "Nama Perusahaan",
-      location: "Lokasi",
-      jobType: "Jenis Pekerjaan",
-      applyLink: "Tautan Melamar",
-      salary: "Gaji",
-      timeworking: "Jam Kerja",
-      jobHighlights: "Sorotan Pekerjaan",
-      qualifications: "Kualifikasi",
-      benefits: "Manfaat",
-      responsibilities: "Tanggung Jawab",
-      jobDescription: "Deskripsi Pekerjaan",
-      equalOpportunityStatement: "Pernyataan Peluang Setara",
-      education: "Pendidikan"
-    },
-    es: {
-      jobTitle: "Título del Trabajo",
-      companyName: "Nombre de la Empresa",
-      location: "Ubicación",
-      jobType: "Tipo de Trabajo",
-      applyLink: "Enlace de Solicitud",
-      salary: "Salario",
-      timeworking: "Horario de Trabajo",
-      jobHighlights: "Aspectos Destacados del Trabajo",
-      qualifications: "Calificaciones",
-      benefits: "Beneficios",
-      responsibilities: "Responsabilidades",
-      jobDescription: "Descripción del Trabajo",
-      equalOpportunityStatement: "Declaración de Igualdad de Oportunidades",
-      education: "Educación"
-    },
-    de: {
-      jobTitle: "Berufsbezeichnung",
-      companyName: "Firmenname",
-      location: "Standort",
-      jobType: "Art der Beschäftigung",
-      applyLink: "Bewerbungslink",
-      salary: "Gehalt",
-      timeworking: "Arbeitszeit",
-      jobHighlights: "Job-Highlights",
-      qualifications: "Qualifikationen",
-      benefits: "Leistungen",
-      responsibilities: "Verantwortlichkeiten",
-      jobDescription: "Stellenbeschreibung",
-      equalOpportunityStatement: "Gleichstellungserklärung",
-      education: "Bildung"
-    },
-    ms: {
-      jobTitle: "Tajuk Pekerjaan",
-      companyName: "Nama Syarikat",
-      location: "Lokasi",
-      jobType: "Jenis Pekerjaan",
-      applyLink: "Pautan Permohonan",
-      salary: "Gaji",
-      timeworking: "Waktu Bekerja",
-      jobHighlights: "Sorotan Pekerjaan",
-      qualifications: "Kelayakan",
-      benefits: "Manfaat",
-      responsibilities: "Tanggungjawab",
-      jobDescription: "Deskripsi Pekerjaan",
-      equalOpportunityStatement: "Pernyataan Kesetaraan Peluang",
-      education: "Pendidikan"
-    },
-    fil: {
-      jobTitle: "Pamagat ng Trabaho",
-      companyName: "Pangalan ng Kumpanya",
-      location: "Lokasyon",
-      jobType: "Uri ng Trabaho",
-      applyLink: "Link ng Aplikasyon",
-      salary: "Suweldo",
-      timeworking: "Oras ng Pagtatrabaho",
-      jobHighlights: "Mga Highlight ng Trabaho",
-      qualifications: "Mga Kwalipikasyon",
-      benefits: "Mga Benepisyo",
-      responsibilities: "Mga Responsibilidad",
-      jobDescription: "Paglalarawan ng Trabaho",
-      equalOpportunityStatement: "Pahayag ng Pantay na Pagkakataon",
-      education: "Edukasyon"
-    }
-  };
+ const labels = {
+  en: {
+    jobTitle: "Job Title",
+    slug: "Slug",
+    companyName: "Company Name",
+    location: "Location",
+    jobType: "Job Type",
+    applyLink: "Apply Link",
+    salary: "Salary",
+    currency: "Currency",
+    timeworking: "Timeworking",
+    jobHighlights: "Job Highlights",
+    qualifications: "Qualifications",
+    benefits: "Benefits",
+    responsibilities: "Responsibilities",
+    jobDescription: "Job Description",
+    equalOpportunityStatement: "Equal Opportunity Statement",
+    education: "Education"
+  },
+  id: {
+    jobTitle: "Judul Pekerjaan",
+    slug: "Slug",
+    companyName: "Nama Perusahaan",
+    location: "Lokasi",
+    jobType: "Jenis Pekerjaan",
+    applyLink: "Tautan Melamar",
+    salary: "Gaji",
+    currency: "Mata Uang",
+    timeworking: "Jam Kerja",
+    jobHighlights: "Sorotan Pekerjaan",
+    qualifications: "Kualifikasi",
+    benefits: "Manfaat",
+    responsibilities: "Tanggung Jawab",
+    jobDescription: "Deskripsi Pekerjaan",
+    equalOpportunityStatement: "Pernyataan Peluang Setara",
+    education: "Pendidikan"
+  },
+  es: {
+    jobTitle: "Título del Trabajo",
+    slug: "Slug",
+    companyName: "Nombre de la Empresa",
+    location: "Ubicación",
+    jobType: "Tipo de Trabajo",
+    applyLink: "Enlace de Solicitud",
+    salary: "Salario",
+    currency: "Moneda",
+    timeworking: "Horario de Trabajo",
+    jobHighlights: "Aspectos Destacados del Trabajo",
+    qualifications: "Calificaciones",
+    benefits: "Beneficios",
+    responsibilities: "Responsabilidades",
+    jobDescription: "Descripción del Trabajo",
+    equalOpportunityStatement: "Declaración de Igualdad de Oportunidades",
+    education: "Educación"
+  },
+  de: {
+    jobTitle: "Berufsbezeichnung",
+    slug: "Slug",
+    companyName: "Firmenname",
+    location: "Standort",
+    jobType: "Art der Beschäftigung",
+    applyLink: "Bewerbungslink",
+    salary: "Gehalt",
+    currency: "Währung",
+    timeworking: "Arbeitszeit",
+    jobHighlights: "Job-Highlights",
+    qualifications: "Qualifikationen",
+    benefits: "Leistungen",
+    responsibilities: "Verantwortlichkeiten",
+    jobDescription: "Stellenbeschreibung",
+    equalOpportunityStatement: "Gleichstellungserklärung",
+    education: "Bildung"
+  },
+  ms: {
+    jobTitle: "Tajuk Pekerjaan",
+    slug: "Slug",
+    companyName: "Nama Syarikat",
+    location: "Lokasi",
+    jobType: "Jenis Pekerjaan",
+    applyLink: "Pautan Permohonan",
+    salary: "Gaji",
+    currency: "Mata Wang",
+    timeworking: "Waktu Bekerja",
+    jobHighlights: "Sorotan Pekerjaan",
+    qualifications: "Kelayakan",
+    benefits: "Manfaat",
+    responsibilities: "Tanggungjawab",
+    jobDescription: "Deskripsi Pekerjaan",
+    equalOpportunityStatement: "Pernyataan Kesetaraan Peluang",
+    education: "Pendidikan"
+  },
+  fil: {
+    jobTitle: "Pamagat ng Trabaho",
+    slug: "Slug",
+    companyName: "Pangalan ng Kumpanya",
+    location: "Lokasyon",
+    jobType: "Uri ng Trabaho",
+    applyLink: "Link ng Aplikasyon",
+    salary: "Suweldo",
+    currency: "Pera",
+    timeworking: "Oras ng Pagtatrabaho",
+    jobHighlights: "Mga Highlight ng Trabaho",
+    qualifications: "Mga Kwalipikasyon",
+    benefits: "Mga Benepisyo",
+    responsibilities: "Mga Responsibilidad",
+    jobDescription: "Paglalarawan ng Trabaho",
+    equalOpportunityStatement: "Pahayag ng Pantay na Pagkakataon",
+    education: "Edukasyon"
+  }
+};
 
   const label = labels[selectedLanguage] || labels.en;
     let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || ``;
@@ -162,6 +174,26 @@ document.getElementById("parseButton").addEventListener("click", function() {
   salary = salary || "Salary tidak ada?";
 
 
+function createSlug(jobTitle) {
+  return jobTitle
+    .toLowerCase() // Ubah ke huruf kecil
+    .replace(/[^a-z0-9\s-]/g, "") // Hapus simbol, non-ASCII, dan non-alfanumerik
+    .trim() // Hapus spasi di awal dan akhir
+    .replace(/\s+/g, "-"); // Ganti spasi dengan "-"
+}
+
+// Contoh penggunaan
+
+let slug = createSlug(jobTitle);
+
+
+
+
+
+
+
+
+  
   
   // 7. Timeworking
   timeworking = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(1) .RcZtZb").textContent.trim() : "Timeworking tidak ada?";
@@ -226,21 +258,42 @@ document.getElementById("parseButton").addEventListener("click", function() {
   applyLink = url.origin + url.pathname;
 
 
-    // Detect currency from salary data
-  let currency = "";
-  if (salary) {
-    if (salary.includes('Rp')) {
-      currency = 'IDR';
-    } else if (salary.includes('$')) {
-      currency = 'USD';
-    } else if (salary.includes('€')) {
-      currency = 'EUR';
-    } else if (salary.includes('£')) {
-      currency = 'GBP';
+// Detect currency from salary data
+let currency = "";
+if (salary) {
+  if (salary.includes('Rp')) {
+    currency = 'IDR'; // Indonesian Rupiah
+  } else if (salary.includes('$')) {
+    // Check for specific dollar types
+    if (salary.toLowerCase().includes('aud') || salary.includes('A$')) {
+      currency = 'AUD'; // Australian Dollar
+    } else if (salary.toLowerCase().includes('sgd') || salary.includes('S$')) {
+      currency = 'SGD'; // Singapore Dollar
     } else {
-      currency = "IDR";  // default currency if not detected
+      currency = 'USD'; // Default to US Dollar for generic '$'
     }
+  } else if (salary.includes('€')) {
+    currency = 'EUR'; // Euro
+  } else if (salary.includes('£')) {
+    currency = 'GBP'; // British Pound
+  } else if (salary.includes('¥')) {
+    currency = 'JPY'; // Japanese Yen
+  } else if (salary.includes('₹')) {
+    currency = 'INR'; // Indian Rupee
+  } else if (salary.includes('₩')) {
+    currency = 'KRW'; // South Korean Won
+  } else if (salary.includes('₦')) {
+    currency = 'NGN'; // Nigerian Naira
+  } else if (salary.includes('₱')) {
+    currency = 'PHP'; // Philippine Peso
+  } else if (salary.includes('฿')) {
+    currency = 'THB'; // Thai Baht
+  } else if (salary.includes('₫')) {
+    currency = 'VND'; // Vietnamese Dong
+  } else {
+    currency = "IDR"; // Default currency if not detected
   }
+}
 
   
 
@@ -301,6 +354,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
   const htmlResults = `
     <h3>${jobTitle}</h3>
     <p><strong>${label.jobTitle}:</strong> ${jobTitle}</p>
+        <p><strong>Slug:</strong> ${slug}</p>
     <p><strong>${label.companyName}:</strong> ${companyName}</p>
     <p><strong>${label.location}:</strong> ${location}</p>
     <p><strong>${label.jobType}:</strong> ${jobType}</p>
@@ -332,6 +386,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
 
   // Preparing data to send to Netlify form, I WISHED I CAN EDIT THEM BEFORE SUBMITTING TO NETLIFY FORMS
   document.getElementById("jobTitle").value = jobTitle;
+  document.getElementById("slug").value = slug;
+  
   document.getElementById("companyName").value = companyName;
   document.getElementById("location").value = location;
   document.getElementById("jobType").value = jobType;
@@ -354,7 +410,7 @@ document.getElementById("jsonLDScript").value = jsonLDScript;
   fetch('/.netlify/functions/saveToGitHub', {
     method: 'POST',
     body: JSON.stringify({
-      jobTitle, companyName, location, jobType, applyLink, currency, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet, googleMapsIframe, jsonLDScript
+      jobTitle, slug, companyName, location, jobType, applyLink, currency, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet, googleMapsIframe, jsonLDScript
       
     })
   })
