@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Parser</title>
+  <link rel="stylesheet" href="index.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatted@3.3.2/min.min.js"></script>
+
+</head>
+<body>
+  <div class="container">
+    <h1>Job Parser</h1>
+    <!-- Dropdown menu for language selection -->
+    <label for="languageSelect">Select Language:</label>
+    <select id="languageSelect">
+      <option value="id">Indonesia</option>
+      <option value="en" selected>English</option>
+      <option value="es">Spanish</option>
+      <option value="de">German</option>
+      <option value="ms">Malay</option>
+      <option value="fil">Filipino</option>
+    </select>
+    <br>
+    <!-- Textarea for entering job description -->
+    <textarea id="jobTextInput" placeholder="Paste job description here..." rows="10"></textarea>
+
+    <!-- Button to trigger the parsing -->
+    <button id="parseButton">Parse Job Description and SEND to SUPABASE.com</button>
+    <br>
+    <span>https://supabase.com/dashboard/project/kbuiddaciduxktywsuna/editor/29245?schema=public</span>
+    <br>
+
+
+
+
+  <!-- Form input elements for each variable -->
+ <form id="parsedForm">
+  <label for="jobTitle">Job Title</label>
+  <textarea id="jobTitle" name="jobTitle" placeholder="Job Title"></textarea>
+  <label for="slug">Slug</label>
+  <textarea id="slug" name="slug" placeholder="Slug"></textarea>
+  <label for="companyName">Company Name</label>
+  <textarea id="companyName" name="companyName" placeholder="Company Name"></textarea>
+  <label for="location">Location</label>
+  <textarea id="location" name="location" placeholder="Location"></textarea>
+  <label for="jobType">Job Type</label>
+  <textarea id="jobType" name="jobType" placeholder="Job Type"></textarea>
+  <label for="applyLink">Apply Link</label>
+  <textarea id="applyLink" name="applyLink" placeholder="Apply Link"></textarea>
+  <label for="currency">Currency</label>
+  <textarea id="currency" name="currency" placeholder="Currency"></textarea>
+  <label for="salary">Salary</label>
+  <textarea id="salary" name="salary" placeholder="Salary"></textarea>
+  <label for="timeworking">Timeworking</label>
+  <textarea id="timeworking" name="timeworking" placeholder="Timeworking"></textarea>
+  <label for="education">Education</label>
+  <textarea id="education" name="education" placeholder="Education"></textarea>
+  <label for="jobHighlights">Job Highlights</label>
+  <textarea id="jobHighlights" name="jobHighlights" placeholder="Job Highlights"></textarea>
+  <label for="qualifications">Qualifications</label>
+  <textarea id="qualifications" name="qualifications" placeholder="Qualifications"></textarea>
+  <label for="benefits">Benefits</label>
+  <textarea id="benefits" name="benefits" placeholder="Benefits"></textarea>
+  <label for="responsibilities">Responsibilities</label>
+  <textarea id="responsibilities" name="responsibilities" placeholder="Responsibilities"></textarea>
+  <label for="jobDescription">Job Description</label>
+  <textarea id="jobDescription" name="jobDescription" placeholder="Job Description"></textarea>
+  <label for="snippet">Equal Opportunity Statement</label>
+  <textarea id="snippet" name="snippet" placeholder="Equal Opportunity Statement"></textarea>
+  <label for="googleMapsIframe">Google Maps Iframe</label>
+  <textarea id="googleMapsIframe" name="googleMapsIframe" placeholder="Google Maps Iframe"></textarea>
+  <label for="jsonLDScript">JSON-LD Script</label>
+  <textarea id="jsonLDScript" name="jsonLDScript" placeholder="JSON-LD Script"></textarea>
+  <button type="button" id="mergeCopyButton">MergeCopy</button>
+</form>
+    <script>
+
+    document.getElementById('mergeCopyButton').addEventListener('click', () => {
+        const textareas = document.querySelectorAll('#parsedForm textarea');
+        let mergedContent = '';
+
+        textareas.forEach((textarea, index) => {
+          const value = textarea.value.trim();
+          if (value) {
+            if (index === 0) {
+              mergedContent += `<h3>${value}</h3>`;
+            } else {
+              mergedContent += `<p>${value}</p>`;
+            }
+          }
+        });
+
+        // Clear clipboard before copying
+        navigator.clipboard.writeText('').then(() => {
+          // Copy merged content to clipboard
+          navigator.clipboard.writeText(mergedContent).then(() => {
+            alert('Merged content copied to clipboard!');
+          }).catch(err => {
+            console.error('Could not copy text: ', err);
+          });
+        }).catch(err => {
+          console.error('Could not clear clipboard: ', err);
+        });
+      });
+    
+
+
+    </script>     
+ <br><br><br>
+
+    
+
+
+
+    
+    <!-- Output for parsed job details -->
+    <div  style="text-align: left;" id="output"></div>
+
+    <!-- Netlify Form to submit parsed data -->
+    <form name="jobForm" method="POST" data-netlify="true" id="netlifyForm">
+  <input type="hidden" name="form-name" value="jobForm">
+      
+  <input type="hidden" name="jobTitle" id="jobTitle">
+        <input type="hidden" name="slug" id="slug">
+  <input type="hidden" name="companyName" id="companyName">
+  <input type="hidden" name="location" id="location">
+  <input type="hidden" name="jobType" id="jobType">
+  <input type="hidden" name="applyLink" id="applyLink">
+  <input type="hidden" name="jobHighlights" id="jobHighlights">
+  <input type="hidden" name="qualifications" id="qualifications">
+  <input type="hidden" name="benefits" id="benefits">
+  <input type="hidden" name="responsibilities" id="responsibilities">
+  <input type="hidden" name="jobDescription" id="jobDescription">
+
+  <input type="hidden" name="snippet" id="snippet">
+
+  <!-- Additional fields that are in the JavaScript code but missing from the HTML -->
+  <input type="hidden" name="currency" id="currency">
+  <input type="hidden" name="salary" id="salary">
+  <input type="hidden" name="timeworking" id="timeworking">
+  <input type="hidden" name="education" id="education">
+  
+  <input type="hidden" name="googleMapsIframe" id="googleMapsIframe"> <!-- Added googleMapsIframe -->
+  <input type="hidden" name="jsonLDScript" id="jsonLDScript"> <!-- Added jsonLDScript -->
+
+
+      
+      <button type="submit">Submit to Netlify Form</button>
+    </form>
+    <br><br>
+
+    <b>HTML part to add a new textarea</b>
+    <div>
+      <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly>  
+      </textarea>
+    </div>
+  
+
+
+
+  <script src="form-sender.js?ref=123"></script>
+
+
+  <script>
+
+
+
+
+    // Ensure this runs after the supabase-js library has been loaded
+    window.onload = function () {
+      // Supabase configuration
+      const supabaseUrl = 'https://kbuiddaciduxktywsuna.supabase.co'; // Ganti dengan URL Supabase Anda
+
+      //ANON PUBLIC KEY:
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtidWlkZGFjaWR1eGt0eXdzdW5hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzUxNzM3MTQsImV4cCI6MjA1MDc0OTcxNH0.jcqqGp6lluR2cZRU6IbSKlrLT8QecRJRVX0jCNVXKdU'; 
+      
+      //INI TIDAK AMAN TAPI BERHASIL const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkqLWIkeq3NphNWmbPPaXC04av08fHeXmJUdFQ';
+      //INI BARIS YANG GAGAL : const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_SECRET; // Replace with your actual service role key
+    
+      
+      const supabase = window.supabase.createClient(supabaseUrl, supabaseKey); // Use window.supabase to ensure correct scope
+
+
+      
+// Handle form submission
+document.getElementById('parseButton').addEventListener('click', async () => {
+const jobData = {
+    jobtitle: document.getElementById('jobTitle').value || null,
+    slug: document.getElementById('slug').value || null,
+    companyname: document.getElementById('companyName').value || null,
+    location: document.getElementById('location').value || null,
+    jobtype: document.getElementById('jobType').value || null,
+    applylink: document.getElementById('applyLink').value || null,
+    jobhighlights: document.getElementById('jobHighlights').value || null,
+    qualifications: document.getElementById('qualifications').value || null,
+    benefits: document.getElementById('benefits').value || null,
+    responsibilities: document.getElementById('responsibilities').value || null,
+    jobdescription: document.getElementById('jobDescription').value || null,
+    snippet: document.getElementById('snippet').value || null,
+    currency: document.getElementById('currency').value || null,
+    salary: document.getElementById('salary').value || null,
+    timeworking: document.getElementById('timeworking').value || null,
+    education: document.getElementById('education').value || null,    
+    googlemapsiframe: document.getElementById('googleMapsIframe').value || null,
+    jsonldscript: document.getElementById('jsonLDScript').value || null,
+};
+
+const jobDataSample = {
+    jobtitle: 'Sample Job', // Pastikan nama kolom sesuai (gunakan huruf kecil semua)
+    slug: 'sample-job-slug',
+    companyname: 'Sample Company',
+    location: 'New York, USA',
+    jobtype: 'Full-time',
+    applylink: 'https://example.com/apply',
+    jobhighlights: 'Exciting opportunity in tech!',
+    qualifications: 'Bachelor\'s degree in Computer Science',
+    benefits: 'Health insurance, 401k',
+    responsibilities: 'Developing and maintaining web applications',
+    jobdescription: 'We are looking for a skilled developer.',
+    currency: 'USD',
+    salary: '60000',
+    timeworking: '9 AM - 5 PM',
+    education: 'Bachelor\'s Degree',
+    snippet: 'Join our team!',
+    googlemapsiframe: '<iframe></iframe>', // Ini bisa disesuaikan
+    jsonldscript: '{"@context": "https://schema.org", "@type": "JobPosting"}', // Contoh JSON-LD
+};
+
+   alert('Job Data: ' + JSON.stringify(jobData)); // Alert job data for debugging
+
+    try {
+          // Log sebelum request
+          console.log('Attempting to insert data:', jobData);
+
+          const response = await supabase.from('jobpost').insert([jobData]);
+
+          // Log response dari Supabase
+          console.log('Supabase response:', response);
+
+          if (response.error) {
+            console.error('Supabase Error:', response.error);
+            document.getElementById('status').innerText = 'Failed to insert data: ' + response.error.message;
+          } else {
+            console.log('Data inserted successfully:', response.data);
+            document.getElementById('status').innerText = 'Data inserted successfully!';
+          }
+        } catch (error) {
+          console.error('Unexpected error:', error);
+          document.getElementById('status').innerText = 'An unexpected error occurred. Please try again.';
+        }
+      });
+    };
+
+    
+  </script>
+  <br>
+<div style="text-align: left; font-family: Arial, sans-serif; line-height: 1.6;">
+(dikosongkan)
+</div>
+
+
+
+
+  </div>
+</body>
+</html>
