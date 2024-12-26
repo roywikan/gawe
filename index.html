@@ -154,24 +154,21 @@ const jobData = {
 };
 
 
-try {
-    const response = await supabase.from('jobPost').insert([jobData]);
+   alert('Job Data: ' + JSON.stringify(jobData)); // Alert job data for debugging
 
-    if (response.error) {
-        console.error('Supabase Error:', response.error);
-        alert('Failed to submit job description: ' + response.error.message);
-    } else if (response.data) {
-        console.log('Data inserted successfully:', response.data);
-        alert('Job description submitted successfully!');
-    } else {
-        console.warn('Unexpected response:', response);
-        alert('Unexpected response format.');
+    try {
+        const response = await supabase.from('jobPost').insert([jobData]);
+
+        if (response.error) {
+            alert('Supabase Error: ' + response.error.message);
+        } else if (response.data) {
+            alert('Job description submitted successfully! Data: ' + JSON.stringify(response.data));
+        } else {
+            alert('Unexpected response format.');
+        }
+    } catch (error) {
+        alert('Unexpected error: ' + error.message);
     }
-} catch (error) {
-    console.error('Unexpected error:', error);
-    alert('An unexpected error occurred. Please try again.');
-}
-
 
 
 });
