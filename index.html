@@ -73,9 +73,31 @@
   <textarea id="googleMapsIframe" name="googleMapsIframe" placeholder="Google Maps Iframe"></textarea>
   <label for="jsonLDScript">JSON-LD Script</label>
   <textarea id="jsonLDScript" name="jsonLDScript" placeholder="JSON-LD Script"></textarea>
-  <button type="button" id="submitButton">Submit to Supabase</button>
+  <button type="button" id="mergeCopyButton">MergeCopy</button>
 </form>
-    
+    <script>
+
+      document.getElementById('mergeCopyButton').addEventListener('click', () => {
+  const textareas = document.querySelectorAll('textarea');
+  let mergedContent = '';
+
+  textareas.forEach((textarea, index) => {
+    const value = textarea.value.trim();
+    if (value) {
+      if (index === 0) {
+        mergedContent += `<h3>${value}</h3>`;
+      } else {
+        mergedContent += `<p>${value}</p>`;
+      }
+    }
+  });
+
+  // Display the merged content or do something with it
+  // For example, you can assign it to a hidden input or show it in a div
+  console.log('Merged Content:', mergedContent);
+});
+
+    </script>     
  <br><br><br>
 
     
