@@ -103,25 +103,24 @@
 // Handle form submission
 document.getElementById('parseButton').addEventListener('click', async () => {
 const jobData = {
-    jobTitle: document.getElementById('jobTitle').value || null,
+    jobtitle: document.getElementById('jobTitle').value || null,
     slug: document.getElementById('slug').value || null,
-    companyName: document.getElementById('companyName').value || null,
+    companyname: document.getElementById('companyName').value || null,
     location: document.getElementById('location').value || null,
-    jobType: document.getElementById('jobType').value || null,
-    //applyLink: document.getElementById('applyLink').value || null,
-    //jobHighlights: document.getElementById('jobHighlights').value || null,
-    //qualifications: document.getElementById('qualifications').value || null,
-    //benefits: document.getElementById('benefits').value || null,
-    //responsibilities: document.getElementById('responsibilities').value || null,
-    //jobDescription: document.getElementById('jobDescription').value || null,
-    //snippet: document.getElementById('snippet').value || null,
-    //currency: document.getElementById('currency').value || null,
-    //salary: document.getElementById('salary').value || null,
-    //timeworking: document.getElementById('timeworking').value || null,
-    //education: document.getElementById('education').value || null,
-    
-    //googleMapsIframe: document.getElementById('googleMapsIframe').value || null,
-    //jsonLDScript: document.getElementById('jsonLDScript').value || null,
+    jobtype: document.getElementById('jobType').value || null,
+    applylink: document.getElementById('applyLink').value || null,
+    jobhighlights: document.getElementById('jobHighlights').value || null,
+    qualifications: document.getElementById('qualifications').value || null,
+    benefits: document.getElementById('benefits').value || null,
+    responsibilities: document.getElementById('responsibilities').value || null,
+    jobdescription: document.getElementById('jobDescription').value || null,
+    snippet: document.getElementById('snippet').value || null,
+    currency: document.getElementById('currency').value || null,
+    salary: document.getElementById('salary').value || null,
+    timeworking: document.getElementById('timeworking').value || null,
+    education: document.getElementById('education').value || null,    
+    googlemapsiframe: document.getElementById('googleMapsIframe').value || null,
+    jsonldscript: document.getElementById('jsonLDScript').value || null,
 };
 
 const jobDataSample = {
