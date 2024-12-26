@@ -406,23 +406,9 @@ if (salary) {
 document.getElementById("googleMapsIframe").value = googleMapsIframe;
 document.getElementById("jsonLDScript").value = jsonLDScript;
 
-  // Send data to Netlify function
-  fetch('/.netlify/functions/saveToGitHub', {
-    method: 'POST',
-    body: JSON.stringify({
-      jobTitle, slug, companyName, location, jobType, applyLink, currency, salary, timeworking, education, jobHighlights, qualifications, benefits, responsibilities, jobDescription, snippet, googleMapsIframe, jsonLDScript
-      
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    alert(data.message);
-  })
-  .catch(error => {
-    alert('Error: ' + error.message);
-    console.error(error);
-  });
+
+
+
 });
 
-// HTML part to add a new textarea
-// <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly></textarea>
+
