@@ -101,7 +101,7 @@
           // Copy merged content to clipboard
           navigator.clipboard.writeText(mergedContent).then(() => {
             document.getElementById('status').innerText = 'mergeCopyButton :> Merged content copied to clipboard!';
-            document.getElementById('output').innerText = mergedContent;
+            document.getElementById('output').value = mergedContent.trim();
             
             document.getElementById("parsedResultsTextarea").value = mergedContent.trim();
             
@@ -132,6 +132,7 @@
     <div  style="text-align: left;" id="output"></div>
 
     <!-- Netlify Form to submit parsed data -->
+    <br><b>(HIDDEN) netlifyForm :</b><br>
     <form name="jobForm" method="POST" data-netlify="true" id="netlifyForm">
   <input type="hidden" name="form-name" value="jobForm">
       
