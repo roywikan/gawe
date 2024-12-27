@@ -161,7 +161,13 @@
 
 
 
-  <script src="form-sender.js?ref=123"></script>
+  <script>
+  const randomRef = Math.floor(100 + Math.random() * 900); // Angka acak 3 digit
+  const script = document.createElement('script');
+  script.src = `form-sender.js?ref=${randomRef}`;
+  document.head.appendChild(script);
+</script>
+
 
 
   <script>
@@ -221,6 +227,9 @@
     jsonldscript: document.getElementById('jsonLDScript').value || null,
   };
 
+
+   alert('sendParsedFormToSupabase :> Job Data: ' + sanitizeAndStringify(jobData)); // Alert job data for debugging
+   
   try {
     const response = await supabase.from('jobpost').insert([jobData]);
     if (response.error) {
@@ -285,8 +294,9 @@ const jobDataSample = {
     jsonldscript: '{"@context": "https://schema.org", "@type": "JobPosting"}', // Contoh JSON-LD
 };
 
-   alert('Job Data: ' + JSON.stringify(jobData)); // Alert job data for debugging
+   alert('parseButton :> Job Data: ' + sanitizeAndStringify(jobData)); // Alert job data for debugging
 
+  /*
     try {
           // Log sebelum request
           console.log('Attempting to insert data:', jobData);
@@ -307,6 +317,8 @@ const jobDataSample = {
           console.error('Unexpected error:', error);
           document.getElementById('status').innerText = 'An unexpected error occurred. Please try again.';
         }
+
+        */
       });
     };
 
