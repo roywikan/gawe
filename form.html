@@ -91,9 +91,10 @@
     <script>
 function formatToList(text) {
   // Periksa apakah data sudah mengandung <li>
-  if (text.includes('<li>')) {
-    return text; // Kembalikan langsung jika sudah dalam format <li>
-  }
+if (text.includes('<li>')) {
+    return `<br>${text}`; // Kembalikan langsung jika sudah dalam format <li>
+}
+
 
   // Split teks berdasarkan <br> dan filter elemen kosong
   const items = text.split('<br>').filter(item => item.trim() !== '');
@@ -105,7 +106,7 @@ function formatToList(text) {
       //return item.trim(); // Tetap sebagai teks dengan simbol, tanpa <li>
       return `<br>${item.trim()}`
     }
-    return `<li>${item.trim()}</li>`; // Bungkus dengan <li> jika bukan simbol
+    return `<li>${item.trim()}</li><br>`; // Bungkus dengan <li> jika bukan simbol
   });
 
   // Gabungkan hasil
