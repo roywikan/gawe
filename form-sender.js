@@ -213,6 +213,8 @@ document.getElementById("parseButton").addEventListener("click", function() {
 };
 
   const label = labels[selectedLanguage] || labels.en;
+  window.label = labels[selectedLanguage] || labels.en;
+
     let jobTitle = doc.querySelector(".LZAQDf.cS4Vcb-pGL6qe-IRrXtf")?.textContent.trim() || ``;
   let companyName = doc.querySelector(".BK5CCe.cS4Vcb-pGL6qe-lfQAOe")?.textContent.trim() || ``;
   let location = doc.querySelector(".waQ7qe.cS4Vcb-pGL6qe-ysgGef")?.textContent.trim() || ``;
