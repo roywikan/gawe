@@ -91,20 +91,22 @@
     <script>
 function formatToList(text) {
   // Periksa apakah data sudah mengandung <li>
-if (text.includes('<li>')) {
+  if (text.includes('<li>')) {
     return `<br>${text}`; // Kembalikan langsung jika sudah dalam format <li>
-}
-
+  }
 
   // Split teks berdasarkan <br> dan filter elemen kosong
   const items = text.split('<br>').filter(item => item.trim() !== '');
 
   // Proses setiap item
-  const formattedItems = items.map(item => {
-    // Jika item diawali dengan simbol "•", tambahkan <br>
+  const formattedItems = items.map((item, index) => {
+    // Jika item diawali dengan simbol "•"
     if (item.trim().startsWith('•')) {
-      //return item.trim(); // Tetap sebagai teks dengan simbol, tanpa <li>
-      return `${item.trim()}<br>`
+      // Jika item adalah yang terakhir dan diawali dengan "•", tambahkan tiga <br>
+      if (index === items.length - 1) {
+        return `${item.trim()}<br><br><br>`; // Tambahkan tiga <br>
+      }
+      return `${item.trim()}<br>`; // Tambahkan satu <br>
     }
     return `<li>${item.trim()}</li><br>`; // Bungkus dengan <li> jika bukan simbol
   });
@@ -112,6 +114,7 @@ if (text.includes('<li>')) {
   // Gabungkan hasil
   return formattedItems.join('\n');
 }
+
 
 
 
