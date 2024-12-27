@@ -124,28 +124,45 @@
         
 <p><strong>${label.qualifications}:</strong></p>
 <ul>
-  ${formData.qualifications.includes('<li>') 
-    ? formData.qualifications 
-    : formData.qualifications.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${formData.qualifications.includes('<li>')
+    ? formData.qualifications
+    : formData.qualifications
+        .split('<br>')
+        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
+        .map(item => `<li>${item.trim()}</li>`) // Bungkus dalam <li>
+        .join('')}
 </ul>
 <p><strong>${label.benefits}:</strong></p>
 <ul>
-  ${formData.benefits.includes('<li>') 
-    ? formData.benefits 
-    : formData.benefits.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${formData.benefits.includes('<li>')
+    ? formData.benefits
+    : formData.benefits
+        .split('<br>')
+        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
+        .map(item => `<li>${item.trim()}</li>`)
+        .join('')}
 </ul>
 <p><strong>${label.responsibilities}:</strong></p>
 <ul>
-  ${formData.responsibilities.includes('<li>') 
-    ? formData.responsibilities 
-    : formData.responsibilities.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${formData.responsibilities.includes('<li>')
+    ? formData.responsibilities
+    : formData.responsibilities
+        .split('<br>')
+        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
+        .map(item => `<li>${item.trim()}</li>`)
+        .join('')}
 </ul>
 <p><strong>${label.jobDescription}:</strong></p>
 <ul>
-  ${formData.jobDescription.includes('<li>') 
-    ? formData.jobDescription 
-    : formData.jobDescription.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${formData.jobDescription.includes('<li>')
+    ? formData.jobDescription
+    : formData.jobDescription
+        .split('<br>')
+        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
+        .map(item => `<li>${item.trim()}</li>`)
+        .join('')}
 </ul>
+
 
 
         
