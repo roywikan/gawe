@@ -88,6 +88,7 @@ obj.circular = obj; // Circular reference for testing
 
 
 // script.js
+//make parseButton event listener to only parse the data and display it in parsedForm.
 document.getElementById("parseButton").addEventListener("click", function() {
   const inputText = document.getElementById("jobTextInput").value.trim();
   const selectedLanguage = document.getElementById("languageSelect").value;
