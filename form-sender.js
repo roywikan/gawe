@@ -460,32 +460,30 @@ if (salary) {
     <p><strong>${label.jobHighlights}:</strong> ${jobHighlights}</p>
 
 
-    
-
 
 <p><strong>${label.qualifications}:</strong></p>
 <ul>
-  ${formData.qualifications.includes('<li>') 
-    ? formData.qualifications 
-    : formData.qualifications.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${qualifications.includes('<li>') 
+    ? qualifications 
+    : qualifications.split('<br>').map(item => `<li>${item}</li>`).join('')}
 </ul>
 <p><strong>${label.benefits}:</strong></p>
 <ul>
-  ${formData.benefits.includes('<li>') 
-    ? formData.benefits 
-    : formData.benefits.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${benefits.includes('<li>') 
+    ? benefits 
+    : benefits.split('<br>').map(item => `<li>${item}</li>`).join('')}
 </ul>
 <p><strong>${label.responsibilities}:</strong></p>
 <ul>
-  ${formData.responsibilities.includes('<li>') 
-    ? formData.responsibilities 
-    : formData.responsibilities.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${responsibilities.includes('<li>') 
+    ? responsibilities 
+    : responsibilities.split('<br>').map(item => `<li>${item}</li>`).join('')}
 </ul>
 <p><strong>${label.jobDescription}:</strong></p>
 <ul>
-  ${formData.jobDescription.includes('<li>') 
-    ? formData.jobDescription 
-    : formData.jobDescription.split('<br>').map(item => `<li>${item}</li>`).join('')}
+  ${jobDescription.includes('<li>') 
+    ? jobDescription 
+    : jobDescription.split('<br>').map(item => `<li>${item}</li>`).join('')}
 </ul>
 
 
