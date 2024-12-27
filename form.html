@@ -113,14 +113,13 @@ function formatToList(text) {
     // Jika item diawali dengan simbol "•"
     if (item.trim().startsWith('•')) {
       // Jika item adalah yang terakhir yang diawali dengan "•", tambahkan tiga <br>
-      if (index === items.length - 1) {
+      if (index === items.length - 1 || !items[index + 1].trim().startsWith('•')) {
         return `${item.trim()}<br><br><br>`; // Tambahkan tiga <br> setelah item terakhir
       }
-      return `${item.trim()}<br>`; // Tambahkan satu <br> jika bukan item terakhir
+      return `${item.trim()}<br>`; // Tambahkan satu <br> untuk item selain terakhir
     }
     
-    // Bungkus dengan <li> jika bukan simbol bullet
-    return `<li>${item.trim()}</li><br>`;
+    return `<li>${item.trim()}</li><br>`; // Bungkus dengan <li> jika bukan simbol
   });
 
   // Gabungkan hasil
