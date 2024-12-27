@@ -10,6 +10,15 @@
 
 </head>
 <body>
+  
+  <script>
+  const randomRef = Math.floor(100 + Math.random() * 900); // Angka acak 3 digit
+  const script = document.createElement('script');
+  script.src = `form-sender.js?ref=${randomRef}`;
+  document.head.appendChild(script);
+</script>
+
+  
   <div class="container">
     <h1>Job Parser</h1>
     <!-- Dropdown menu for language selection -->
@@ -236,12 +245,6 @@
 
 
 
-  <script>
-  const randomRef = Math.floor(100 + Math.random() * 900); // Angka acak 3 digit
-  const script = document.createElement('script');
-  script.src = `form-sender.js?ref=${randomRef}`;
-  document.head.appendChild(script);
-</script>
 
 
 
