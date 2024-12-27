@@ -101,7 +101,7 @@
           // Copy merged content to clipboard
           navigator.clipboard.writeText(mergedContent).then(() => {
             document.getElementById('status').innerText = 'mergeCopyButton :> Merged content copied to clipboard!';
-            document.getElementById('output').innerText = mergedContent;
+            document.getElementById('').innerText = mergedContent;
             
             document.getElementById("parsedResultsTextarea").value = mergedContent.trim();
             
@@ -128,6 +128,7 @@
 
     
     <!-- Output for parsed job details -->
+    <br><b>Output:</b><br>
     <div  style="text-align: left;" id="output"></div>
 
     <!-- Netlify Form to submit parsed data -->
@@ -164,6 +165,7 @@
     <br><br>
 
     <b>HTML part to add a new textarea</b>
+    <br><b>parsedResultsTextarea:</b><br>
     <div>
       <textarea id="parsedResultsTextarea" rows="10" cols="50" readonly>  
       </textarea>
