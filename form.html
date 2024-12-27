@@ -76,7 +76,7 @@
   <button type="button" id="mergeCopyButton">Merge and Copy To Clipboard</button>
    <button type="button" id="sendParsedFormToSupabase">Send to Supabase</button>
 </form>
-    <br>
+    <br><b>Status:</b><br>
     <div id="status"></div>
 
     <script>
@@ -101,6 +101,10 @@
           // Copy merged content to clipboard
           navigator.clipboard.writeText(mergedContent).then(() => {
             document.getElementById('status').innerText = 'mergeCopyButton :> Merged content copied to clipboard!';
+            document.getElementById('output').innerText = mergedContent;
+            document.getElementById('parsedResultsTextarea').innerText = mergedContent;
+            
+            
             alert('Merged content copied to clipboard!');
           }).catch(err => {
             document.getElementById('status').innerText = 'mergeCopyButton :> Could not copy text: ' + err;
