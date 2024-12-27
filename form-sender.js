@@ -510,7 +510,7 @@ document.getElementById("jsonLDScript").value = jsonLDScript;
 // Menambahkan event listener untuk tombol submit
 document.getElementById("mergeCopyButton").addEventListener("click", function() {
   const formData = new FormData(document.getElementById("parsedForm"));
-  
+  /*
   // Kirim data ke Supabase Postgres
   fetch('URL_SUPABASE_FUNCTION', {
     method: 'POST',
@@ -528,4 +528,6 @@ document.getElementById("mergeCopyButton").addEventListener("click", function() 
     console.error('Error:', error);
     alert('An error occurred while submitting data to Supabase.');
   });
+  */
+  
 });
