@@ -458,14 +458,49 @@ if (salary) {
     <p><strong>${label.timeworking}:</strong> ${timeworking}</p>
     <p><strong>${label.education}:</strong> ${education}</p>
     <p><strong>${label.jobHighlights}:</strong> ${jobHighlights}</p>
-    <p><strong>${label.qualifications}:</strong></p>
-    <ul>${qualifications.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
-    <p><strong>${label.benefits}:</strong></p>
-    <ul>${benefits.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
-    <p><strong>${label.responsibilities}:</strong></p>
-    <ul>${responsibilities.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
-    <p><strong>${label.jobDescription}:</strong></p>
-    <ul>${jobDescription.split('<br>').map(item => `<li>${item}</li>`).join('')}</ul>
+
+
+    
+
+
+<p><strong>${label.qualifications}:</strong></p>
+<ul>
+  ${formData.qualifications.includes('<li>') 
+    ? formData.qualifications 
+    : formData.qualifications.split('<br>').map(item => `<li>${item}</li>`).join('')}
+</ul>
+<p><strong>${label.benefits}:</strong></p>
+<ul>
+  ${formData.benefits.includes('<li>') 
+    ? formData.benefits 
+    : formData.benefits.split('<br>').map(item => `<li>${item}</li>`).join('')}
+</ul>
+<p><strong>${label.responsibilities}:</strong></p>
+<ul>
+  ${formData.responsibilities.includes('<li>') 
+    ? formData.responsibilities 
+    : formData.responsibilities.split('<br>').map(item => `<li>${item}</li>`).join('')}
+</ul>
+<p><strong>${label.jobDescription}:</strong></p>
+<ul>
+  ${formData.jobDescription.includes('<li>') 
+    ? formData.jobDescription 
+    : formData.jobDescription.split('<br>').map(item => `<li>${item}</li>`).join('')}
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     <p><strong>Location Map:</strong> ${googleMapsIframe}</p>
     <p><blockquote>${snippet}</blockquote>
     <p>${jsonLDScript}</p>
