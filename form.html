@@ -95,16 +95,20 @@ function formatToList(text) {
     return text; // Kembalikan langsung jika sudah dalam format <li>
   }
 
-  // Split dengan <br> dan filter elemen kosong
+  // Split teks berdasarkan <br> dan filter elemen kosong
   const items = text.split('<br>').filter(item => item.trim() !== '');
 
-  // Jika hanya ada satu item (bukan daftar), kembalikan sebagai teks biasa
-  if (items.length === 1) {
-    return `<p>${items[0]}</p>`;
-  }
+  // Proses setiap item
+  const formattedItems = items.map(item => {
+    // Jika item diawali dengan simbol "•", tambahkan <br>
+    if (item.trim().startsWith('•')) {
+      return item.trim(); // Tetap sebagai teks dengan simbol, tanpa <li>
+    }
+    return `<li>${item.trim()}</li>`; // Bungkus dengan <li> jika bukan simbol
+  });
 
-  // Format menjadi <ul> dengan <li>
-  return `<ul>${items.map(item => `<li>${item.trim()}</li>`).join('')}</ul>`;
+  // Gabungkan hasil
+  return formattedItems.join('\n');
 }
 
 
