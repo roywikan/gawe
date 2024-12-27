@@ -104,7 +104,7 @@ if (text.includes('<li>')) {
     // Jika item diawali dengan simbol "•", tambahkan <br>
     if (item.trim().startsWith('•')) {
       //return item.trim(); // Tetap sebagai teks dengan simbol, tanpa <li>
-      return `<br>${item.trim()}`
+      return `${item.trim()}<br>`
     }
     return `<li>${item.trim()}</li><br>`; // Bungkus dengan <li> jika bukan simbol
   });
