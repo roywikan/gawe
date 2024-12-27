@@ -161,10 +161,10 @@
           navigator.clipboard.writeText(mergedContent).then(() => {
             document.getElementById('status').innerText = 'mergeCopyButton :> Merged content copied to clipboard!';
             
-            //document.getElementById('output').value = mergedContent.trim();
-            document.getElementById('output').innerHTML = mergedContent;
+            //document.getElementById('output').value = mergedContent.trim;
+            //document.getElementById('output').innerHTML = mergedHtmlOutput;
             
-            document.getElementById("parsedResultsTextarea").value = mergedContent.trim();
+            document.getElementById("parsedResultsTextarea").value = mergedHtmlOutput;
             
             
             alert('Merged content copied to clipboard!');
