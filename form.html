@@ -74,6 +74,7 @@
   <label for="jsonLDScript">JSON-LD Script</label>
   <textarea id="jsonLDScript" name="jsonLDScript" placeholder="JSON-LD Script"></textarea>
   <button type="button" id="mergeCopyButton">MergeCopy</button>
+   <button type="button" id="sendParsedFormToSupabase">Send to Supabase</button>
 </form>
     <script>
 
@@ -181,6 +182,62 @@
     
       
       const supabase = window.supabase.createClient(supabaseUrl, supabaseKey); // Use window.supabase to ensure correct scope
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ document.getElementById('sendParsedFormToSupabase').addEventListener('click', async () => {
+  const jobData = {
+    jobtitle: document.getElementById('jobTitle').value || null,
+    slug: document.getElementById('slug').value || null,
+    companyname: document.getElementById('companyName').value || null,
+    location: document.getElementById('location').value || null,
+    jobtype: document.getElementById('jobType').value || null,
+    applylink: document.getElementById('applyLink').value || null,
+    jobhighlights: document.getElementById('jobHighlights').value || null,
+    qualifications: document.getElementById('qualifications').value || null,
+    benefits: document.getElementById('benefits').value || null,
+    responsibilities: document.getElementById('responsibilities').value || null,
+    jobdescription: document.getElementById('jobDescription').value || null,
+    snippet: document.getElementById('snippet').value || null,
+    currency: document.getElementById('currency').value || null,
+    salary: document.getElementById('salary').value || null,
+    timeworking: document.getElementById('timeworking').value || null,
+    education: document.getElementById('education').value || null,
+    googlemapsiframe: document.getElementById('googleMapsIframe').value || null,
+    jsonldscript: document.getElementById('jsonLDScript').value || null,
+  };
+
+  try {
+    const response = await supabase.from('jobpost').insert([jobData]);
+    if (response.error) {
+      console.error('Supabase Error:', response.error);
+      alert('Failed to send data to Supabase: ' + response.error.message);
+    } else {
+      console.log('Data sent to Supabase:', response.data);
+      alert('Data sent to Supabase successfully!');
+    }
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    alert('An unexpected error occurred. Please try again.');
+  }
+});
+
+
+
 
 
       
