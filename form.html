@@ -232,15 +232,25 @@
    
   try {
     const response = await supabase.from('jobpost').insert([jobData]);
+                  // Log response dari Supabase
+          console.log('Supabase response:', response);
+
+    
     if (response.error) {
       console.error('Supabase Error:', response.error);
+      document.getElementById('status').innerText = 'Failed to insert data: ' + response.error.message;
       alert('Failed to send data to Supabase: ' + response.error.message);
     } else {
       console.log('Data sent to Supabase:', response.data);
+      document.getElementById('status').innerText = 'Data inserted successfully!';
       alert('Data sent to Supabase successfully!');
     }
+
+
+    
   } catch (error) {
     console.error('Unexpected error:', error);
+    document.getElementById('status').innerText = 'An unexpected error occurred. Please try again.';
     alert('An unexpected error occurred. Please try again.');
   }
 });
@@ -296,7 +306,7 @@ const jobDataSample = {
 
    alert('parseButton :> Job Data: ' + sanitizeAndStringify(jobData)); // Alert job data for debugging
 
-  /*
+  /* sudah dipindah tugaskan ke button sendParsedFormToSupabase !
     try {
           // Log sebelum request
           console.log('Attempting to insert data:', jobData);
