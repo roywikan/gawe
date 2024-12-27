@@ -89,7 +89,35 @@
     <div id="status"></div>
 
     <script>
+function formatToList(text) {
+  // Periksa apakah data sudah mengandung <li>
+  if (text.includes('<li>')) {
+    return text; // Kembalikan langsung jika sudah dalam format <li>
+  }
 
+  // Split dengan <br> dan filter elemen kosong
+  const items = text.split('<br>').filter(item => item.trim() !== '');
+
+  // Jika hanya ada satu item (bukan daftar), kembalikan sebagai teks biasa
+  if (items.length === 1) {
+    return `<p>${items[0]}</p>`;
+  }
+
+  // Format menjadi <ul> dengan <li>
+  return `<ul>${items.map(item => `<li>${item.trim()}</li>`).join('')}</ul>`;
+}
+
+
+
+
+
+
+
+
+
+
+
+      
     document.getElementById('mergeCopyButton').addEventListener('click', () => {
         // Ambil nilai dari semua textarea
       const textareas = document.querySelectorAll('#parsedForm textarea');
@@ -122,46 +150,17 @@
         <p><strong>${label.jobHighlights}:</strong> ${formData.jobHighlights}</p>
 
         
+
+
 <p><strong>${label.qualifications}:</strong></p>
-<ul>
-  ${formData.qualifications.includes('<li>')
-    ? formData.qualifications
-    : formData.qualifications
-        .split('<br>')
-        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
-        .map(item => `<li>${item.trim()}</li>`) // Bungkus dalam <li>
-        .join('')}
-</ul>
+${formatToList(formData.qualifications)}
 <p><strong>${label.benefits}:</strong></p>
-<ul>
-  ${formData.benefits.includes('<li>')
-    ? formData.benefits
-    : formData.benefits
-        .split('<br>')
-        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
-        .map(item => `<li>${item.trim()}</li>`)
-        .join('')}
-</ul>
+${formatToList(formData.benefits)}
 <p><strong>${label.responsibilities}:</strong></p>
-<ul>
-  ${formData.responsibilities.includes('<li>')
-    ? formData.responsibilities
-    : formData.responsibilities
-        .split('<br>')
-        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
-        .map(item => `<li>${item.trim()}</li>`)
-        .join('')}
-</ul>
+${formatToList(formData.responsibilities)}
 <p><strong>${label.jobDescription}:</strong></p>
-<ul>
-  ${formData.jobDescription.includes('<li>')
-    ? formData.jobDescription
-    : formData.jobDescription
-        .split('<br>')
-        .filter(item => item.trim() !== '') // Hilangkan elemen kosong
-        .map(item => `<li>${item.trim()}</li>`)
-        .join('')}
-</ul>
+${formatToList(formData.jobDescription)}
+
 
 
 
