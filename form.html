@@ -102,7 +102,8 @@
           navigator.clipboard.writeText(mergedContent).then(() => {
             document.getElementById('status').innerText = 'mergeCopyButton :> Merged content copied to clipboard!';
             document.getElementById('output').innerText = mergedContent;
-            document.getElementById('parsedResultsTextarea').innerText = mergedContent;
+            
+            document.getElementById("parsedResultsTextarea").value = mergedContent.trim();
             
             
             alert('Merged content copied to clipboard!');
