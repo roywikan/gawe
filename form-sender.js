@@ -391,7 +391,7 @@ if (salary) {
       currency = 'AUD'; // Australian Dollar
     } else if (salary.toLowerCase().includes('sgd') || salary.includes('S$')) {
       currency = 'SGD'; // Singapore Dollar
-    } else {
+    } else if (salary.toLowerCase().includes('usd') || salary.includes('US$')) {
       currency = 'USD'; // Default to US Dollar for generic '$'
     }
   } else if (salary.includes('€')) {
