@@ -343,10 +343,15 @@ let slug = createSlug(jobTitle, companyName);
   }
 
 
-  if (jobType === "No Degree Mentioned") {
+if (jobType === "No Degree Mentioned") {
+  // Pastikan jobType tidak mengandung kata "time" sebelum menetapkannya ke education
+  if (!/time/i.test(jobType)) {
     education = jobType;
-    jobType = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
   }
+  // Tetapkan jobType ke nilai yang ditemukan di dokumen atau tetap kosong
+  jobType = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
+}
+
 
 // Correcting the values for salary and timeworking
 if (salary === "Full-time") {
