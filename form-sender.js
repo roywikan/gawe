@@ -380,18 +380,19 @@ if (jobType && jobType.includes('ago')) {
   applyLink = url.origin + url.pathname;
 
 
-// Detect currency from salary data
 let currency = "";
 if (salary) {
   if (salary.includes('Rp')) {
     currency = 'IDR'; // Indonesian Rupiah
   } else if (salary.includes('$')) {
     // Check for specific dollar types
-    if (salary.toLowerCase().includes('aud') || salary.includes('A$')) {
+    if (salary.toLowerCase().includes('usd') || salary.includes('US$')) {
+      currency = 'USD'; // Default to US Dollar for US$
+    } else if (salary.toLowerCase().includes('aud') || salary.includes('A$')) {
       currency = 'AUD'; // Australian Dollar
     } else if (salary.toLowerCase().includes('sgd') || salary.includes('S$')) {
       currency = 'SGD'; // Singapore Dollar
-    } else if (salary.toLowerCase().includes('usd') || salary.includes('US$')) {
+    } else {
       currency = 'USD'; // Default to US Dollar for generic '$'
     }
   } else if (salary.includes('€')) {
