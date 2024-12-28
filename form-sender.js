@@ -111,7 +111,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     applyLink: "Apply Link",
     salary: "Salary",
     currency: "Currency",
-    timeworking: "Timeworking",
+    timeworking: "working",
     jobHighlights: "Job Highlights",
     qualifications: "Qualifications",
     benefits: "Benefits",
@@ -129,7 +129,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     applyLink: "Tautan Melamar",
     salary: "Gaji",
     currency: "Mata Uang",
-    timeworking: "Jam Kerja",
+    working: "Jam Kerja",
     jobHighlights: "Sorotan Pekerjaan",
     qualifications: "Kualifikasi",
     benefits: "Manfaat",
@@ -147,7 +147,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     applyLink: "Enlace de Solicitud",
     salary: "Salario",
     currency: "Moneda",
-    timeworking: "Horario de Trabajo",
+    working: "Horario de Trabajo",
     jobHighlights: "Aspectos Destacados del Trabajo",
     qualifications: "Calificaciones",
     benefits: "Beneficios",
@@ -165,7 +165,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     applyLink: "Bewerbungslink",
     salary: "Gehalt",
     currency: "Währung",
-    timeworking: "Arbeitszeit",
+    working: "Arbeitszeit",
     jobHighlights: "Job-Highlights",
     qualifications: "Qualifikationen",
     benefits: "Leistungen",
@@ -183,7 +183,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     applyLink: "Pautan Permohonan",
     salary: "Gaji",
     currency: "Mata Wang",
-    timeworking: "Waktu Bekerja",
+    working: "Waktu Bekerja",
     jobHighlights: "Sorotan Pekerjaan",
     qualifications: "Kelayakan",
     benefits: "Manfaat",
@@ -201,7 +201,7 @@ document.getElementById("parseButton").addEventListener("click", function() {
     applyLink: "Link ng Aplikasyon",
     salary: "Suweldo",
     currency: "Pera",
-    timeworking: "Oras ng Pagtatrabaho",
+    working: "Oras ng Pagtatrabaho",
     jobHighlights: "Mga Highlight ng Trabaho",
     qualifications: "Mga Kwalipikasyon",
     benefits: "Mga Benepisyo",
@@ -252,22 +252,34 @@ document.getElementById("parseButton").addEventListener("click", function() {
   salary = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb") ? doc.querySelector(".nYym1e:nth-child(2) .RcZtZb").textContent.trim() : false;
 
 
-  if (!salary) {
-    const benefitsList = doc.querySelectorAll(".yVFmQd + ul.zqeyHd > li.LevrW");
-    let salaryLines = [];
-    benefitsList.forEach((item) => {
-      let text = item.textContent.trim();
-      if (/[\$€£¥₩₹]|Rp|USD|SGD/i.test(text)) {
-        salaryLines.push(text);
-      }
-    });
-    salary = salaryLines.join(", ");
-  }
-  salary = salary || "Salary tidak ada?";
+if (!salary) {
+  const benefitsList = doc.querySelectorAll(".yVFmQd + ul.zqeyHd > li.LevrW");
+  let salaryLines = [];
+  
+  benefitsList.forEach((item) => {
+    let text = item.textContent.trim();
+    // Periksa apakah teks mengandung simbol mata uang atau teks seperti "Rp", "USD", dll.
+    if (/[\$€£¥₩₹]|Rp|USD|SGD/i.test(text)) {
+      salaryLines.push(text);
+    }
+  });
+
+  // Gabungkan semua teks yang valid menjadi string
+  salary = salaryLines.join(", ");
+}
+
+// Tambahkan validasi untuk memastikan salary minimal mengandung angka "0"
+if (salary && !/0/.test(salary)) {
+  salary = ""; // Kosongkan jika tidak mengandung angka "0"
+}
+
+salary = salary || "";
 
 
-function createSlug(jobTitle) {
-  return jobTitle
+
+function createSlug(jobTitle, companyName) {
+  const combinedTitle = `${jobTitle} ${companyName}`; // Gabungkan jobTitle dan companyName
+  return combinedTitle
     .toLowerCase() // Ubah ke huruf kecil
     .replace(/[^a-z0-9\s-]/g, "") // Hapus simbol, non-ASCII, dan non-alfanumerik
     .trim() // Hapus spasi di awal dan akhir
@@ -276,9 +288,10 @@ function createSlug(jobTitle) {
 }
 
 
+
 // Contoh penggunaan
 
-let slug = createSlug(jobTitle);
+let slug = createSlug(jobTitle, companyName);
 
 
 
@@ -335,17 +348,32 @@ let slug = createSlug(jobTitle);
     jobType = doc.querySelector(".nYym1e:nth-child(2) .RcZtZb")?.textContent.trim() || ``;
   }
 
-  // Correcting the values for salary and timeworking
-  if (salary === "Full-time") {
-    salary = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
+// Correcting the values for salary and timeworking
+if (salary === "Full-time") {
+  const salaryText = doc.querySelector(".nYym1e:nth-child(1) .RcZtZb")?.textContent.trim() || ``;
+  
+  // Check if 'salaryText' contains at least one digit and doesn't contain 'ago'
+  if (/\d/.test(salaryText) && !salaryText.includes('ago')) {
+    salary = salaryText;
     timeworking = "Full-time";
   }
+}
 
+// If jobType is not defined but timeworking is, assign jobType to timeworking
+if (!jobType && timeworking) {
+  jobType = timeworking;
+}
 
-
-  if (!jobType && timeworking) {
-    jobType = timeworking;
-  }
+// Ensure timeworking, salary, or jobType do not contain 'ago'
+if (timeworking && timeworking.includes('ago')) {
+  timeworking = ``;
+}
+if (salary && salary.includes('ago')) {
+  salary = ``;
+}
+if (jobType && jobType.includes('ago')) {
+  jobType = ``;
+}
 
     // Remove query strings from apply link
   const url = new URL(applyLink);
